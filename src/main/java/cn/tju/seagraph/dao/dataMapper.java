@@ -15,4 +15,5 @@ public interface dataMapper {
     int insertData(@Param("data") data data);
     int deleteById(@Param("id") int id);
     int updateData(@Param("data") data data);
+
 }
