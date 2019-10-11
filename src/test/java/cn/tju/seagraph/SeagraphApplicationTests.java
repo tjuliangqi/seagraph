@@ -1,7 +1,10 @@
 package cn.tju.seagraph;
 
-import cn.tju.seagraph.dao.dataMapper;
+import cn.tju.seagraph.dao.DataMapper;
+import cn.tju.seagraph.dao.StatisticsMapper;
+import cn.tju.seagraph.daomain.Statistics;
 import cn.tju.seagraph.daomain.data;
+import cn.tju.seagraph.utils.dateUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +18,9 @@ import java.util.List;
 public class SeagraphApplicationTests {
 
     @Autowired
-    dataMapper dataMapper;
+    DataMapper dataMapper;
+    @Autowired
+    StatisticsMapper statisticsMapper;
     @Test
     public void contextLoads() {
     }
@@ -34,6 +39,22 @@ public class SeagraphApplicationTests {
         System.out.println(list2.get(0).getCount());
         int j = dataMapper.deleteById(2);
         List<data> list3 = dataMapper.getDataList();
+        System.out.println(list3.size());
+
+    }
+    @Test
+    public void testStatistics(){
+        int i = statisticsMapper.insertStatistics(dateUtils.gainDate());
+        List<Statistics> list1 = statisticsMapper.selectStatisticsByDate(dateUtils.gainDate());
+        System.out.println(list1.size());
+        Statistics statistics = list1.get(0);
+        System.out.println(statistics.getDetail());
+        statistics.setDetail(1);
+        int k = statisticsMapper.updateStatistics(statistics);
+        List<Statistics> list2 = statisticsMapper.selectStatisticsByDate(dateUtils.gainDate());
+        System.out.println(list2.get(0).getDetail());
+        int j = statisticsMapper.deleteByDate(dateUtils.gainDate());
+        List<Statistics> list3 = statisticsMapper.selectStatisticsByDate(dateUtils.gainDate());
         System.out.println(list3.size());
 
     }

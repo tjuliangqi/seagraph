@@ -9,7 +9,7 @@ import java.util.List;
 
 @Mapper
 @Repository
-public interface dataMapper {
+public interface DataMapper {
     List<data> getDataById(@Param("id") int id);
     List<data> getDataList();
     int insertData(@Param("data") data data);

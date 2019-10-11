@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.tju.seagraph.dao.StatisticsMapper" >
+
+    <select id="selectStatisticsByDate"  resultType="Statistics" parameterType="String">
+        SELECT * FROM statistics WHERE date = #{date} ;
+    </select>
+
+    <insert id="insertStatistics" parameterType="String">
+        insert into statistics
+        (login,registe,detail,download,date)
+        values
+        (0,0,0,0,#{date})
+    </insert>
+
+    <update id="updateStatistics" parameterType="cn.tju.seagraph.daomain.Statistics">
+        update statistics
+        <set>
+            <if test="statistics.login != 0">login=${statistics.login},</if>
+            <if test="statistics.registe != 0">regis=${statistics.regis},</if>
+            <if test="statistics.detail != 0">detail=${statistics.detail},</if>
+            <if test="statistics.download != 0">download=${statistics.download}</if>
+        </set>
+        where date=#{statistics.date}
+    </update>
+
+    <delete id="deleteByDate">
+        DELETE FROM statistics
+        WHERE date = #{date}
+    </delete>
+
+</mapper>
