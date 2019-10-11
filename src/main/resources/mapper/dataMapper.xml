@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.tju.seagraph.dao.dataMapper" >
+
+    <select id="getDataById"  resultType="data" parameterType="String">
+        SELECT * FROM data WHERE id = ${id} ;
+    </select>
+
+    <select id="getDataList"  resultType="data" >
+        SELECT * FROM data ;
+    </select>
+
+    <insert id="insertData" parameterType="data">
+        INSERT INTO data (labels,
+        count)
+        VALUES   (#{data.labels},
+        ${data.count})
+    </insert>
+
+    <update id="updateData" parameterType="cn.tju.seagraph.daomain.data">
+        update data
+        <set>
+            <if test="data.labels != null">labels=#{data.labels},</if>
+            <if test="data.count != 0">count=${data.count}</if>
+        </set>
+        where id=${data.id}
+    </update>
+
+    <delete id="deleteById">
+        DELETE FROM data
+        WHERE id = ${id}
+    </delete>
+
+</mapper>
