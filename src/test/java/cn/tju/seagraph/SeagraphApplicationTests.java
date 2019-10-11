@@ -1,7 +1,9 @@
 package cn.tju.seagraph;
 
+import cn.tju.seagraph.dao.ConferenceMapper;
 import cn.tju.seagraph.dao.DataMapper;
 import cn.tju.seagraph.dao.StatisticsMapper;
+import cn.tju.seagraph.daomain.Conference;
 import cn.tju.seagraph.daomain.Statistics;
 import cn.tju.seagraph.daomain.data;
 import cn.tju.seagraph.utils.dateUtils;
@@ -11,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RunWith(SpringRunner.class)
@@ -21,6 +24,8 @@ public class SeagraphApplicationTests {
     DataMapper dataMapper;
     @Autowired
     StatisticsMapper statisticsMapper;
+    @Autowired
+    ConferenceMapper conferenceMapper;
     @Test
     public void contextLoads() {
     }
@@ -57,5 +62,29 @@ public class SeagraphApplicationTests {
         List<Statistics> list3 = statisticsMapper.selectStatisticsByDate(dateUtils.gainDate());
         System.out.println(list3.size());
 
+    }
+    @Test
+    public void testConference(){
+        List<String> list = new ArrayList<>();
+        list.add("机器学习");
+        list.add("计算机视觉");
+        Conference conference = new Conference();
+        conference.setDate(dateUtils.gainDate());
+        conference.setHomepage("1");
+        conference.setLabels(list.toString());
+        conference.setLevel("A");
+        conference.setLocation("China");
+        conference.setName("VALSE");
+        conferenceMapper.insertConference(conference);
+        conference.setLevel("B");
+        conference.setId(1);
+        int i = conferenceMapper.updateConference(conference);
+        List<Conference> list1 = conferenceMapper.getAllConference();
+        for (Conference c:list1) {
+            System.out.println(c.getLevel());
+        }
+        int k = conferenceMapper.deleteById(2);
+        List<Conference> list2 = conferenceMapper.getAllConference();
+        System.out.println(list2.size());
     }
 }

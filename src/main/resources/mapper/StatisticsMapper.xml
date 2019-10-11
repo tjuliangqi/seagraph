@@ -18,7 +18,7 @@
         update statistics
         <set>
             <if test="statistics.login != 0">login=${statistics.login},</if>
-            <if test="statistics.registe != 0">regis=${statistics.regis},</if>
+            <if test="statistics.registe != 0">registe=${statistics.registe},</if>
             <if test="statistics.detail != 0">detail=${statistics.detail},</if>
             <if test="statistics.download != 0">download=${statistics.download}</if>
         </set>

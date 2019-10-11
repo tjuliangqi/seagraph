@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.tju.seagraph.dao.ConferenceMapper" >
+
+    <select id="selectConferenceByDate"  resultType="Conference" parameterType="String">
+        SELECT * FROM conference WHERE date = #{date} ;
+    </select>
+
+    <select id="getAllConference"  resultType="Conference" parameterType="String">
+        SELECT * FROM conference ;
+    </select>
+
+    <insert id="insertConference" parameterType="cn.tju.seagraph.daomain.Conference">
+        insert into conference
+        (homepage,name,location,level,date,labels)
+        values
+        (#{conference.homepage},#{conference.name},#{conference.location},#{conference.level},
+        #{conference.date},#{conference.labels})
+    </insert>
+
+    <update id="updateConference" parameterType="cn.tju.seagraph.daomain.Conference">
+        update conference
+        <set>
+            <if test="conference.homepage != null">homepage=#{conference.homepage},</if>
+            <if test="conference.name != null">name=#{conference.name},</if>
+            <if test="conference.location != null">location=#{conference.location},</if>
+            <if test="conference.date != null">date=#{conference.date},</if>
+            <if test="conference.level != null">level=#{conference.level},</if>
+            <if test="conference.labels != null">labels=#{conference.labels}</if>
+        </set>
+        where id=#{conference.id};
+    </update>
+
+    <delete id="deleteById">
+        DELETE FROM conference
+        WHERE id = ${id}
+    </delete>
+
+</mapper>
