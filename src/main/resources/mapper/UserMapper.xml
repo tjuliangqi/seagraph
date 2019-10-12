@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.tju.seagraph.dao.UserMapper" >
+
+    <select id="getUserById" resultType="cn.tju.seagraph.daomain.User" parameterType="int">
+        SELECT * FROM users WHERE id = #{id} ;
+    </select>
+
+    <insert id="insertUser" parameterType="user">
+        INSERT INTO users (root, email, username, passwd, keywords)
+        VALUES  (#{user.root}, #{user.email}, #{user.username}, #{user.passwd}, #{user.keywords})
+    </insert>
+
+    <delete id="deleteUserById" parameterType="java.lang.Integer">
+        DELETE FROM users WHERE id = #{id}
+    </delete>
+
+    <update id="updateUser" parameterType="cn.tju.seagraph.daomain.User">
+        UPDATE users SET root=#{user.root}, email=#{user.email}, username=#{user.username}, passwd=#{user.passwd}, keywords=#{user.keywords}
+        WHERE id=${user.id}
+    </update>
+
+</mapper>
