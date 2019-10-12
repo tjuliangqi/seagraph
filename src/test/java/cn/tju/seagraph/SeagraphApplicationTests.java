@@ -1,6 +1,14 @@
 package cn.tju.seagraph;
 
 import cn.tju.seagraph.dao.DataMapper;
+<<<<<<< Updated upstream
+=======
+import cn.tju.seagraph.dao.StatisticsMapper;
+import cn.tju.seagraph.dao.authorMapper;
+import cn.tju.seagraph.daomain.Author;
+import cn.tju.seagraph.daomain.Conference;
+import cn.tju.seagraph.daomain.Statistics;
+>>>>>>> Stashed changes
 import cn.tju.seagraph.daomain.data;
 import cn.tju.seagraph.daomain.paperMysqlBean;
 import org.junit.Test;
@@ -18,7 +26,15 @@ public class SeagraphApplicationTests {
     @Autowired
     DataMapper dataMapper;
     @Autowired
+<<<<<<< Updated upstream
     cn.tju.seagraph.dao.paperMapper paperMapper;
+=======
+    StatisticsMapper statisticsMapper;
+    @Autowired
+    ConferenceMapper conferenceMapper;
+    @Autowired
+    authorMapper authorMapper;
+>>>>>>> Stashed changes
     @Test
     public void contextLoads() {
     }
@@ -64,6 +80,36 @@ public class SeagraphApplicationTests {
         System.out.println("测试update");
         t1.setAbs("wedswerwerf");
         paperMapper.updateData(t1);
+
+
+    }
+    @Test
+    public void testAuthor(){
+        //通过ID查询
+        List<Author> list = authorMapper.getAuthorById("0005a3a9b58b4ebc81254ada09cd4218");
+        System.out.println(list.get(0).getName());
+        System.out.println(list.get(0).toString());
+
+        //查询整个列表
+        List<Author> list1 = authorMapper.getAuthorList();
+        System.out.println(list1.size());
+        Author author = list1.get(4);
+        System.out.println(author.getLabels());
+
+        //增加
+        int i = authorMapper.insertAuthor(author);
+        System.out.println(i);
+
+        //修改
+        author.setPaperNum(91);
+        author.setName("zhangsan");
+        author.setAffiliations("hello");
+        int k = authorMapper.updateAuthor(author);
+        System.out.println(k);
+
+        //删除
+        int j = authorMapper.deleteById("fff9b37fa96c499aa8f3228d9eb3251a");
+        System.out.println(j);
 
 
     }

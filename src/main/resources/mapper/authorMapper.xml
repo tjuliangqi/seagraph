@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.tju.seagraph.dao.authorMapper" >
+
+    <select id="getAuthorById"  resultType="cn.tju.seagraph.daomain.Author" parameterType="String">
+        SELECT * FROM authors WHERE id = #{id} ;
+    </select>
+
+    <select id="getAuthorList"  resultType="cn.tju.seagraph.daomain.Author" >
+        SELECT * FROM authors ;
+    </select>
+
+    <insert id="insertAuthor" parameterType="cn.tju.seagraph.daomain.Author">
+        INSERT INTO authors_test (name,paperNum,id,affiliations,labels,paperList,pic_url) VALUES (#{author.name},${author.paperNum},#{author.id},#{author.affiliations},#{author.labels},#{author.paperList},#{author.pic_url})
+    </insert>
+
+    <update id="updateAuthor" parameterType="cn.tju.seagraph.daomain.Author">
+        update authors_test
+        <set>
+            <if test="author.paperNum != 0">paperNum=${author.paperNum},</if>
+            <if test="author.name != null">name=#{author.name},</if>
+            <if test="author.affiliations != null">affiliations=#{author.affiliations},</if>
+            <if test="author.labels != null">labels=#{author.labels},</if>
+            <if test="author.paperList != null">paperList=#{author.paperList},</if>
+            <if test="author.pic_url != null">pic_url=#{author.pic_url}</if>
+        </set>
+        where id=#{author.id}
+    </update>
+
+    <delete id="deleteById">
+        DELETE FROM authors_test
+        WHERE id = #{id}
+    </delete>
+
+</mapper>
