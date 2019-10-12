@@ -16,7 +16,7 @@ import java.util.List;
 public class SeagraphApplicationTests {
 
     @Autowired
-    ataMapper dataMapper;D
+    DataMapper dataMapper;
     @Autowired
     cn.tju.seagraph.dao.paperMapper paperMapper;
     @Test
