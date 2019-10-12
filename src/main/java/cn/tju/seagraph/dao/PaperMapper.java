@@ -8,7 +8,7 @@ import java.util.List;
 
 @Mapper
 @Repository
-public interface paperMapper {
+public interface PaperMapper {
 
     @Select("SELECT * FROM `science1` WHERE `uuid` = #{uuid}")
     paperMysqlBean getDataById(String uuid);

@@ -10,7 +10,7 @@ import java.util.List;
 
 @Mapper
 @Repository
-public interface authorMapper {
+public interface AuthorMapper {
     List<Author> getAuthorById(@Param("id") String id);
     List<Author> getAuthorList();
     int insertAuthor(@Param("author") Author author);
