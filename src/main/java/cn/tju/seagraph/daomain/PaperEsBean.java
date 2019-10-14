@@ -2,7 +2,7 @@ package cn.tju.seagraph.daomain;
 
 import java.util.List;
 
-public class paperEsBean {
+public class PaperEsBean {
     private String id;
     private List authors;
     private List affiliations;
@@ -26,7 +26,7 @@ public class paperEsBean {
 
     @Override
     public String toString() {
-        return "paperEsBean{" +
+        return "PaperEsBean{" +
                 "id='" + id + '\'' +
                 ", authors=" + authors +
                 ", affiliations=" + affiliations +

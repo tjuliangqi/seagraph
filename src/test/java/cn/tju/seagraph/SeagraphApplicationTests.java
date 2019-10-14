@@ -110,19 +110,19 @@ public class SeagraphApplicationTests {
 
     @Test
     public void testPaper(){
-        paperMysqlBean paperMysqlBean = paperMapper.getDataById("2f03e746ea3611e9a3d800d861171bd5");
+        PaperMysqlBean paperMysqlBean = paperMapper.getDataById("2f03e746ea3611e9a3d800d861171bd5");
         System.out.println(paperMysqlBean.toString());
         System.out.println("测试list");
-        List<cn.tju.seagraph.daomain.paperMysqlBean> list = paperMapper.getDataList();
-        for(cn.tju.seagraph.daomain.paperMysqlBean each:list){
+        List<PaperMysqlBean> list = paperMapper.getDataList();
+        for(PaperMysqlBean each:list){
             System.out.println("*******");
             System.out.println(each.toString());
         }
-        cn.tju.seagraph.daomain.paperMysqlBean t1 = new paperMysqlBean();
+        PaperMysqlBean t1 = new PaperMysqlBean();
         t1.setUuid("1245422");
 
         System.out.println("测试delete");
-        paperMapper.deleteById("12454");
+        paperMapper.deleteById("1245422");
 
         System.out.println("测试insert");
         System.out.println(t1.toString());
