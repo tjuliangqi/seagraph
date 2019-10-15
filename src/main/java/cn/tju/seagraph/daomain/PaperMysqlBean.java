@@ -1,7 +1,7 @@
 package cn.tju.seagraph.daomain;
 
 
-public class paperMysqlBean {
+public class PaperMysqlBean {
     private String uuid;
     private String authors;
     private String affiliations;
@@ -212,7 +212,7 @@ public class paperMysqlBean {
 
     @Override
     public String toString() {
-        return "paperMysqlBean{" +
+        return "PaperMysqlBean{" +
                 "uuid='" + uuid + '\'' +
                 ", authors=" + authors +
                 ", affiliations=" + affiliations +
