@@ -87,26 +87,6 @@ public class SeagraphApplicationTests {
         List<Conference> list2 = conferenceMapper.getAllConference();
         System.out.println(list2.size());
     }
-    @Test
-    public void testUser() {
-        User user3 = userMapper.getUserById(5);
-        System.out.println(user3);
-
-        User user1 = new User("xxx@xxx1.com", "name1", "pwd1", "keyword1", 1);
-        System.out.println(userMapper.insertUser(user1));
-
-        User user2 = new User("xxx@xxx2.com", "name2", "pwd2", "keyword2", 2);
-        System.out.println(userMapper.insertUser(user2));
-
-//        User user3 = userMapper.getUserById(1);
-//        System.out.println(user3);
-        User user4 = userMapper.getUserById(2);
-        System.out.println(user4);
-        User user5 = new User("xxx@xxx5.com", "name5", "pwd5", "keyword5", 5);
-        user5.setId(1);
-        System.out.println(userMapper.updateUser(user5));
-        System.out.println(userMapper.deleteUserById(2));
-    }
 
     @Test
     public void testPaper(){

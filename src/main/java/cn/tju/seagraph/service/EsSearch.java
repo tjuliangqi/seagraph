@@ -1,4 +1,4 @@
-package cn.tju.seagraph.server;
+package cn.tju.seagraph.service;
 
 import cn.tju.seagraph.Config;
 import cn.tju.seagraph.utils.EsUtils;
@@ -12,7 +12,7 @@ import org.elasticsearch.search.builder.SearchSourceBuilder;
 
 import java.io.IOException;
 
-public class EsSerch {
+public class EsSearch {
 
     public void TestSearch() throws IOException {
         EsUtils esUtils = new EsUtils();
@@ -32,8 +32,8 @@ public class EsSerch {
     }
 
     public static void main(String[] args) throws IOException {
-        EsSerch esSerch = new EsSerch();
-        esSerch.TestSearch();
+        EsSearch esSearch = new EsSearch();
+        esSearch.TestSearch();
     }
 
 }
