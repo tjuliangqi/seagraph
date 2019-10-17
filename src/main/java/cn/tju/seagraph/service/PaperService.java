@@ -250,14 +250,4 @@ public class PaperService {
         return RetResponse.makeOKRsp(filterBean);
 
     }
-
-    public static void main(String[] args) throws IOException {
-        String jsonStr = "{journal:['Science'],pubdate:['1966-06-21T00:00:00','2019-06-21T00:00:00'],affiliations:['L. Rowen and L. Hood are in the Department of Molecular Biotechnology, University of Washington, Seattle, WA 98195-7730, USA.'],labels:['fluorescence', 'detect']}";
-        String title = "The Complete 685-Kilobase DNA Sequence of the Human β T Cell Receptor Locus";
-        RetResult<List> result1 = searchList("0",title,Boolean.TRUE,jsonStr,1);
-        System.out.println("************");
-        RetResult<FilterBean> result2 = prepara("0",title);
-
-
-    }
 }
