@@ -3,17 +3,17 @@ package cn.tju.seagraph.daomain;
 import java.util.List;
 
 public class PaperEsBean {
-    private String id;
-    private List authors;
-    private List affiliations;
+    private String uuid;
+    private String authors;
+    private String affiliations;
     private String title;
     private String journal;
     private String abs;
     private String pubdate;
     private String type;
     private String browse;
-    private List keywords;
-    private List chemicallist;
+    private String keywords;
+    private String chemicallist;
     private String labels;
     private String ch_title;
     private String or_title;
@@ -27,7 +27,7 @@ public class PaperEsBean {
     @Override
     public String toString() {
         return "PaperEsBean{" +
-                "id='" + id + '\'' +
+                "id='" + uuid + '\'' +
                 ", authors=" + authors +
                 ", affiliations=" + affiliations +
                 ", title='" + title + '\'' +
@@ -50,27 +50,27 @@ public class PaperEsBean {
                 '}';
     }
 
-    public String getId() {
-        return id;
+    public String getUuid() {
+        return uuid;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setUuid(String id) {
+        this.uuid = id;
     }
 
-    public List getAuthors() {
+    public String getAuthors() {
         return authors;
     }
 
-    public void setAuthors(List authors) {
+    public void setAuthors(String authors) {
         this.authors = authors;
     }
 
-    public List getAffiliations() {
+    public String getAffiliations() {
         return affiliations;
     }
 
-    public void setAffiliations(List affiliations) {
+    public void setAffiliations(String affiliations) {
         this.affiliations = affiliations;
     }
 
@@ -122,19 +122,19 @@ public class PaperEsBean {
         this.browse = browse;
     }
 
-    public List getKeywords() {
+    public String getKeywords() {
         return keywords;
     }
 
-    public void setKeywords(List keywords) {
+    public void setKeywords(String keywords) {
         this.keywords = keywords;
     }
 
-    public List getChemicallist() {
+    public String getChemicallist() {
         return chemicallist;
     }
 
-    public void setChemicallist(List chemicallist) {
+    public void setChemicallist(String chemicallist) {
         this.chemicallist = chemicallist;
     }
 

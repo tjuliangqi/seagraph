@@ -7,7 +7,7 @@ import org.elasticsearch.client.RestHighLevelClient;
 
 
 public class EsUtils {
-    private RestHighLevelClient client = null;
+    public RestHighLevelClient client = null;
 
     public EsUtils(){
         try{
