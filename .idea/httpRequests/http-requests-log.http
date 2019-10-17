@@ -1,355 +1,3 @@
-POST http://localhost:8088/conference/searchList
-Accept: */*
-Cache-Control: no-cache
-Content-Type: application/json
-
-{"type":"0","valye":"","ifPrepara":true,"preparaString":"{'date':['2019-10-10','2019-11-26'],'labels':['机器学习']}","page":"1"}
-
-<> 2019-10-17T032938.200.json
-
-###
-
-POST http://localhost:8088/conference/searchList
-Accept: */*
-Cache-Control: no-cache
-Content-Type: application/json
-
-{"type":"0","valye":"","ifPrepara":true,"preparaString":"{'date':['2019-10-10','2019-11-26'],'labels':['机器学习']}","page":"1"}
-
-<> 2019-10-17T032808.200.json
-
-###
-
-POST http://localhost:8088/conference/searchList
-Accept: */*
-Cache-Control: no-cache
-Content-Type: application/json
-
-{"type":"0","valye":"","ifPrepara":true,"preparaString":"{'date':['2019-10-16','2019-11-26'],'labels':['机器学习']}","page":"1"}
-
-<> 2019-10-17T032511.200.json
-
-###
-
-POST http://localhost:8088/conference/searchList
-Accept: */*
-Cache-Control: no-cache
-Content-Type: application/json
-
-{"type":"0","valye":"","ifPrepara":true,"preparaString":"{'date':['2019-10-16','2019-11-26'],'labels':['机器学习',机器学习,计算机视觉,meshine,'vision','计算机视觉']}","page":"1"}
-
-<> 2019-10-17T032324.200.json
-
-###
-
-POST http://localhost:8088/conference/searchList
-Accept: */*
-Cache-Control: no-cache
-Content-Type: application/json
-
-{"type":"0","valye":"","ifPrepara":false,"preparaString":"{'date':['2019-10-16','2019-11-26'],'labels':['机器学习',机器学习,计算机视觉,meshine,'vision','计算机视觉']}","page":"1"}
-
-<> 2019-10-17T032310.200.json
-
-###
-
-POST http://localhost:8088/conference/searchList
-Accept: */*
-Cache-Control: no-cache
-Content-Type: application/json
-
-{"type":"0","valye":"","ifPrepara":false,"preparaString":"{'date':['2019-10-16','2019-11-26'],'labels':['机器学习',机器学习,计算机视觉,meshine,'vision','计算机视觉']}","page":"1"}
-
-<> 2019-10-17T032211.200.json
-
-###
-
-POST http://localhost:8088/conference/searchList
-Accept: */*
-Cache-Control: no-cache
-Content-Type: application/json
-
-{"type":"0","valye":"","ifPrepara":true,"preparaString":"{'date':['2019-10-16','2019-11-26'],'labels':['机器学习',机器学习,计算机视觉,meshine,'vision','计算机视觉']}","page":"1"}
-
-<> 2019-10-17T032150.200.json
-
-###
-
-POST http://localhost:8088/conference/searchList
-Accept: */*
-Cache-Control: no-cache
-Content-Type: application/json
-
-{"type":"0","valye":"","ifPrepara":true,"preparaString":"{'date':['2019-10-16','2019-11-26'],'labels':['机器学习',机器学习,计算机视觉,meshine,'vision','计算机视觉']}","page":"1"}
-
-<> 2019-10-17T031817.200.json
-
-###
-
-POST http://localhost:8088/conference/searchList
-Accept: */*
-Cache-Control: no-cache
-Content-Type: application/json
-
-{"type":"0","valye":"","ifPrepara":false,"preparaString":"{'date':['2019-10-16','2019-11-26'],'labels':['机器学习',机器学习,计算机视觉,meshine,'vision','计算机视觉']}","page":"1"}
-
-<> 2019-10-17T031728.200.json
-
-###
-
-POST http://localhost:8088/conference/searchList
-Accept: */*
-Cache-Control: no-cache
-Content-Type: application/json
-
-{"type":"0","valye":"","ifPrepara":false,"preparaString":"{'date':['2019-10-16','2019-11-26'],'labels':['机器学习',机器学习,计算机视觉,meshine,'vision','计算机视觉']}","page":"1"}
-
-<> 2019-10-17T031619.500.json
-
-###
-
-POST http://localhost:8088/conference/searchList
-Accept: */*
-Cache-Control: no-cache
-Content-Type: application/json
-
-{"type":"0","valye":"","ifPrepara":false,"preparaString":"{'date':['2019-10-16','2019-11-26'],'labels':['机器学习',机器学习,计算机视觉,meshine,'vision','计算机视觉']}","page":"1"}
-
-<> 2019-10-17T031547.500.json
-
-###
-
-POST http://localhost:8088/conference/searchList
-Accept: */*
-Cache-Control: no-cache
-Content-Type: application/json
-
-{"type":"0","valye":"","ifPrepara":false,"preparaString":"{'date':['2019-10-16','2019-11-26'],'labels':['机器学习',机器学习,计算机视觉,meshine,'vision','计算机视觉']}","page":"1"}
-
-<> 2019-10-17T031439.500.json
-
-###
-
-POST http://localhost:8088/conference/searchList
-Accept: */*
-Cache-Control: no-cache
-Content-Type: application/json
-
-{"type":"0","valye":"","ifPrepara":true,"preparaString":"{'date':['2019-10-16','2019-11-26'],'labels':['机器学习',机器学习,计算机视觉,meshine,'vision','计算机视觉']}","page":"1"}
-
-<> 2019-10-17T031417.200.json
-
-###
-
-POST http://localhost:8088/conference/searchList
-Accept: */*
-Cache-Control: no-cache
-Content-Type: application/json
-
-{"type":"0","valye":"","ifPrepara":true,"preparaString":"{'date':['2019-10-17','2019-11-25'],'labels':['机器学习',机器学习,计算机视觉,meshine,'vision','计算机视觉']}","page":"1"}
-
-<> 2019-10-17T031253.200.json
-
-###
-
-POST http://localhost:8088/conference/searchList
-Accept: */*
-Cache-Control: no-cache
-Content-Type: application/json
-
-{"type":"0","valye":"","ifPrepara":true,"preparaString":"{'date':['2019-10-17','2019-11-25'],'labels':['机器学习',机器学习,计算机视觉,meshine,'vision','计算机视觉']}","page":"1"}
-
-<> 2019-10-17T030935.200.json
-
-###
-
-POST http://localhost:8088/conference/searchList
-Accept: */*
-Cache-Control: no-cache
-Content-Type: application/json
-
-{"type":"0","valye":"","ifPrepara":true,"preparaString":"{'date':['2019-10-17','2019-11-25'],'labels':['机器学习',机器学习,计算机视觉,meshine,'vision','计算机视觉']}","page":"0"}
-
-<> 2019-10-17T030902.500.json
-
-###
-
-POST http://localhost:8088/conference/searchList
-Accept: */*
-Cache-Control: no-cache
-Content-Type: application/json
-
-{"type":"0","valye":"","ifPrepara":true,"preparaString":"{'date':['2019-10-17','2019-11-25'],'labels':['机器学习',机器学习,计算机视觉,meshine,'vision','计算机视觉']}","page":"0"}
-
-<> 2019-10-17T030333.500.json
-
-###
-
-POST http://localhost:8088/conference/searchList
-Accept: */*
-Cache-Control: no-cache
-Content-Type: application/json
-
-{"type":"0","valye":"","ifPrepara":true,"preparaString":"{'date':['2019-10-17','2019-11-25'],'labels':['机器学习',机器学习,计算机视觉,meshine,'vision','计算机视觉']}","page":"0"}
-
-<> 2019-10-17T030108.500.json
-
-###
-
-POST http://localhost:8088/conference/searchList
-Accept: */*
-Cache-Control: no-cache
-Content-Type: application/json
-
-{"type":"0","valye":"","ifPrepara":true,"preparaString":"{'date':['2019-10-17','2019-11-25'],'labels':['机器学习',机器学习,计算机视觉,meshine,'vision','计算机视觉']}","page":"0"}
-
-<> 2019-10-17T025950.500.json
-
-###
-
-POST http://localhost:8088/conference/searchList
-Accept: */*
-Cache-Control: no-cache
-Content-Type: application/json
-
-{"type":"0","valye":"","ifPrepara":true,"preparaString":"{'date':['2019-10-17','2019-11-25'],'labels':['机器学习',机器学习,计算机视觉,meshine,'vision','计算机视觉']}","page":0}
-
-<> 2019-10-17T025914.500.json
-
-###
-
-POST http://localhost:8088/conference/searchList
-Accept: */*
-Cache-Control: no-cache
-Content-Type: application/json
-
-{"type":"0","valye":"","ifPrepara":true,"preparaString":"{'date':['2019-10-17','2019-11-25'],'labels':['机器学习',机器学习,计算机视觉,meshine,'vision','计算机视觉']}"}
-
-<> 2019-10-17T025828.500.json
-
-###
-
-POST http://localhost:8088/conference/searchList
-Accept: */*
-Cache-Control: no-cache
-Content-Type: application/json
-
-{"type":"0","valye":"","ifPrepara":true,"preparaString":"{'date':['2019-10-17','2019-11-25'],'labels':['机器学习',机器学习,计算机视觉,meshine,'vision','计算机视觉']}"}
-
-<> 2019-10-17T025805.500.json
-
-###
-
-POST http://localhost:8088/conference/searchList
-Accept: */*
-Cache-Control: no-cache
-Content-Type: application/json
-
-{"type":"0","value":"","ifPrepara":true,"preparaString":"{"date":["2019-10-17","2019-11-25"],"labels":["'机器学习'","机器学习","计算机视觉","meshine","'vision'","'计算机视觉'"]}"}
-
-<> 2019-10-17T025621.400.json
-
-###
-
-POST http://localhost:8088/conference/searchList
-Accept: */*
-Cache-Control: no-cache
-Content-Type: application/json
-
-{"type":"0","valye":"","ifPrepara":true,"preparaString":"{"date":["2019-10-17","2019-11-25"],"labels":["'机器学习'","机器学习","计算机视觉","meshine","'vision'","'计算机视觉'"]}"}
-
-<> 2019-10-17T025312.400.json
-
-###
-
-GET http://localhost:8088/conference/prepra?email=296301852@qq.com&username=tju1&passwd=12345
-Accept: */*
-Cache-Control: no-cache
-Content-Type: application/json
-
-{"name":"AAAI", "homepage":"1", "labels":"['计算机视觉', '机器学习']", "location":"USA", "date":"2019-11-25", "level":"A"}
-
-<> 2019-10-17T022206.200.json
-
-###
-
-GET http://localhost:8088/conference/prepra?email=296301852@qq.com&username=tju1&passwd=12345
-Accept: */*
-Cache-Control: no-cache
-Content-Type: application/json
-
-{"name":"AAAI", "homepage":"1", "labels":"['计算机视觉', '机器学习']", "location":"USA", "date":"2019-11-25", "level":"A"}
-
-<> 2019-10-17T022108.500.json
-
-###
-
-GET http://localhost:8088/conference/prepra?email=296301852@qq.com&username=tju1&passwd=12345
-Accept: */*
-Cache-Control: no-cache
-Content-Type: application/json
-
-{"name":"AAAI", "homepage":"1", "labels":"['计算机视觉', '机器学习']", "location":"USA", "date":"2019-11-25", "level":"A"}
-
-<> 2019-10-17T021629.500.json
-
-###
-
-POST http://localhost:8088/conference/prepra?email=296301852@qq.com&username=tju1&passwd=12345
-Accept: */*
-Cache-Control: no-cache
-Content-Type: application/json
-
-{"name":"AAAI", "homepage":"1", "labels":"['计算机视觉', '机器学习']", "location":"USA", "date":"2019-11-25", "level":"A"}
-
-<> 2019-10-17T021621.405.json
-
-###
-
-POST http://localhost:8088/conference/add?email=296301852@qq.com&username=tju1&passwd=12345
-Accept: */*
-Cache-Control: no-cache
-Content-Type: application/json
-
-{"name":"AAAI", "homepage":"1", "labels":"['计算机视觉', '机器学习']", "location":"USA", "date":"2019-11-25", "level":"A"}
-
-<> 2019-10-17T111437.200.json
-
-###
-
-POST http://localhost:8088/conference/add?email=296301852@qq.com&username=tju1&passwd=12345
-Accept: */*
-Cache-Control: no-cache
-Content-Type: application/json
-
-{"name":"AAAI", "homepage":"1", "labels":"['计算机视觉', '机器学习']", "location":"USA", "date":"2019-11-25", "level":"A"}
-
-<> 2019-10-17T110955.500.json
-
-###
-
-POST http://localhost:8088/conference/add?email=296301852@qq.com&username=tju1&passwd=12345
-Accept: */*
-Cache-Control: no-cache
-Content-Type: application/json
-
-{"name":"AAAI", "homepage":"1", "labels":"['计算机视觉', '机器学习']", "location":"USA", "date":"2019-11-25", "level":"A"}
-
-<> 2019-10-17T110823.500.json
-
-###
-
-POST http://localhost:8088/conference/add?email=296301852@qq.com&username=tju1&passwd=12345
-Accept: */*
-Cache-Control: no-cache
-Content-Type: application/json
-
-{"name":"AAAI", "homepage":"1", "labels":"['计算机视觉', '机器学习']", "location":"USA", "date":"2019-11-25", "level":"A"}
-
-<> 2019-10-17T110224.500.json
-
-###
-
 POST http://localhost:8088/paper/detail
 Accept: */*
 Cache-Control:
@@ -535,6 +183,124 @@ Content-Type: application/json
 {"type":"0","value":"The Complete 685-Kilobase DNA Sequence of the Human β T Cell Receptor Locus","ifPrepara":"Ture","page":1,"preparaString":“0”}
 
 <> 2019-10-16T043153.400.json
+
+###
+
+POST http://localhost:8088/paper/searchList
+Accept: */*
+Cache-Control:
+Content-Type: application/json
+
+{"type":"0","value":"The Complete 685-Kilobase DNA Sequence of the Human β T Cell Receptor Locus","ifPrepara":"1","page":1,"preparaString":“{journal:['Science'],pubdate:['1966-06-21T00:00:00','2019-06-21T00:00:00'],affiliations:['L. Rowen and L. Hood are in the Department of Molecular Biotechnology, University of Washington, Seattle, WA 98195-7730, USA.'],labels:['fluorescence', 'detect']}”}
+
+<> 2019-10-16T043112.400.json
+
+###
+
+POST http://localhost:8088/paper/searchList
+Accept: */*
+Cache-Control:
+Content-Type: application/json
+
+{"type":"0","value":"The Complete 685-Kilobase DNA Sequence of the Human β T Cell Receptor Locus","ifPrepara":"1","page":1}
+
+<> 2019-10-16T042917.400.json
+
+###
+
+POST http://localhost:8088/paper/searchList
+Accept: */*
+Cache-Control:
+Content-Type: application/json
+
+{"type":"0","value":"The Complete 685-Kilobase DNA Sequence of the Human β T Cell Receptor Locus","ifPrepara":"ture","page":1}
+
+<> 2019-10-16T042838.400.json
+
+###
+
+POST http://localhost:8088/paper/searchList
+Accept: */*
+Cache-Control:
+Content-Type: application/json
+
+{"type":"0",value":"The Complete 685-Kilobase DNA Sequence of the Human β T Cell Receptor Locus","ifPrepara":"ture","page":1}
+
+<> 2019-10-16T042819.400.json
+
+###
+
+POST http://localhost:8088/paper/searchList
+Accept: */*
+Cache-Control:
+Content-Type: application/json
+
+{"type":"0",value":"The Complete 685-Kilobase DNA Sequence of the Human β T Cell Receptor Locus","ifPrepara":"ture","page":1}
+
+<> 2019-10-16T042818.400.json
+
+###
+
+POST http://localhost:8088/paper/searchList
+Accept: */*
+Cache-Control:
+Content-Type: application/json
+
+{"type":"0",value":"The Complete 685-Kilobase DNA Sequence of the Human β T Cell Receptor Locus","ifPrepara":"ture","page":1}
+
+<> 2019-10-16T042816.400.json
+
+###
+
+POST http://localhost:8088/paper/searchList
+Accept: */*
+Cache-Control:
+Content-Type: application/json
+
+{"type":"0",value":"The Complete 685-Kilobase DNA Sequence of the Human β T Cell Receptor Locus","ifPrepara":"ture","page":1}
+
+<> 2019-10-16T042800.400.json
+
+###
+
+POST http://localhost:8088/paper/searchList
+Accept: application/json
+Cache-Control:
+Content-Type: application/json
+
+{"type":"0",value":"The Complete 685-Kilobase DNA Sequence of the Human β T Cell Receptor Locus","ifPrepara":"ture","page":1}
+
+<> 2019-10-16T042718.400.json
+
+###
+
+POST http://localhost:8088/paper/searchList
+Accept: application/json
+Cache-Control:
+
+{"type":"0",value":"The Complete 685-Kilobase DNA Sequence of the Human β T Cell Receptor Locus","ifPrepara":"ture","page":1}
+
+<> 2019-10-16T042634.415.json
+
+###
+
+POST http://localhost:8088/paper/searchList
+Accept: */*
+Cache-Control: application/json
+
+{"type":"0",value":"The Complete 685-Kilobase DNA Sequence of the Human β T Cell Receptor Locus","ifPrepara":"ture","page":1}
+
+<> 2019-10-16T042606.415.json
+
+###
+
+POST http://localhost:8088/paper/searchList
+Accept: */*
+Cache-Control: no-cache
+
+{"type":"0",value":"The Complete 685-Kilobase DNA Sequence of the Human β T Cell Receptor Locus","ifPrepara":"ture","page":1}
+
+<> 2019-10-16T042310.415.json
 
 ###
 
