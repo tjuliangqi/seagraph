@@ -1,3 +1,23 @@
+POST http://localhost:8088/paper/prepara
+Accept: */*
+Cache-Control:
+Content-Type: application/json
+
+{"type":"0","value":"The Complete 685-Kilobase DNA Sequence of the Human β T Cell Receptor Locus","ifPrepara":true,"page":1,"preparaString":"{journal:['Science'],pubdate:['1966-06-21T00:00:00','2019-06-21T00:00:00'],affiliations:['L. Rowen and L. Hood are in the Department of Molecular Biotechnology, University of Washington, Seattle, WA 98195-7730, USA.'],labels:['fluorescence', 'detect']}"}
+
+<> 2019-10-17T115120.200.json
+
+###
+
+POST http://localhost:8088/paper/prepara
+Accept: */*
+Cache-Control:
+Content-Type: application/json
+
+{"type":"0","value":"The Complete 685-Kilobase DNA Sequence of the Human β T Cell Receptor Locus","ifPrepara":true,"page":1,"preparaString":"{journal:['Science'],pubdate:['1966-06-21T00:00:00','2019-06-21T00:00:00'],affiliations:['L. Rowen and L. Hood are in the Department of Molecular Biotechnology, University of Washington, Seattle, WA 98195-7730, USA.'],labels:['fluorescence', 'detect']}"}
+
+###
+
 POST http://localhost:8088/paper/detail
 Accept: */*
 Cache-Control:
