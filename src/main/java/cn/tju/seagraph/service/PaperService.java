@@ -247,7 +247,7 @@ public class PaperService {
         filterBean.setLabels(labels);
         System.out.println(filterBean.toString());
 
-        return RetResponse.makeRsp(20000,"ok",filterBean);
+        return RetResponse.makeOKRsp(filterBean);
 
     }
 

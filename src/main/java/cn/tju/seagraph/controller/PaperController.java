@@ -61,7 +61,7 @@ public class PaperController {
         }
         paperMysqlBean.setBrowse(String.valueOf(browse));
         paperMapper.updateData(paperMysqlBean);
-        return RetResponse.makeRsp(20000,"ok",result);
+        return RetResponse.makeOKRsp(result);
     }
 
 }
