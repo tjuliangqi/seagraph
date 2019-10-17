@@ -178,7 +178,7 @@ public class PaperService {
             result.add(hitToBean(searchHit));
         }
         System.out.println(result);
-        return RetResponse.makeRsp(20000,"ok",result);
+        return RetResponse.makeOKRsp(result);
     }
 
     public static RetResult<FilterBean> prepara(String type, String value) throws IOException {
