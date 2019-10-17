@@ -10,9 +10,9 @@ import java.util.List;
 @Mapper
 @Repository
 public interface ConferenceMapper {
-    List<Conference> getConferenceByDate(@Param("date") String date);
+    List<Conference> getConferenceByFilter(@Param("datefrom") String datefrom, @Param("dateto") String dateto, @Param("item") List<String> item);
     List<Conference> getAllConference();
-    int insertConference(@Param("conference") Conference conference);
+    Integer insertConference(@Param("conference") Conference conference);
     int deleteById(@Param("id") int id);
     int updateConference(@Param("conference") Conference conference);
 }

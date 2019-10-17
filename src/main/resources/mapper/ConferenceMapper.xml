@@ -3,15 +3,18 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.tju.seagraph.dao.ConferenceMapper" >
 
-    <select id="selectConferenceByDate"  resultType="Conference" parameterType="String">
-        SELECT * FROM conference WHERE date = #{date} ;
+    <select id="selectConferenceFilter"  resultType="Conference" parameterType="String">
+        SELECT * FROM conference WHERE date_format(date,'%Y-%m-%d') between #{datefrom} and #{dateto} and labels in
+        <foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+            #{item}
+        </foreach>
     </select>
 
     <select id="getAllConference"  resultType="Conference" parameterType="String">
         SELECT * FROM conference ;
     </select>
 
-    <insert id="insertConference" parameterType="cn.tju.seagraph.daomain.Conference">
+    <insert id="insertConference" parameterType="cn.tju.seagraph.daomain.Conference" >
         insert into conference
         (homepage,name,location,level,date,labels)
         values
