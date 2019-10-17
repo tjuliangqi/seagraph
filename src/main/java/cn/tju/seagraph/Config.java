@@ -7,7 +7,7 @@ public class Config {
      */
 
     public static final String ES_IP = "192.168.199.31";
-    public static final String INDEX = "paper";
+    public static final String PAPERINDEX = "paper";
     public static int PORT = 9200;
 }
 

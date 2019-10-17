@@ -44,8 +44,8 @@ public class PaperService {
         SearchSourceBuilder searchSourceBuilderASC = new SearchSourceBuilder();
         searchSourceBuilderDESC.sort("pubdate", SortOrder.DESC);
         searchSourceBuilderASC.sort("pubdate", SortOrder.ASC);
-        SearchRequest searchRequestDESC = new SearchRequest(Config.INDEX);
-        SearchRequest searchRequestASC = new SearchRequest(Config.INDEX);
+        SearchRequest searchRequestDESC = new SearchRequest(Config.PAPERINDEX);
+        SearchRequest searchRequestASC = new SearchRequest(Config.PAPERINDEX);
 
         if (type.equals("0")) {
             queryBuilder = QueryBuilders.matchQuery("title", value);
@@ -114,7 +114,7 @@ public class PaperService {
         BoolQueryBuilder boolQueryBuilder = QueryBuilders.boolQuery();
         SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();
         searchSourceBuilder.from(10*(page-1));
-        SearchRequest searchRequest = new SearchRequest(Config.INDEX);
+        SearchRequest searchRequest = new SearchRequest(Config.PAPERINDEX);
         if (type.equals("0")){
             boolQueryBuilder.must(QueryBuilders.matchQuery("title",value));
             if (ifPrepara){
@@ -197,7 +197,7 @@ public class PaperService {
             queryBuilder = QueryBuilders.matchQuery("title", value);
         }
         SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();
-        SearchRequest searchRequest = new SearchRequest(Config.INDEX);
+        SearchRequest searchRequest = new SearchRequest(Config.PAPERINDEX);
         searchSourceBuilder.size(100);
         searchSourceBuilder.query(queryBuilder);
         searchRequest.source(searchSourceBuilder);
