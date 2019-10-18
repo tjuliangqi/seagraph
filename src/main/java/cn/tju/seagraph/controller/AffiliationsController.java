@@ -1,6 +1,7 @@
 package cn.tju.seagraph.controller;
 
 import cn.tju.seagraph.dao.AffiliationsMapper;
+import cn.tju.seagraph.daomain.AffiliationsEsBean;
 import cn.tju.seagraph.daomain.AffiliationsMysqlBean;
 import cn.tju.seagraph.daomain.RetResponse;
 import cn.tju.seagraph.daomain.RetResult;
@@ -27,8 +28,8 @@ public class AffiliationsController {
     AffiliationsMapper affiliationsMapper;
     @RequestMapping(value = "/searchList", method = RequestMethod.POST)
     public RetResult<ArrayList<AffiliationsEsBean>> searchList(@RequestParam("type") String type, @RequestParam("value") String value,
-                                                                  @RequestParam("email") String email, @RequestParam("ifPrepara") String ifPrepara,
-                                                                  @RequestParam("preparaString") String preparaString, @RequestParam("page") String page) throws IOException, JSONException {
+                                                               @RequestParam("email") String email, @RequestParam("ifPrepara") String ifPrepara,
+                                                               @RequestParam("preparaString") String preparaString, @RequestParam("page") String page) throws IOException, JSONException {
         //RetResult retResult = new RetResult();
         boolean ifPrepara_new = Boolean.parseBoolean(ifPrepara);
         int page_new = Integer.parseInt(page);

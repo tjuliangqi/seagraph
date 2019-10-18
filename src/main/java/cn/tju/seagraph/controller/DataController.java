@@ -18,7 +18,7 @@ import java.util.List;
 public class DataController {
     @Autowired
     DataMapper dataMapper;
-    @RequestMapping(value = "/statistics", method = RequestMethod.POST)
+    @RequestMapping(value = "/label", method = RequestMethod.POST)
     public RetResult<List<data>> getCount() {
         List<data> list = dataMapper.getDataList();
         return RetResponse.makeOKRsp(list);

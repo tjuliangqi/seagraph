@@ -10,11 +10,11 @@ import java.util.List;
 @Repository
 public interface PaperMapper {
 
-    @Select("SELECT * FROM `science1` WHERE `uuid` = #{uuid}")
+    @Select("SELECT * FROM `science` WHERE `uuid` = #{uuid}")
     PaperMysqlBean getDataById(String uuid);
-    @Select("SELECT * FROM `science1`")
+    @Select("SELECT * FROM `science`")
     List<PaperMysqlBean> getDataList();
-    @Insert({"INSERT INTO `wy`.`science1`(`uuid`, `authors`, `affiliations`, " +
+    @Insert({"INSERT INTO `wy`.`science`(`uuid`, `authors`, `affiliations`, " +
             "`doi`, `title`, `journal`, `abs`, `fulltext`, `references`, `pubdate`," +
             " `pdf_url`, `type`, `pic_url`, `pic_text`, `keywords`, `fulltext_url`, `download`, " +
             "`ch_title`, `re_uuid`, `or_title`, `browse`, `chemicallist`, `labels`) VALUES (#{uuid},#{authors}," +
@@ -22,9 +22,9 @@ public interface PaperMapper {
             "#{pic_url},#{pic_text},#{keywords},#{fulltext_url},#{download},#{ch_title},#{re_uuid},#{or_title},#{browse},#{chemicallist}," +
             "#{labels})"})
     int insertData(PaperMysqlBean paperMysqlBean);
-    @Delete("DELETE FROM science1 WHERE uuid = #{uuid}")
+    @Delete("DELETE FROM science WHERE uuid = #{uuid}")
     int deleteById(String uuid);
-    @Update("UPDATE `wy`.`science1` SET `authors` = #{authors}, `affiliations` = #{affiliations}," +
+    @Update("UPDATE `wy`.`science` SET `authors` = #{authors}, `affiliations` = #{affiliations}," +
             " `doi` = #{doi}, `title` = #{title}, `journal` = #{journal}, `abs` = #{abs}, `fulltext` = #{fulltext}," +
             " `references` = #{references}, `pubdate` = #{pubdate}, `pdf_url` = #{pdf_url}, `type` = #{type},`pic_url` = #{pic_url}," +
             " `pic_text` = #{pic_text}, `keywords` = #{keywords}, `fulltext_url` = #{fulltext_url}, `download` = #{download}, `ch_title` = #{ch_title}," +

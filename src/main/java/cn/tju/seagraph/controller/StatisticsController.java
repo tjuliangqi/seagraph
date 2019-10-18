@@ -26,7 +26,12 @@ public class StatisticsController {
         dateUtils.update(statisticsMapper,3,dateUtils.gainDate());
         dateUtils.update(statisticsMapper,3,"2000-01-01");
         PaperMysqlBean paperMysqlBean = paperMapper.getDataById(json.get("paperId"));
-        int n = Integer.valueOf(paperMysqlBean.getDownload());
+        int n = 0;
+        if (paperMysqlBean.getDownload()==null){
+            n =0;
+        }else {
+            n = Integer.valueOf(paperMysqlBean.getDownload());
+        }
         n++;
         paperMysqlBean.setDownload(String.valueOf(n));
         paperMapper.updateData(paperMysqlBean);
@@ -35,7 +40,7 @@ public class StatisticsController {
 
     @RequestMapping(value = "/statistics", method = RequestMethod.POST)
     public RetResult<List<Statistics>> getCount(@RequestBody Map<String,String> json) {
-        List<Statistics> list0 = statisticsMapper.selectStatisticsByDate("2000-00-00");
+        List<Statistics> list0 = statisticsMapper.selectStatisticsByDate("2000-01-01");
         List<Statistics> list = statisticsMapper.selectStatisticsByDate(dateUtils.gainDate());
         List<Statistics> list1 = statisticsMapper.selectStatisticsByDate(json.get("date"));
         if (list.size()==0){
