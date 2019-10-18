@@ -24,7 +24,7 @@ public class StatisticsController {
     @RequestMapping(value = "/addDownload", method = RequestMethod.POST)
     public RetResult<String> Count(@RequestBody Map<String,String> json) {
         dateUtils.update(statisticsMapper,3,dateUtils.gainDate());
-        dateUtils.update(statisticsMapper,3,"2000-00-00");
+        dateUtils.update(statisticsMapper,3,"2000-01-01");
         PaperMysqlBean paperMysqlBean = paperMapper.getDataById(json.get("paperId"));
         int n = Integer.valueOf(paperMysqlBean.getDownload());
         n++;
