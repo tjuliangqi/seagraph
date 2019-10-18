@@ -1,10 +1,12 @@
 package cn.tju.seagraph.daomain;
 
-public class Author {
+import java.util.Set;
+
+public class AuthorEsBean {
     private String id;
     private String name;
-    private String affiliations;
-    private String labels;
+    private Set affiliations;
+    private Set labels;
     private String paperList;
     private int paperNum;
     private String pic_url;
@@ -26,19 +28,19 @@ public class Author {
         this.name = name;
     }
 
-    public String getAffiliations() {
+    public Set getAffiliations() {
         return affiliations;
     }
 
-    public void setAffiliations(String affiliations) {
+    public void setAffiliations(Set affiliations) {
         this.affiliations = affiliations;
     }
 
-    public String getLabels() {
+    public Set getLabels() {
         return labels;
     }
 
-    public void setLabels(String labels) {
+    public void setLabels(Set labels) {
         this.labels = labels;
     }
 
@@ -76,11 +78,11 @@ public class Author {
 
     @Override
     public String toString() {
-        return "Author{" +
+        return "AuthorEsBean{" +
                 "id='" + id + '\'' +
                 ", name='" + name + '\'' +
-                ", affiliations='" + affiliations + '\'' +
-                ", labels='" + labels + '\'' +
+                ", affiliations=" + affiliations +
+                ", labels=" + labels +
                 ", paperList='" + paperList + '\'' +
                 ", paperNum=" + paperNum +
                 ", pic_url='" + pic_url + '\'' +

@@ -10,6 +10,7 @@ public class Config {
     public static final String PAPERINDEX = "paper";
     public static final String CONFERENCEINDEX = "conference";
     public static final String INDEX_AFFILIATIONS = "affiliations";
+    public static final String AUTHORINDEX = "authors";
     public static int PORT = 9200;
 }
 

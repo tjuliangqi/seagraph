@@ -1,3 +1,58 @@
+POST http://localhost:8088/data/label
+Accept: */*
+Cache-Control: no-cache
+Content-Type: application/json
+
+{"paperId":"2f03e746ea3611e9a3d800d861171bd5","date":"2000-01-01","passwd":"12345"}
+
+<> 2019-10-18T050446.200.json
+
+###
+
+POST http://localhost:8088/statistics/statistics
+Accept: */*
+Cache-Control: no-cache
+Content-Type: application/json
+
+{"paperId":"2f03e746ea3611e9a3d800d861171bd5","date":"2000-01-01","passwd":"12345"}
+
+<> 2019-10-18T045719.200.json
+
+###
+
+POST http://localhost:8088/statistics/addDownload
+Accept: */*
+Cache-Control: no-cache
+Content-Type: application/json
+
+{"paperId":"2f03e746ea3611e9a3d800d861171bd5","username":"tju1","passwd":"12345"}
+
+<> 2019-10-18T045350.200.json
+
+###
+
+POST http://localhost:8088/statistics/addDownload
+Accept: */*
+Cache-Control: no-cache
+Content-Type: application/json
+
+{"paperId":"2f03e746ea3611e9a3d800d861171bd5","username":"tju1","passwd":"12345"}
+
+<> 2019-10-18T045125.500.json
+
+###
+
+POST http://localhost:8088/statistics/addDownload
+Accept: */*
+Cache-Control: no-cache
+Content-Type: application/json
+
+{"paperId":"2f03e746ea3611e9a3d800d861171bd5","username":"tju1","passwd":"12345"}
+
+<> 2019-10-18T044913.500.json
+
+###
+
 POST http://localhost:8088/statistics/addDownload
 Accept: */*
 Cache-Control: no-cache
@@ -480,47 +535,6 @@ Content-Type: application/json
 {"type":"0",value":"The Complete 685-Kilobase DNA Sequence of the Human β T Cell Receptor Locus","ifPrepara":"ture","page":1}
 
 <> 2019-10-16T042800.400.json
-
-###
-
-POST http://localhost:8088/paper/searchList
-Accept: application/json
-Cache-Control:
-Content-Type: application/json
-
-{"type":"0",value":"The Complete 685-Kilobase DNA Sequence of the Human β T Cell Receptor Locus","ifPrepara":"ture","page":1}
-
-<> 2019-10-16T042718.400.json
-
-###
-
-POST http://localhost:8088/paper/searchList
-Accept: application/json
-Cache-Control:
-
-{"type":"0",value":"The Complete 685-Kilobase DNA Sequence of the Human β T Cell Receptor Locus","ifPrepara":"ture","page":1}
-
-<> 2019-10-16T042634.415.json
-
-###
-
-POST http://localhost:8088/paper/searchList
-Accept: */*
-Cache-Control: application/json
-
-{"type":"0",value":"The Complete 685-Kilobase DNA Sequence of the Human β T Cell Receptor Locus","ifPrepara":"ture","page":1}
-
-<> 2019-10-16T042606.415.json
-
-###
-
-POST http://localhost:8088/paper/searchList
-Accept: */*
-Cache-Control: no-cache
-
-{"type":"0",value":"The Complete 685-Kilobase DNA Sequence of the Human β T Cell Receptor Locus","ifPrepara":"ture","page":1}
-
-<> 2019-10-16T042310.415.json
 
 ###
 
