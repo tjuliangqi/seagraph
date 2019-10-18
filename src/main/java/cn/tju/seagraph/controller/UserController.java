@@ -26,7 +26,7 @@ public class UserController {
     EmailService emailService;
     @Autowired
     StatisticsMapper statisticsMapper;
-    @RequestMapping(value = "/getCheckCode", method = RequestMethod.GET)
+    @RequestMapping(value = "/getCheckCode", method = RequestMethod.POST)
     public RetResult<String> getCheckCode(@RequestBody Map<String,String> json){
         List<User> list = userMapper.getUserByEmail(json.get("email"));
         if (list.size()==0){
@@ -43,7 +43,7 @@ public class UserController {
         }
     }
 
-    @RequestMapping(value = "/getCheckUser", method = RequestMethod.GET)
+    @RequestMapping(value = "/getCheckUser", method = RequestMethod.POST)
     public RetResult<String> getCheckUser(@RequestBody Map<String,String> json){
         List<User> list = userMapper.getUserByUsername(json.get("username"));
         if (list.size()==0){
@@ -53,7 +53,7 @@ public class UserController {
         }
     }
 
-    @RequestMapping(value = "/login", method = RequestMethod.GET)
+    @RequestMapping(value = "/login", method = RequestMethod.POST)
     public RetResult<Map> login(@RequestBody Map<String,String> json){
         List<User> list = userMapper.getUserByEmail(json.get("email"));
         if (list.size()==0){
@@ -72,7 +72,7 @@ public class UserController {
         }
     }
 
-    @RequestMapping(value = "/login", method = RequestMethod.POST)
+    @RequestMapping(value = "/regis", method = RequestMethod.POST)
     public RetResult<String> login(@RequestBody User user){
         int flag = userMapper.insertUser(user);
         if (flag==1){

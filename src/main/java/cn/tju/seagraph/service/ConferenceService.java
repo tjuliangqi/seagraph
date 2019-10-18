@@ -83,30 +83,37 @@ public class ConferenceService {
         SearchRequest searchRequest = new SearchRequest(Config.CONFERENCEINDEX);
         if (type.equals("0")){
             boolQueryBuilder.must(QueryBuilders.matchAllQuery());
-            if (ifPrepara){
-                try {
-                    map = strToMap(preparaString);
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                    return null;
-                }
-                for (Object key : map.keySet()){
-                    if (key.toString().equals("date")){
-                        if (map.get(key).toString().equals("")){
-                            continue;
-                        }
-                        String[] strings = toStringList(map.get(key).toString());
-                        System.out.println(strings);
-                        boolQueryBuilder.filter(QueryBuilders.rangeQuery("date").from(strings[0]).to(strings[1]));
+        }else {
+            if (type.equals("1")){
+                boolQueryBuilder.must(QueryBuilders.matchQuery("name",value));
+            }else {
+                return null;
+            }
+        }
+
+        if (ifPrepara){
+            try {
+                map = strToMap(preparaString);
+            } catch (JSONException e) {
+                e.printStackTrace();
+                return null;
+            }
+            for (Object key : map.keySet()){
+                if (key.toString().equals("date")){
+                    if (map.get(key).toString().equals("")){
+                        continue;
                     }
-                    if (key.toString().equals("labels")){
-                        if (map.get(key).toString().equals("")){
-                            continue;
-                        }
-                        String[] strings = toStringList(map.get(key).toString());
-                        for (String each :strings){
-                            boolQueryBuilder.filter(QueryBuilders.matchQuery("labels",each.trim()));
-                        }
+                    String[] strings = toStringList(map.get(key).toString());
+                    System.out.println(strings);
+                    boolQueryBuilder.filter(QueryBuilders.rangeQuery("date").from(strings[0]).to(strings[1]));
+                }
+                if (key.toString().equals("labels")){
+                    if (map.get(key).toString().equals("")){
+                        continue;
+                    }
+                    String[] strings = toStringList(map.get(key).toString());
+                    for (String each :strings){
+                        boolQueryBuilder.filter(QueryBuilders.matchQuery("labels",each.trim()));
                     }
                 }
             }
