@@ -4,7 +4,7 @@
 <mapper namespace="cn.tju.seagraph.dao.AuthorMapper" >
 
     <select id="getAuthorById"  resultType="cn.tju.seagraph.daomain.Author" parameterType="String">
-        SELECT * FROM authors WHERE id = #{id} ;
+        SELECT * FROM authors1 WHERE id = #{id} ;
     </select>
 
     <select id="getAuthorList"  resultType="cn.tju.seagraph.daomain.Author" >
