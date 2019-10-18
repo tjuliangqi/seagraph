@@ -21,7 +21,7 @@ public class StatisticsController {
     StatisticsMapper statisticsMapper;
     @Autowired
     PaperMapper paperMapper;
-    @RequestMapping(value = "/statistics", method = RequestMethod.POST)
+    @RequestMapping(value = "/addDownload", method = RequestMethod.POST)
     public RetResult<String> Count(@RequestBody Map<String,String> json) {
         dateUtils.update(statisticsMapper,3,dateUtils.gainDate());
         dateUtils.update(statisticsMapper,3,"2000-00-00");
@@ -33,7 +33,7 @@ public class StatisticsController {
         return RetResponse.makeOKRsp("ok");
     }
 
-    @RequestMapping(value = "/statistics", method = RequestMethod.GET)
+    @RequestMapping(value = "/statistics", method = RequestMethod.POST)
     public RetResult<List<Statistics>> getCount(@RequestBody Map<String,String> json) {
         List<Statistics> list0 = statisticsMapper.selectStatisticsByDate("2000-00-00");
         List<Statistics> list = statisticsMapper.selectStatisticsByDate(dateUtils.gainDate());
