@@ -1,6 +1,7 @@
 package cn.tju.seagraph.service;
 
 import cn.tju.seagraph.Config;
+import cn.tju.seagraph.daomain.AffiliationsEsBean;
 import cn.tju.seagraph.daomain.AffiliationsMysqlBean;
 import cn.tju.seagraph.utils.EsUtils;
 import org.elasticsearch.action.search.SearchRequest;
@@ -29,10 +30,10 @@ public class AffiliationsService {
      * @throws IOException
      * @throws JSONException
      */
-    public static ArrayList<AffiliationsMysqlBean> affiliationSearchList(String type, String value, boolean ifPrepara, String preparaString, int page) throws IOException, JSONException {
+    public static ArrayList<AffiliationsEsBean> affiliationSearchList(String type, String value, boolean ifPrepara, String preparaString, int page) throws IOException, JSONException {
         EsUtils esUtils = new EsUtils();
         RestHighLevelClient client = esUtils.client;
-        ArrayList<AffiliationsMysqlBean> affiliationsMysqlBeans = new ArrayList<>();
+        ArrayList<AffiliationsEsBean> affiliationsEsBeans = new ArrayList<>();
         QueryBuilder builder = queryTextToBuilder(type, value, ifPrepara, preparaString);
         SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();
         searchSourceBuilder.from(page)
@@ -45,30 +46,31 @@ public class AffiliationsService {
 
         for (SearchHit searchHit:searchHits){
             System.out.println(searchHit.getSourceAsString());
-            AffiliationsMysqlBean affiliationsMysqlBean = new AffiliationsMysqlBean();
+            AffiliationsEsBean affiliationsEsBean = new AffiliationsEsBean();
             String uuid = (String)searchHit.getSourceAsMap().get("uuid");
             String name = (String)searchHit.getSourceAsMap().get("name");
             String labels = (String)searchHit.getSourceAsMap().get("labels");
             String influence = (String)searchHit.getSourceAsMap().get("influence");
+            String[] labelsArray = labels.replace("['","").replace("']","").split("', '");
+            Set<String> labelsSet = new HashSet<>(Arrays.asList(labelsArray));
 
-            affiliationsMysqlBean.setUuid(uuid);
-            affiliationsMysqlBean.setName(name);
-            affiliationsMysqlBean.setLabels(labels);
-            affiliationsMysqlBean.setInfluence(influence);
-            affiliationsMysqlBeans.add(affiliationsMysqlBean);
+            affiliationsEsBean.setUuid(uuid);
+            affiliationsEsBean.setName(name);
+            affiliationsEsBean.setLabels(labelsSet);
+            affiliationsEsBean.setInfluence(influence);
+            affiliationsEsBeans.add(affiliationsEsBean);
         }
-        return affiliationsMysqlBeans;
+        return affiliationsEsBeans;
     }
 
     /**
      *
      * @param type
      * @param value
-     * @param page
      * @return
      * @throws IOException
      */
-    public static AffiliationsMysqlBean affiliationPrepara(String type, String value, int page) throws IOException {
+    public static Map<String, Set> affiliationPrepara(String type, String value) throws IOException {
         String queryField = "paperList";
         if (type.equals("0")){
             queryField = "paperList";
@@ -77,7 +79,7 @@ public class AffiliationsService {
         RestHighLevelClient client = esUtils.client;
         QueryBuilder builder = QueryBuilders.matchQuery(queryField,value);
         SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();
-        searchSourceBuilder.from(page)
+        searchSourceBuilder.from(0)
                 .size(10)
                 .query(builder);
         SearchRequest searchRequest = new SearchRequest(Config.INDEX_AFFILIATIONS);
@@ -87,10 +89,10 @@ public class AffiliationsService {
 
         ArrayList<String> labelsList = new ArrayList<>();
         ArrayList<String> influenceList = new ArrayList<>();
-        AffiliationsMysqlBean affiliationsMysqlBean = new AffiliationsMysqlBean();
+        Map<String,Set> selectTags = new HashMap<>();
+        AffiliationsEsBean affiliationsEsBean = new AffiliationsEsBean();
         for (SearchHit searchHit:searchHits){
             System.out.println(searchHit.getSourceAsString());
-
 
             String labels = (String)searchHit.getSourceAsMap().get("labels");
             String influence = (String)searchHit.getSourceAsMap().get("influence");
@@ -106,9 +108,28 @@ public class AffiliationsService {
         }
         Set result1 = new HashSet(labelsList);
         Set result2 = new HashSet(influenceList);
-        affiliationsMysqlBean.setLabels(result1.toString());
-        affiliationsMysqlBean.setInfluence(result2.toString());
-        return affiliationsMysqlBean;
+        selectTags.put("labels",result1);
+        selectTags.put("influence",result2);
+
+        return selectTags;
+    }
+
+    public static AffiliationsEsBean mySqlBeanToEsBean(AffiliationsMysqlBean affiliationsMysqlBean){
+        AffiliationsEsBean affiliationsEsBean = new AffiliationsEsBean();
+        affiliationsEsBean.setUuid(affiliationsMysqlBean.getUuid());
+        affiliationsEsBean.setName(affiliationsMysqlBean.getName());
+        affiliationsEsBean.setPaperList(affiliationsMysqlBean.getPaperList());
+        affiliationsEsBean.setInfluence(affiliationsMysqlBean.getInfluence());
+        affiliationsEsBean.setPaperUUID(affiliationsMysqlBean.getPaperUUID());
+
+        String labelsText = affiliationsMysqlBean.getLabels();
+        String[] labelsArray = labelsText.replace("['","").replace("']","").split("', '");
+        Set<String> labelsSet = new HashSet<>(Arrays.asList(labelsArray));
+        affiliationsEsBean.setLabels(labelsSet);
+
+        int pageNum = Integer.parseInt(affiliationsMysqlBean.getPaperNum());
+        affiliationsEsBean.setPaperNum(pageNum);
+        return affiliationsEsBean;
     }
 
 }
