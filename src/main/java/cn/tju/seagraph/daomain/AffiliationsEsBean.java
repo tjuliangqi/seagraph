@@ -1,13 +1,14 @@
 package cn.tju.seagraph.daomain;
 
 import java.util.ArrayList;
+import java.util.Set;
 
-public class AffiliationsMysqlBean {
+public class AffiliationsEsBean {
     private String uuid;
     private String name;
-    private String labels;
+    private Set<String> labels;
     private String paperList;
-    private String paperNum;
+    private int paperNum;
     private String influence;
     private String paperUUID;
 
@@ -27,11 +28,11 @@ public class AffiliationsMysqlBean {
         this.name = name;
     }
 
-    public String getLabels() {
+    public Set<String> getLabels() {
         return labels;
     }
 
-    public void setLabels(String labels) {
+    public void setLabels(Set<String> labels) {
         this.labels = labels;
     }
 
@@ -43,11 +44,11 @@ public class AffiliationsMysqlBean {
         this.paperList = paperList;
     }
 
-    public String getPaperNum() {
+    public int getPaperNum() {
         return paperNum;
     }
 
-    public void setPaperNum(String paperNum) {
+    public void setPaperNum(int paperNum) {
         this.paperNum = paperNum;
     }
 
@@ -58,6 +59,7 @@ public class AffiliationsMysqlBean {
     public void setInfluence(String influence) {
         this.influence = influence;
     }
+
     public String getPaperUUID() {
         return paperUUID;
     }

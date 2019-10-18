@@ -9,6 +9,7 @@ public class Config {
     public static final String ES_IP = "192.168.199.31";
     public static final String PAPERINDEX = "paper";
     public static final String CONFERENCEINDEX = "conference";
+    public static final String INDEX_AFFILIATIONS = "affiliations";
     public static int PORT = 9200;
 }
 

@@ -16,6 +16,7 @@ import java.util.*;
 
 import static cn.tju.seagraph.service.AffiliationsService.affiliationPrepara;
 import static cn.tju.seagraph.service.AffiliationsService.affiliationSearchList;
+import static cn.tju.seagraph.service.AffiliationsService.mySqlBeanToEsBean;
 
 
 @RestController
@@ -25,34 +26,34 @@ public class AffiliationsController {
     @Autowired
     AffiliationsMapper affiliationsMapper;
     @RequestMapping(value = "/searchList", method = RequestMethod.POST)
-    public RetResult<ArrayList<AffiliationsMysqlBean>> searchList(@RequestParam("type") String type, @RequestParam("value") String value,
+    public RetResult<ArrayList<AffiliationsEsBean>> searchList(@RequestParam("type") String type, @RequestParam("value") String value,
                                                                   @RequestParam("email") String email, @RequestParam("ifPrepara") String ifPrepara,
                                                                   @RequestParam("preparaString") String preparaString, @RequestParam("page") String page) throws IOException, JSONException {
         //RetResult retResult = new RetResult();
         boolean ifPrepara_new = Boolean.parseBoolean(ifPrepara);
         int page_new = Integer.parseInt(page);
-        ArrayList<AffiliationsMysqlBean> affiliationsMysqlBeans = affiliationSearchList(type, value, ifPrepara_new, preparaString, page_new);
+        ArrayList<AffiliationsEsBean> affiliationsEsBeans = affiliationSearchList(type, value, ifPrepara_new, preparaString, page_new);
         //retResult.setCode(20000).setMsg("SUCCESS").setData(affiliationsMysqlBeans);
-        return RetResponse.makeOKRsp(affiliationsMysqlBeans);
+        return RetResponse.makeOKRsp(affiliationsEsBeans);
     }
 
 
 
     @RequestMapping(value = "/prepara", method = RequestMethod.POST)
-    public RetResult<AffiliationsMysqlBean> prepara(@RequestParam("type") String type, @RequestParam("value") String value, @RequestParam("page") String page) throws IOException {
+    public RetResult<Map> prepara(@RequestParam("type") String type, @RequestParam("value") String value) throws IOException {
         //RetResult retResult = new RetResult();
-        int page_new = Integer.parseInt(page);
-        AffiliationsMysqlBean affiliationsMysqlBean = affiliationPrepara(type, value, page_new);
+        Map<String, Set> selectTags = affiliationPrepara(type, value);
         //retResult.setCode(20000).setMsg("SUCCESS").setData(affiliationsMysqlBean);
-        return RetResponse.makeOKRsp(affiliationsMysqlBean);
+        return RetResponse.makeOKRsp(selectTags);
     }
 
     @RequestMapping(value = "/detail", method = RequestMethod.POST)
-    public RetResult<AffiliationsMysqlBean> detail(@RequestParam("id") String id, @RequestParam("email") String email) throws IOException {
+    public RetResult<AffiliationsEsBean> detail(@RequestParam("id") String id, @RequestParam("email") String email) throws IOException {
         //RetResult retResult = new RetResult();
         AffiliationsMysqlBean affiliationsMysqlBean = affiliationsMapper.getDataById(id);
+        AffiliationsEsBean affiliationsEsBean = mySqlBeanToEsBean(affiliationsMysqlBean);
         //retResult.setCode(20000).setMsg("SUCCESS").setData(affiliationsMysqlBean);
-        return RetResponse.makeOKRsp(affiliationsMysqlBean);
+        return RetResponse.makeOKRsp(affiliationsEsBean);
     }
 }
 
