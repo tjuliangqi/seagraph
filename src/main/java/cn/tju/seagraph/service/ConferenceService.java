@@ -104,7 +104,7 @@ public class ConferenceService {
                         continue;
                     }
                     String[] strings = toStringList(map.get(key).toString());
-                    System.out.println(strings);
+//                    System.out.println(strings);
                     boolQueryBuilder.filter(QueryBuilders.rangeQuery("date").from(strings[0]).to(strings[1]));
                 }
                 if (key.toString().equals("labels")){

@@ -161,7 +161,7 @@ public class AuthorSearch {
         SearchResponse searchResponse = client.search(searchRequest);
         SearchHit[] searchHits = searchResponse.getHits().getHits();
 
-        System.out.println(searchHits.length);
+//        System.out.println(searchHits.length);
 
         JsonToMapUtils j = new JsonToMapUtils();
         Set authorresult = new HashSet();

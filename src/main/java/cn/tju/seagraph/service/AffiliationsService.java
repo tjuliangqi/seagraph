@@ -45,7 +45,7 @@ public class AffiliationsService {
         SearchHit[] searchHits = searchResponse.getHits().getHits();
 
         for (SearchHit searchHit:searchHits){
-            System.out.println(searchHit.getSourceAsString());
+//            System.out.println(searchHit.getSourceAsString());
             AffiliationsEsBean affiliationsEsBean = new AffiliationsEsBean();
             String uuid = (String)searchHit.getSourceAsMap().get("uuid");
             String name = (String)searchHit.getSourceAsMap().get("name");
@@ -92,7 +92,7 @@ public class AffiliationsService {
         Map<String,Set> selectTags = new HashMap<>();
         AffiliationsEsBean affiliationsEsBean = new AffiliationsEsBean();
         for (SearchHit searchHit:searchHits){
-            System.out.println(searchHit.getSourceAsString());
+//            System.out.println(searchHit.getSourceAsString());
 
             String labels = (String)searchHit.getSourceAsMap().get("labels");
             String influence = (String)searchHit.getSourceAsMap().get("influence");

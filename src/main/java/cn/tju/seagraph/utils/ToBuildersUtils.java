@@ -51,21 +51,21 @@ public class ToBuildersUtils {
                     .must(builder1)
                     .must(builder2);
         }
-        System.out.println(builder0);
+//        System.out.println(builder0);
         return builder0;
     }
 
     public static void test() throws JSONException {
         String jsonStr = "{example:{'labels':['oocyte recovery','monospecific antiserum','photosynthetic'],influence:['1','1','1']}}";
         Map map = strToMap(jsonStr);
-        System.out.println(map);
+//        System.out.println(map);
 
         String labels = map.get("labels").toString().replace("[", "").replace("]", "").replace("\"", "");
         String[] strsToList1 = labels.split(",");
         for(int i =1;i<strsToList1.length;i++){
-            System.out.println(strsToList1[i]);
+//            System.out.println(strsToList1[i]);
         }
         String influence = map.get("influence").toString();
-        System.out.println(map.get("labels"));
+//        System.out.println(map.get("labels"));
     }
 }

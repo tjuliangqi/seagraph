@@ -6,14 +6,16 @@ import cn.tju.seagraph.daomain.RetResponse;
 import cn.tju.seagraph.daomain.RetResult;
 import cn.tju.seagraph.daomain.User;
 import cn.tju.seagraph.service.EmailService;
+import cn.tju.seagraph.utils.VerifyUtil;
 import cn.tju.seagraph.utils.dateUtils;
+import com.auth0.jwt.JWT;
+import com.auth0.jwt.algorithms.Algorithm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Random;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+import java.util.*;
 
 
 @RestController
@@ -28,34 +30,36 @@ public class UserController {
     StatisticsMapper statisticsMapper;
     @RequestMapping(value = "/getCheckCode", method = RequestMethod.POST)
     public RetResult<String> getCheckCode(@RequestBody Map<String,String> json){
-        List<User> list = userMapper.getUserByEmail(json.get("email"));
-        if (list.size()==0){
-            String checkCode = String.valueOf(new Random().nextInt(899999) + 100000);
-            String message = "您的注册验证码为："+checkCode;
-            try {
-                emailService.sendSimpleMail(json.get("email"), "注册验证码", message);
-            }catch (Exception e){
-                return RetResponse.makeErrRsp("邮箱注册失败，请检查邮箱是否正确");
-            }
-            return RetResponse.makeOKRsp(checkCode);
-        }else {
-            return RetResponse.makeErrRsp("该邮箱已经被注册");
+        String checkCode = String.valueOf(new Random().nextInt(899999) + 100000);
+        String message = "您的验证码为："+checkCode;
+        try {
+            emailService.sendSimpleMail(json.get("email"), "验证码", message);
+        }catch (Exception e){
+            e.printStackTrace();
+            return RetResponse.makeErrRsp("邮箱验证失败，请检查邮箱是否正确");
         }
+        return RetResponse.makeOKRsp(checkCode);
     }
 
     @RequestMapping(value = "/getCheckUser", method = RequestMethod.POST)
     public RetResult<String> getCheckUser(@RequestBody Map<String,String> json){
-        List<User> list = userMapper.getUserByUsername(json.get("username"));
-        if (list.size()==0){
+        List<User> usernamelist = userMapper.getUserByUsername(json.get("username"));
+        List<User> emaillist = userMapper.getUserByEmail(json.get("email"));
+        if (usernamelist.size()==0 && emaillist.size() == 0){
             return RetResponse.makeOKRsp("ok");
-        }else {
+        }else if (usernamelist.size() == 0){
             return RetResponse.makeErrRsp("该用户名已经被注册");
+        }else if (emaillist.size() == 0){
+            return RetResponse.makeErrRsp("该邮箱已经被注册");
+        }else {
+            return RetResponse.makeErrRsp("ERROR");
         }
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public RetResult<Map> login(@RequestBody Map<String,String> json){
         List<User> list = userMapper.getUserByEmail(json.get("email"));
+        System.out.println(json);
         if (list.size()==0){
             return RetResponse.makeErrRsp("邮箱不正确");
         }else {
@@ -63,12 +67,52 @@ public class UserController {
             if (user.getPasswd().equals(json.get("passwd"))){
                 Map<String,String> map = new HashMap<>();
                 map.put("username",user.getUsername());
+                String token= JWT.create().withAudience(String.valueOf(user.getId())).sign(Algorithm.HMAC256(user.getPasswd()));
+                user.setToken(token);
+                userMapper.updateUser(user);
+                map.put("token",token);
                 dateUtils.update(statisticsMapper,0,dateUtils.gainDate());
                 dateUtils.update(statisticsMapper,0,"2000-01-01");
                 return RetResponse.makeOKRsp(map);
             }else {
                 return RetResponse.makeErrRsp("密码不正确");
             }
+        }
+    }
+
+    @RequestMapping(value = "/getImg", method = RequestMethod.POST)
+    public RetResult<Object> getImg(HttpServletRequest httpRequest){
+        HttpSession session = httpRequest.getSession();
+        //利用图片工具生成图片
+        //第一个参数是生成的验证码，第二个参数是生成的图片
+        Object[] objs = VerifyUtil.createImage();
+        //将验证码存入Session
+
+        return RetResponse.makeOKRsp(objs);
+    }
+
+    @RequestMapping(value = "/checkUser", method = RequestMethod.POST)
+    public RetResult<Object> checkUser(@RequestBody Map<String,String> map){
+        List<User> list = userMapper.getUserByEmail(map.get("email"));
+        if (list.size()==0){
+            return RetResponse.makeErrRsp("邮箱不正确");
+        }else {
+            User user = list.get(0);
+            if (user.getUsername().equals(map.get("username"))){
+                return RetResponse.makeOKRsp();
+            }else {
+                return RetResponse.makeErrRsp("用户名不正确");
+            }
+        }
+    }
+
+    @RequestMapping(value = "/updateUser")
+    public RetResult<String> updateUser(@RequestBody User user){
+        int flag = userMapper.updateUser(user);
+        if (flag == 1){
+            return RetResponse.makeOKRsp("ok");
+        }else{
+            return RetResponse.makeErrRsp("ERROR");
         }
     }
 

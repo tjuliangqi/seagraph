@@ -32,35 +32,35 @@ public class SeagraphApplicationTests {
     @Test
     public void testData(){
         List<data> list = dataMapper.getDataById(1);
-        System.out.println(list.get(0).getLabels());
+//        System.out.println(list.get(0).getLabels());
         int i = dataMapper.insertData(list.get(0));
         List<data> list1 = dataMapper.getDataList();
-        System.out.println(list1.size());
+//        System.out.println(list1.size());
         data data = list1.get(1);
-        System.out.println(data.getCount());
+//        System.out.println(data.getCount());
         data.setCount(91);
         int k = dataMapper.updateData(data);
         List<data> list2 = dataMapper.getDataById(2);
-        System.out.println(list2.get(0).getCount());
+//        System.out.println(list2.get(0).getCount());
         int j = dataMapper.deleteById(2);
         List<data> list3 = dataMapper.getDataList();
-        System.out.println(list3.size());
+//        System.out.println(list3.size());
 
     }
     @Test
     public void testStatistics(){
         int i = statisticsMapper.insertStatistics(dateUtils.gainDate());
         List<Statistics> list1 = statisticsMapper.selectStatisticsByDate(dateUtils.gainDate());
-        System.out.println(list1.size());
+//        System.out.println(list1.size());
         Statistics statistics = list1.get(0);
-        System.out.println(statistics.getDetail());
+//        System.out.println(statistics.getDetail());
         statistics.setDetail(1);
         int k = statisticsMapper.updateStatistics(statistics);
         List<Statistics> list2 = statisticsMapper.selectStatisticsByDate(dateUtils.gainDate());
-        System.out.println(list2.get(0).getDetail());
+//        System.out.println(list2.get(0).getDetail());
         int j = statisticsMapper.deleteByDate(dateUtils.gainDate());
         List<Statistics> list3 = statisticsMapper.selectStatisticsByDate(dateUtils.gainDate());
-        System.out.println(list3.size());
+//        System.out.println(list3.size());
 
     }
     @Test
@@ -85,30 +85,30 @@ public class SeagraphApplicationTests {
         }
         int k = conferenceMapper.deleteById(2);
         List<Conference> list2 = conferenceMapper.getAllConference();
-        System.out.println(list2.size());
+//        System.out.println(list2.size());
     }
 
     @Test
     public void testPaper(){
         PaperMysqlBean paperMysqlBean = paperMapper.getDataById("2f03e746ea3611e9a3d800d861171bd5");
-        System.out.println(paperMysqlBean.toString());
-        System.out.println("测试list");
+//        System.out.println(paperMysqlBean.toString());
+//        System.out.println("测试list");
         List<PaperMysqlBean> list = paperMapper.getDataList();
         for(PaperMysqlBean each:list){
-            System.out.println("*******");
-            System.out.println(each.toString());
+//            System.out.println("*******");
+//            System.out.println(each.toString());
         }
         PaperMysqlBean t1 = new PaperMysqlBean();
         t1.setUuid("1245422");
 
-        System.out.println("测试delete");
+//        System.out.println("测试delete");
         paperMapper.deleteById("1245422");
 
-        System.out.println("测试insert");
-        System.out.println(t1.toString());
+//        System.out.println("测试insert");
+//        System.out.println(t1.toString());
         paperMapper.insertData(t1);
 
-        System.out.println("测试update");
+//        System.out.println("测试update");
         t1.setAbs("wedswerwerf");
         paperMapper.updateData(t1);
 

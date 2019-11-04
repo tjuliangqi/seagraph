@@ -46,7 +46,7 @@ public class JsonToMapUtils {
         JsonToMap(stObj,resultMap);
         Set<String> keys = resultMap.keySet();
         for (String key:keys){
-            System.out.println(key+"："+resultMap.get(key));
+//            System.out.println(key+"："+resultMap.get(key));
         }
 
         return resultMap;
@@ -57,7 +57,7 @@ public class JsonToMapUtils {
                 "suggestion:[中国工商银行, 中国人民, 中国国际, 中国农业, 中国市场, 中国经济, 中国人, 中国广播, 中国文化]}}," +
                 "collations:{collation:中国工商银行}}}";
         Map map = strToMap(jsonStr);
-        System.out.println(map);
+//        System.out.println(map);
 
     }
 //    输出：

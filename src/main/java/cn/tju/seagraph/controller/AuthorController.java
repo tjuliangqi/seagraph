@@ -33,11 +33,11 @@ public class AuthorController {
     @RequestMapping(value = "/searchList", method = RequestMethod.POST)
     public RetResult<List> searchList(@RequestBody Map json) throws IOException, JSONException {
         AuthorSearch authorSearch = new AuthorSearch();
-        System.out.println(json.get("type"));
-        System.out.println(json.get("value"));
-        System.out.println(json.get("email"));
-        System.out.println(json.get("ifPrepara"));
-        System.out.println(json.get("preparaString"));
+//        System.out.println(json.get("type"));
+//        System.out.println(json.get("value"));
+//        System.out.println(json.get("email"));
+//        System.out.println(json.get("ifPrepara"));
+//        System.out.println(json.get("preparaString"));
         List search = authorSearch.authorSearchList(json.get("type").toString(), json.get("value").toString());
         if (search.size()>0){
 //            System.out.println(search.get("pic_url"));
@@ -51,8 +51,8 @@ public class AuthorController {
     @RequestMapping(value = "/prepara", method = RequestMethod.POST)
     public RetResult<AuthorEsBean> prePara(@RequestBody Map<String,String>json) throws IOException, JSONException {
         AuthorSearch authorSearch = new AuthorSearch();
-        System.out.println(json.get("type"));
-        System.out.println(json.get("value"));
+//        System.out.println(json.get("type"));
+//        System.out.println(json.get("value"));
         AuthorEsBean search = authorSearch.authorSearchPrepara(json.get("type"), json.get("value"));
         if (search.getPaperNum()>0){
 //            System.out.println(search.get("pic_url"));

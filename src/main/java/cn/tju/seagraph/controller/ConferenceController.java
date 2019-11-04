@@ -23,7 +23,7 @@ import static cn.tju.seagraph.utils.JsonToMapUtils.strToMap;
 public class ConferenceController {
     @Autowired
     ConferenceMapper conferenceMapper;
-    @RequestMapping(value = "/prepra", method = RequestMethod.GET)
+    @RequestMapping(value = "/prepara", method = RequestMethod.POST)
     public RetResult<Map> getPrepra() {
         List<Conference> list = conferenceMapper.getAllConference();
         Set<String> dataset;

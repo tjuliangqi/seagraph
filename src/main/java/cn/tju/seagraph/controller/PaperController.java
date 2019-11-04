@@ -25,7 +25,7 @@ public class PaperController {
 
     @RequestMapping(value = "/searchList",method = RequestMethod.POST)
     public RetResult<List> searchListResponse(@RequestBody Map<String,String> map) throws IOException {
-        System.out.println(map);
+//        System.out.println(map);
         String type = String.valueOf(map.get("type"));
         String value = String.valueOf(map.get("value"));
         Boolean ifPrepara = Boolean.valueOf(map.get("ifPrepara"));
@@ -37,7 +37,7 @@ public class PaperController {
 
     @RequestMapping(value = "/prepara",method = RequestMethod.POST)
     public RetResult<FilterBean> preparaResponse(@RequestBody Map<String,String> map) throws IOException {
-        System.out.println(map);
+//        System.out.println(map);
         String type = map.get("type");
         String value = map.get("value");
         RetResult<FilterBean> result = prepara(type,value);
@@ -46,13 +46,13 @@ public class PaperController {
 
     @RequestMapping(value = "/detail",method = RequestMethod.POST)
     public RetResult<PaperMysqlBean> detailResponse(@RequestBody Map<String,String> map){
-        System.out.println(map);
+//        System.out.println(map);
         int browse;
         PaperMysqlBean result = paperMapper.getDataById(map.get("uuid"));
         PaperMysqlBean paperMysqlBean = result;
-        System.out.println(result);
-        System.out.println("**********");
-        System.out.println(paperMysqlBean);
+//        System.out.println(result);
+//        System.out.println("**********");
+//        System.out.println(paperMysqlBean);
         if (paperMysqlBean.getBrowse() != null){
             browse = Integer.valueOf(paperMysqlBean.getBrowse())+1;
         }

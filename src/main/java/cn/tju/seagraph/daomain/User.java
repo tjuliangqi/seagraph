@@ -9,6 +9,8 @@ public class User implements Serializable {
     private String passwd;
     private String keywords;
     private int root;
+    private String token;
+
 
     public User() {
     }
@@ -19,6 +21,14 @@ public class User implements Serializable {
         this.passwd = passwd;
         this.keywords = keywords;
         this.root = root;
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
     }
 
     public int getId() {

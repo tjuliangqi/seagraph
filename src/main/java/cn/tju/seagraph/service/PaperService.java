@@ -76,8 +76,8 @@ public class PaperService {
         client.close();
         SearchHit[] searchHitsDESC = searchResponseDESC.getHits().getHits();
         SearchHit[] searchHitsASC = searchResponseASC.getHits().getHits();
-        System.out.println("正序：" + searchHitsASC.length);
-        System.out.println("反序：" + searchHitsDESC.length);
+//        System.out.println("正序：" + searchHitsASC.length);
+//        System.out.println("反序：" + searchHitsDESC.length);
         pubdate.add(searchHitsASC[0].getSourceAsMap().get("pubdate"));
         pubdate.add(searchHitsDESC[0].getSourceAsMap().get("pubdate"));
         return pubdate;
@@ -177,7 +177,7 @@ public class PaperService {
         for (SearchHit searchHit : searchHits){
             result.add(hitToBean(searchHit));
         }
-        System.out.println(result);
+//        System.out.println(result);
         return RetResponse.makeOKRsp(result);
     }
 
@@ -245,7 +245,7 @@ public class PaperService {
         filterBean.setAffiliations(affiliations);
         filterBean.setJournal(journal);
         filterBean.setLabels(labels);
-        System.out.println(filterBean.toString());
+//        System.out.println(filterBean.toString());
 
         return RetResponse.makeOKRsp(filterBean);
 
