@@ -182,12 +182,11 @@ public class PaperService {
         }
         client.close();
         SearchHit[] searchHits = searchResponse.getHits().getHits();
-
         long count = searchResponse.getHits().getTotalHits();
         for (SearchHit searchHit : searchHits){
             result.add(hitToBean(searchHit));
         }
-
+        System.out.println(value);
         Map<String,Object> resultMap = new HashMap<>();
         resultMap.put("result",result);
         resultMap.put("count",count);
