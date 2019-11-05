@@ -24,14 +24,14 @@ public class PaperController {
     PaperMapper paperMapper;
 
     @RequestMapping(value = "/searchList",method = RequestMethod.POST)
-    public RetResult<List> searchListResponse(@RequestBody Map<String,String> map) throws IOException {
+    public RetResult<Map<String,Object>> searchListResponse(@RequestBody Map<String,String> map) throws IOException {
 //        System.out.println(map);
         String type = String.valueOf(map.get("type"));
         String value = String.valueOf(map.get("value"));
         Boolean ifPrepara = Boolean.valueOf(map.get("ifPrepara"));
         String preparaString = String.valueOf(map.get("preparaString"));
         int page = Integer.valueOf(map.get("page"));
-        RetResult<List> result = searchList(type,value,ifPrepara,preparaString,page);
+        RetResult<Map<String,Object>> result = searchList(type,value,ifPrepara,preparaString,page);
         return result;
     }
 
