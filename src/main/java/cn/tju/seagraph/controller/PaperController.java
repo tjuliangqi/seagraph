@@ -11,8 +11,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
 import static cn.tju.seagraph.service.PaperService.prepara;
 import static cn.tju.seagraph.service.PaperService.searchList;
@@ -44,24 +46,17 @@ public class PaperController {
         return result;
     }
 
-    @RequestMapping(value = "/detail",method = RequestMethod.POST)
-    public RetResult<PaperMysqlBean> detailResponse(@RequestBody Map<String,String> map){
+    @RequestMapping(value = "/keywordsheat",method = RequestMethod.POST)
+    public RetResult<Map<String,String>> KeywordsHeat(){
 //        System.out.println(map);
-        int browse;
-        PaperMysqlBean result = paperMapper.getDataById(map.get("uuid"));
-        PaperMysqlBean paperMysqlBean = result;
-//        System.out.println(result);
-//        System.out.println("**********");
-//        System.out.println(paperMysqlBean);
-        if (paperMysqlBean.getBrowse() != null){
-            browse = Integer.valueOf(paperMysqlBean.getBrowse())+1;
+        Random r = new Random();
+        Map m = new HashMap();
+        m.put("keyword","");
+        for (int i = 1 ; i<=12;i++){
+            m.put(""+i,""+r.nextInt(99)+1);
         }
-        else {
-            browse = 1;
-        }
-        paperMysqlBean.setBrowse(String.valueOf(browse));
-        paperMapper.updateData(paperMysqlBean);
-        return RetResponse.makeOKRsp(result);
+        return RetResponse.makeOKRsp(m);
     }
+
 
 }
