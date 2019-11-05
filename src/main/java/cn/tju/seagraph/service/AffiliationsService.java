@@ -75,13 +75,20 @@ public class AffiliationsService {
      * @throws IOException
      */
     public static Map<String, Set> affiliationPrepara(String type, String value) throws IOException {
-        String queryField = "paperList";
+        String queryField = "name";
+        QueryBuilder builder = QueryBuilders.matchAllQuery();
         if (type.equals("0")){
-            queryField = "paperList";
+            queryField = "name";
+            builder = QueryBuilders.matchQuery(queryField,value);
+        }else if(type.equals("1")){
+            builder = QueryBuilders.matchAllQuery();
+        }else if(type.equals("2")){
+            queryField = "labels";
+            builder = QueryBuilders.matchQuery(queryField,value);
         }
         EsUtils esUtils = new EsUtils();
         RestHighLevelClient client = esUtils.client;
-        QueryBuilder builder = QueryBuilders.matchQuery(queryField,value);
+
         SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();
         searchSourceBuilder.from(0)
                 .size(10)
