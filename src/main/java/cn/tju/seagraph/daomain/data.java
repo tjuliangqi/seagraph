@@ -3,7 +3,7 @@ package cn.tju.seagraph.daomain;
 public class data {
     private int id;
     private String labels;
-    private int count;
+    private String count;
 
     public int getId() {
         return id;
@@ -21,11 +21,11 @@ public class data {
         this.labels = labels;
     }
 
-    public int getCount() {
+    public String getCount() {
         return count;
     }
 
-    public void setCount(int count) {
+    public void setCount(String count) {
         this.count = count;
     }
 }

@@ -11,10 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Random;
+import java.util.*;
 
 import static cn.tju.seagraph.service.PaperService.prepara;
 import static cn.tju.seagraph.service.PaperService.searchList;
@@ -47,15 +44,23 @@ public class PaperController {
     }
 
     @RequestMapping(value = "/keywordsheat",method = RequestMethod.POST)
-    public RetResult<Map<String,String>> KeywordsHeat(){
+    public RetResult<List> KeywordsHeat(){
 //        System.out.println(map);
         Random r = new Random();
-        Map m = new HashMap();
-        m.put("keyword","");
-        for (int i = 1 ; i<=12;i++){
-            m.put(""+i,""+r.nextInt(99)+1);
+        List l = new ArrayList();
+        String[] keys = {"Immunotherapy", "Innate immunity", "Signal transduction"};
+        for (int j = 0;j<keys.length;j++){
+
+            Map m = new HashMap();
+//
+            m.put("keyword",keys[j]);
+            for (int i = 1 ; i<=12;i++){
+                m.put(""+i,""+r.nextInt(99)+1);
+            }
+            l.add(m);
         }
-        return RetResponse.makeOKRsp(m);
+
+        return RetResponse.makeOKRsp(l);
     }
 
 
