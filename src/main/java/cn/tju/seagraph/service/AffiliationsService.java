@@ -30,7 +30,7 @@ public class AffiliationsService {
      * @throws IOException
      * @throws JSONException
      */
-    public static ArrayList<AffiliationsEsBean> affiliationSearchList(String type, String value, boolean ifPrepara, String preparaString, int page) throws IOException, JSONException {
+    public static Map<String,Object> affiliationSearchList(String type, String value, boolean ifPrepara, String preparaString, int page) throws IOException, JSONException {
         EsUtils esUtils = new EsUtils();
         RestHighLevelClient client = esUtils.client;
         ArrayList<AffiliationsEsBean> affiliationsEsBeans = new ArrayList<>();
@@ -60,7 +60,11 @@ public class AffiliationsService {
             affiliationsEsBean.setInfluence(influence);
             affiliationsEsBeans.add(affiliationsEsBean);
         }
-        return affiliationsEsBeans;
+        long count = searchResponse.getHits().getTotalHits();
+        Map<String,Object> resultMap = new HashMap<>();
+        resultMap.put("result",affiliationsEsBeans);
+        resultMap.put("count",count);
+        return resultMap;
     }
 
     /**

@@ -91,7 +91,7 @@ public class AuthorSearch {
 //        return result;
     }
 
-    public List<AuthorEsBean> authorSearchList(String type, String value) throws IOException, JSONException {
+    public Map<String,Object> authorSearchList(String type, String value) throws IOException, JSONException {
 
         List<AuthorEsBean> resultList = new ArrayList<AuthorEsBean>();
         EsUtils esUtils = new EsUtils();
@@ -137,7 +137,12 @@ public class AuthorSearch {
             resultList.add(result);
         }
 
-        return resultList;
+        long count = searchResponse.getHits().getTotalHits();
+        Map<String,Object> resultMap = new HashMap<>();
+        resultMap.put("result",resultList);
+        resultMap.put("count",count);
+
+        return resultMap;
     }
     public AuthorEsBean authorSearchPrepara(String type, String value) throws IOException, JSONException {
 

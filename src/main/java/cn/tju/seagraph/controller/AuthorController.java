@@ -31,14 +31,14 @@ public class AuthorController {
     @Autowired
     StatisticsMapper statisticsMapper;
     @RequestMapping(value = "/searchList", method = RequestMethod.POST)
-    public RetResult<List> searchList(@RequestBody Map json) throws IOException, JSONException {
+    public RetResult<Map<String,Object>> searchList(@RequestBody Map json) throws IOException, JSONException {
         AuthorSearch authorSearch = new AuthorSearch();
 //        System.out.println(json.get("type"));
 //        System.out.println(json.get("value"));
 //        System.out.println(json.get("email"));
 //        System.out.println(json.get("ifPrepara"));
 //        System.out.println(json.get("preparaString"));
-        List search = authorSearch.authorSearchList(json.get("type").toString(), json.get("value").toString());
+        Map<String,Object> search = authorSearch.authorSearchList(json.get("type").toString(), json.get("value").toString());
         if (search.size()>0){
 //            System.out.println(search.get("pic_url"));
             return RetResponse.makeOKRsp(search);

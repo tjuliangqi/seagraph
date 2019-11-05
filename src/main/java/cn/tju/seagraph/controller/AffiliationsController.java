@@ -24,7 +24,7 @@ public class AffiliationsController {
     @Autowired
     AffiliationsMapper affiliationsMapper;
     @RequestMapping(value = "/searchList", method = RequestMethod.POST)
-    public RetResult<ArrayList<AffiliationsEsBean>> searchList(@RequestBody Map<String,String> map) throws IOException, JSONException {
+    public RetResult<Map<String,Object>> searchList(@RequestBody Map<String,String> map) throws IOException, JSONException {
         //RetResult retResult = new RetResult();
         String type = String.valueOf(map.get("type"));
         String value = String.valueOf(map.get("value"));
@@ -32,7 +32,7 @@ public class AffiliationsController {
         String preparaString = String.valueOf(map.get("preparaString"));
         int page = Integer.valueOf(map.get("page"));
 
-        ArrayList<AffiliationsEsBean> affiliationsEsBeans = affiliationSearchList(type, value, ifPrepara, preparaString, page);
+        Map<String,Object> affiliationsEsBeans = affiliationSearchList(type, value, ifPrepara, preparaString, page);
         //retResult.setCode(20000).setMsg("SUCCESS").setData(affiliationsMysqlBeans);
         return RetResponse.makeOKRsp(affiliationsEsBeans);
     }
