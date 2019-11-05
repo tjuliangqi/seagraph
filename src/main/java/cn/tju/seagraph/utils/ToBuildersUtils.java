@@ -18,16 +18,30 @@ public class ToBuildersUtils {
      * @throws JSONException
      */
     public static QueryBuilder queryTextToBuilder (String type, String value, boolean ifPrepara, String preparaString) throws JSONException {
-        String queryField0 = "paperList";
-        if (type.equals("0")){
-            queryField0 = "paperList";
-        }
-        QueryBuilder builder0;
+        String queryField0 = "name";
+        QueryBuilder builder0 = QueryBuilders.matchAllQuery();
+
         if (ifPrepara==false) {
-            builder0 = QueryBuilders.matchQuery(queryField0, value);
+            if (type.equals("0")){
+                queryField0 = "name";
+                builder0 = QueryBuilders.matchQuery(queryField0, value);
+            }else if(type.equals("1")){
+                builder0 = QueryBuilders.matchAllQuery();
+            }else if(type.equals("2")){
+                queryField0 = "labels";
+                builder0 = QueryBuilders.matchQuery(queryField0, value);
+            }
         }
         else {
-            builder0 = QueryBuilders.matchQuery(queryField0, value);
+            if (type.equals("0")){
+                queryField0 = "name";
+                builder0 = QueryBuilders.matchQuery(queryField0, value);
+            }else if(type.equals("1")){
+                builder0 = QueryBuilders.matchAllQuery();
+            }else if(type.equals("2")){
+                queryField0 = "labels";
+                builder0 = QueryBuilders.matchQuery(queryField0, value);
+            }
             Map map = strToMap(preparaString);
             String labels = map.get("labels").toString().replace("[", "").replace("]", "").replace("\"", "");
             String[] labelsToList = labels.split(",");
