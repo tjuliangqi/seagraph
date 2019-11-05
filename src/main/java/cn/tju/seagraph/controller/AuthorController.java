@@ -20,6 +20,8 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
+import static cn.tju.seagraph.service.AuthorSearch.relationAuthors;
+
 @RestController
 
 @RequestMapping("/author")
@@ -64,16 +66,36 @@ public class AuthorController {
 
 
     @RequestMapping(value = "/detail", method = RequestMethod.POST)
-    public RetResult<AuthorEsBean> detail(@RequestBody Map<String,String>json) throws IOException, JSONException {
+    public RetResult<AuthorEsBean> detail(@RequestBody Map<String,String>json){
         AuthorSearch authorSearch = new AuthorSearch();
         List<Author> list = authorMapper.getAuthorById(json.get("id"));
         if (list.size()>0){
-            AuthorEsBean search = authorSearch.authorSearchDetail(list);
+            AuthorEsBean search = null;
+            try {
+                search = authorSearch.authorSearchDetail(list);
+            } catch (IOException e) {
+                return RetResponse.makeErrRsp("es查询错误");
+            } catch (JSONException e) {
+                return RetResponse.makeErrRsp("输入数据");
+            }
 //            System.out.println(search.get("pic_url"));
             return RetResponse.makeOKRsp(search);
         }else {
             return RetResponse.makeErrRsp("查无数据");
         }
+    }
+
+    @RequestMapping(value = "/relate", method = RequestMethod.POST)
+    public RetResult<List<String>> relate(@RequestBody Map<String,String> json){
+        List<String> result;
+        try {
+            result = relationAuthors(json.get("name"));
+        }catch (IOException e) {
+            return RetResponse.makeErrRsp("es查询错误");
+        }
+        return RetResponse.makeOKRsp(result);
+
+
     }
 }
 

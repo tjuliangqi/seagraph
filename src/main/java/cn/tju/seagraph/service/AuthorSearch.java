@@ -202,4 +202,29 @@ public class AuthorSearch {
         return result;
     }
 
+    public static List<String> relationAuthors(String name) throws IOException {
+        EsUtils esUtils = new EsUtils();
+        RestHighLevelClient client = esUtils.client;
+        SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();
+        QueryBuilder match = QueryBuilders.matchQuery("name",name);
+        searchSourceBuilder.query(match);
+        searchSourceBuilder.size(100);
+        SearchRequest searchRequest = new SearchRequest();
+        searchRequest.indices(Config.PAPERINDEX);
+        searchRequest.source(searchSourceBuilder);
+        SearchResponse searchResponse = client.search(searchRequest);
+        SearchHit[] searchHits = searchResponse.getHits().getHits();
+        Set<String> result = new HashSet<>();
+        for (SearchHit searchHit:searchHits){
+            Map<String,Object> map = searchHit.getSourceAsMap();
+            String[] strs = String.valueOf(map.get("authors")).replace("\"","").replace("[","").replace("}","").split(",");
+            for (String str : strs){
+                result.add(str);
+            }
+        }
+        List final_result = new ArrayList(result);
+        return final_result;
+
+    }
+
 }
