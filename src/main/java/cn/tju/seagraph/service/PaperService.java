@@ -106,7 +106,7 @@ public class PaperService {
         return paperEsBean;
     }
 
-    public static RetResult<List> searchList(String type, String value, Boolean ifPrepara, String preparaString, int page) throws IOException {
+    public static RetResult<Map<String,Object>> searchList(String type, String value, Boolean ifPrepara, String preparaString, int page) throws IOException {
         List result = new ArrayList();
         Map map = new HashMap();
         EsUtils esUtils = new EsUtils();
@@ -174,11 +174,17 @@ public class PaperService {
         }
         client.close();
         SearchHit[] searchHits = searchResponse.getHits().getHits();
+
+        long count = searchResponse.getHits().getTotalHits();
         for (SearchHit searchHit : searchHits){
             result.add(hitToBean(searchHit));
         }
-//        System.out.println(result);
-        return RetResponse.makeOKRsp(result);
+
+        Map<String,Object> resultMap = new HashMap<>();
+        resultMap.put("result",result);
+        resultMap.put("count",count);
+        System.out.println(resultMap);
+        return RetResponse.makeOKRsp(resultMap);
     }
 
     public static RetResult<FilterBean> prepara(String type, String value) throws IOException {

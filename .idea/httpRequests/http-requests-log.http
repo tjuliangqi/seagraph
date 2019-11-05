@@ -1,524 +1,73 @@
-POST http://211.81.50.158/ocean/user/login
+POST http://localhost:8088/paper/searchList
 Accept: */*
-Cache-Control: no-cache
+Cache-Control:
 Content-Type: application/json
 
-{"email":"296301852@qq.com","passwd":"12345"}
+{"type":"0","value":"The Complete 685-Kilobase DNA Sequence of the Human β T Cell Receptor Locus","email":"111@111","ifPrepara":true,"page":1,"preparaString":"{journal:['Science'],pubdate:['1966-06-21T00:00:00','2019-06-21T00:00:00'],affiliations:['L. Rowen and L. Hood are in the Department of Molecular Biotechnology, University of Washington, Seattle, WA 98195-7730, USA.'],labels:['fluorescence', 'detect']}"}
 
-<> 2019-11-04T031450.200.json
+<> 2019-10-18T092752.200.json
 
 ###
 
-POST http://211.81.50.158/ocean/user/getCheckCode
+POST http://localhost:8088/paper/detail
 Accept: */*
-Cache-Control: no-cache
+Cache-Control:
 Content-Type: application/json
 
-{"email":"296301852@qq.com","username":"tju1","passwd":"12345"}
+{"uuid":"2f03e746ea3611e9a3d800d861171bd5"}
 
-<> 2019-10-28T043351.200.json
+<> 2019-10-18T092333.200.json
 
 ###
 
-POST http://211.81.50.158/ocean/user/email
+POST http://localhost:8088/paper/searchList
 Accept: */*
-Cache-Control: no-cache
+Cache-Control:
 Content-Type: application/json
 
-{"email":"296301852@qq.com","username":"tju1","passwd":"12345"}
+{"type":"0","value":"The Complete 685-Kilobase DNA Sequence of the Human β T Cell Receptor Locus","ifPrepara":true,"page":1,"preparaString":"{journal:['Science'],pubdate:['1966-06-21T00:00:00','2019-06-21T00:00:00'],affiliations:['L. Rowen and L. Hood are in the Department of Molecular Biotechnology, University of Washington, Seattle, WA 98195-7730, USA.'],labels:['fluorescence', 'detect']}"}
 
-<> 2019-10-28T043336.404.json
+<> 2019-10-18T092057.200.json
 
 ###
 
-POST http://211.81.50.158/ocean/user/login
+POST http://localhost:8088/paper/prepara
 Accept: */*
-Cache-Control: no-cache
+Cache-Control:
 Content-Type: application/json
 
-{"email":"296301852@qq.com","username":"tju1","passwd":"12345"}
+{"type":"0","value":"The Complete 685-Kilobase DNA Sequence of the Human β T Cell Receptor Locus","ifPrepara":true,"page":1,"preparaString":"{journal:['Science'],pubdate:['1966-06-21T00:00:00','2019-06-21T00:00:00'],affiliations:['L. Rowen and L. Hood are in the Department of Molecular Biotechnology, University of Washington, Seattle, WA 98195-7730, USA.'],labels:['fluorescence', 'detect']}"}
 
-<> 2019-10-28T043321.200.json
+<> 2019-10-18T092020.200.json
 
 ###
 
-POST http://211.81.50.158/ocean/user/login
+POST http://localhost:8088/paper/prepara
 Accept: */*
-Cache-Control: no-cache
+Cache-Control:
 Content-Type: application/json
 
-{"email":"13835427123@163.com","passwd":"123456"}
-
-<> 2019-10-28T043258.200.json
+{"type":"0","value":"The Complete 685-Kilobase DNA Sequence of the Human β T Cell Receptor Locus","ifPrepara":true,"page":1,"preparaString":"{journal:['Science'],pubdate:['1966-06-21T00:00:00','2019-06-21T00:00:00'],affiliations:['L. Rowen and L. Hood are in the Department of Molecular Biotechnology, University of Washington, Seattle, WA 98195-7730, USA.'],labels:['fluorescence', 'detect']}"}
 
 ###
 
-POST http://211.81.50.158/ocean/user/regis
+POST http://localhost:8088/paper/prepara
 Accept: */*
-Cache-Control: no-cache
+Cache-Control:
 Content-Type: application/json
 
-{"email":"296301852@qq.com","username":"tju1","passwd":"12345"}
+{"type":"0","value":"The Complete 685-Kilobase DNA Sequence of the Human β T Cell Receptor Locus","ifPrepara":true,"page":1,"preparaString":"{journal:['Science'],pubdate:['1966-06-21T00:00:00','2019-06-21T00:00:00'],affiliations:['L. Rowen and L. Hood are in the Department of Molecular Biotechnology, University of Washington, Seattle, WA 98195-7730, USA.'],labels:['fluorescence', 'detect']}"}
 
-<> 2019-10-28T043227.200.json
+<> 2019-10-17T115120.200.json
 
 ###
 
-POST http://211.81.50.158/ocean/user/regis
+POST http://localhost:8088/paper/prepara
 Accept: */*
-Cache-Control: no-cache
+Cache-Control:
 Content-Type: application/json
 
-{"email":"296301852@qq.com","username":"tju1","passwd":"12345"}
-
-<> 2019-10-28T043018.500.json
-
-###
-
-POST http://211.81.50.158/ocean/user/login
-Accept: */*
-Cache-Control: no-cache
-Content-Type: application/json
-
-{"email":"296301852@qq.com","username":"tju1","passwd":"12345"}
-
-<> 2019-10-28T043002.200.json
-
-###
-
-POST http://211.81.50.158/ocean/user/login
-Accept: */*
-Cache-Control: no-cache
-Content-Type: application/json
-
-{"email":"13835427123@163.com","passwd":"123456"}
-
-<> 2019-10-28T042933.200.json
-
-###
-
-POST http://211.81.50.158/ocean/user/login
-Accept: */*
-Cache-Control: no-cache
-Content-Type: application/json
-
-{"email":"13835427123@163.com","passwd":"123456"}
-
-<> 2019-10-28T042818.500.json
-
-###
-
-POST http://192.168.199.211:8088/ocean/data/label
-Accept: */*
-Cache-Control: no-cache
-Content-Type: application/json
-
-{"type":"0","value":"","ifPrepara":true,"preparaString":"{'date':['2019-10-17','2019-11-25'],'labels':['机器学习',机器学习,计算机视觉,meshine,'vision','计算机视觉']}","page":1}
-
-<> 2019-10-18T081221.200.json
-
-###
-
-POST http://211.81.50.158:80/ocean/data/label
-Accept: */*
-Cache-Control: no-cache
-Content-Type: application/json
-
-{"type":"0","value":"","ifPrepara":true,"preparaString":"{'date':['2019-10-17','2019-11-25'],'labels':['机器学习',机器学习,计算机视觉,meshine,'vision','计算机视觉']}","page":1}
-
-<> 2019-10-18T081208.302.html
-
-###
-
-POST http://211.81.50.158:80/ocean/data/label
-Accept: */*
-Cache-Control: no-cache
-Content-Type: application/json
-
-{"paperId":"2f03e746ea3611e9a3d800d861171bd5","date":"2000-01-01","passwd":"12345"}
-
-###
-
-POST http://211.81.50.158/ocean/data/label
-Accept: */*
-Cache-Control: no-cache
-Content-Type: application/json
-
-{"paperId":"2f03e746ea3611e9a3d800d861171bd5","date":"2000-01-01","passwd":"12345"}
-
-###
-
-POST http://192.168.199.211:8088/ocean/data/label
-Accept: */*
-Cache-Control: no-cache
-Content-Type: application/json
-
-{"paperId":"2f03e746ea3611e9a3d800d861171bd5","date":"2000-01-01","passwd":"12345"}
-
-<> 2019-10-18T055727.200.json
-
-###
-
-POST http://211.81.50.158/ocean/data/label
-Accept: */*
-Cache-Control: no-cache
-Content-Type: application/json
-
-{"paperId":"2f03e746ea3611e9a3d800d861171bd5","date":"2000-01-01","passwd":"12345"}
-
-<> 2019-10-18T055657.302.html
-
-###
-
-POST http://211.81.50.158/ocean/data/label
-Accept: */*
-Cache-Control: no-cache
-Content-Type: application/json
-
-{"paperId":"2f03e746ea3611e9a3d800d861171bd5","date":"2000-01-01","passwd":"12345"}
-
-<> 2019-10-18T055329.302.html
-
-###
-
-POST http://211.81.50.158/ocean/data/label
-Accept: */*
-Cache-Control: no-cache
-Content-Type: application/json
-
-{"paperId":"2f03e746ea3611e9a3d800d861171bd5","date":"2000-01-01","passwd":"12345"}
-
-<> 2019-10-18T055128.302.html
-
-###
-
-POST http://211.81.50.158/ocean/data/label
-Accept: */*
-Cache-Control: no-cache
-Content-Type: application/json
-
-{"paperId":"2f03e746ea3611e9a3d800d861171bd5","date":"2000-01-01","passwd":"12345"}
-
-<> 2019-10-18T055114.302.html
-
-###
-
-POST http://211.81.50.158/ocean/data/label
-Accept: */*
-Cache-Control: no-cache
-Content-Type: application/json
-
-{"paperId":"2f03e746ea3611e9a3d800d861171bd5","date":"2000-01-01","passwd":"12345"}
-
-<> 2019-10-18T055039.302.html
-
-###
-
-POST http://211.81.50.158/ocean/data/label
-Accept: */*
-Cache-Control: no-cache
-Content-Type: application/json
-
-{"paperId":"2f03e746ea3611e9a3d800d861171bd5","date":"2000-01-01","passwd":"12345"}
-
-<> 2019-10-18T054921.302.html
-
-###
-
-POST http://localhost:8088/ocean/data/label
-Accept: */*
-Cache-Control: no-cache
-Content-Type: application/json
-
-{"paperId":"2f03e746ea3611e9a3d800d861171bd5","date":"2000-01-01","passwd":"12345"}
-
-<> 2019-10-18T054829.200.json
-
-###
-
-POST http://211.81.50.158/ocean/data/label
-Accept: */*
-Cache-Control: no-cache
-Content-Type: application/json
-
-{"paperId":"2f03e746ea3611e9a3d800d861171bd5","date":"2000-01-01","passwd":"12345"}
-
-<> 2019-10-18T054737.302.html
-
-###
-
-POST http://localhost:8088/data/label
-Accept: */*
-Cache-Control: no-cache
-Content-Type: application/json
-
-{"paperId":"2f03e746ea3611e9a3d800d861171bd5","date":"2000-01-01","passwd":"12345"}
-
-<> 2019-10-18T050446.200.json
-
-###
-
-POST http://localhost:8088/statistics/statistics
-Accept: */*
-Cache-Control: no-cache
-Content-Type: application/json
-
-{"paperId":"2f03e746ea3611e9a3d800d861171bd5","date":"2000-01-01","passwd":"12345"}
-
-<> 2019-10-18T045719.200.json
-
-###
-
-POST http://localhost:8088/statistics/addDownload
-Accept: */*
-Cache-Control: no-cache
-Content-Type: application/json
-
-{"paperId":"2f03e746ea3611e9a3d800d861171bd5","username":"tju1","passwd":"12345"}
-
-<> 2019-10-18T045350.200.json
-
-###
-
-POST http://localhost:8088/statistics/addDownload
-Accept: */*
-Cache-Control: no-cache
-Content-Type: application/json
-
-{"paperId":"2f03e746ea3611e9a3d800d861171bd5","username":"tju1","passwd":"12345"}
-
-<> 2019-10-18T045125.500.json
-
-###
-
-POST http://localhost:8088/statistics/addDownload
-Accept: */*
-Cache-Control: no-cache
-Content-Type: application/json
-
-{"paperId":"2f03e746ea3611e9a3d800d861171bd5","username":"tju1","passwd":"12345"}
-
-<> 2019-10-18T044913.500.json
-
-###
-
-POST http://localhost:8088/statistics/addDownload
-Accept: */*
-Cache-Control: no-cache
-Content-Type: application/json
-
-{"paperId":"2f03e746ea3611e9a3d800d861171bd5","username":"tju1","passwd":"12345"}
-
-<> 2019-10-18T044530.500.json
-
-###
-
-POST http://localhost:8088/user/regis
-Accept: */*
-Cache-Control: no-cache
-Content-Type: application/json
-
-{"email":"296301852@qq.com","username":"tju1","passwd":"12345"}
-
-<> 2019-10-18T115530.200.json
-
-###
-
-POST http://localhost:8088/user/login
-Accept: */*
-Cache-Control: no-cache
-Content-Type: application/json
-
-{"email":"13835427123@163.com","username":"tju","passwd":"12345"}
-
-<> 2019-10-18T115426.200.json
-
-###
-
-POST http://localhost:8088/user/login
-Accept: */*
-Cache-Control: no-cache
-Content-Type: application/json
-
-{"email":"13835427123@163.com","username":"tju","passwd":"123456"}
-
-<> 2019-10-18T115315.200.json
-
-###
-
-POST http://localhost:8088/user/login
-Accept: */*
-Cache-Control: no-cache
-Content-Type: application/json
-
-{"email":"13835427123@163.com","username":"tju","passwd":"12345"}
-
-<> 2019-10-18T115306.200.json
-
-###
-
-POST http://localhost:8088/user/getCheckUser
-Accept: */*
-Cache-Control: no-cache
-Content-Type: application/json
-
-{"email":"13835427123@163.com","username":"tju1"}
-
-<> 2019-10-18T115155.200.json
-
-###
-
-POST http://localhost:8088/user/getCheckUser
-Accept: */*
-Cache-Control: no-cache
-Content-Type: application/json
-
-{"email":"13835427123@163.com","username":"tju"}
-
-<> 2019-10-18T115139.200.json
-
-###
-
-POST http://localhost:8088/user/getCheckCode
-Accept: */*
-Cache-Control: no-cache
-Content-Type: application/json
-
-{"email":"13835427123@163.com"}
-
-<> 2019-10-18T114924.200.json
-
-###
-
-POST http://localhost:8088/user/getCheckCode
-Accept: */*
-Cache-Control: no-cache
-Content-Type: application/json
-
-{"email":"296301852@qq.com"}
-
-<> 2019-10-18T114838.200.json
-
-###
-
-POST http://localhost:8088/user/getCheckCode
-Accept: */*
-Cache-Control: no-cache
-Content-Type: application/json
-
-{"email":"13835427123@163.com"}
-
-<> 2019-10-18T114812.200.json
-
-###
-
-POST http://localhost:8088/user/getCheckCode
-Accept: */*
-Cache-Control: no-cache
-Content-Type: application/json
-
-{"email":"13835427123@163.com"}
-
-<> 2019-10-18T114637.405.json
-
-###
-
-GET http://localhost:8088/user/getCheckCode
-Accept: */*
-Cache-Control: no-cache
-Content-Type: application/json
-
-{"email":"13835427123@163.com"}
-
-<> 2019-10-18T114611.400.json
-
-###
-
-GET http://localhost:8088/conference/prepra
-Accept: */*
-Cache-Control: no-cache
-Content-Type: application/json
-
-{"type":"0","value":"VALSE"}
-
-<> 2019-10-18T092931.200.json
-
-###
-
-POST http://localhost:8088/conference/prepra
-Accept: */*
-Cache-Control: no-cache
-Content-Type: application/json
-
-{"type":"0","value":"VALSE"}
-
-<> 2019-10-18T092924.405.json
-
-###
-
-POST http://localhost:8088/conference/prepara
-Accept: */*
-Cache-Control: no-cache
-Content-Type: application/json
-
-{"type":"0","value":"VALSE"}
-
-<> 2019-10-18T092756.404.json
-
-###
-
-POST http://localhost:8088/conference/searchList
-Accept: */*
-Cache-Control: no-cache
-Content-Type: application/json
-
-{"type":"0","value":"VALSE","ifPrepara":true,"preparaString":"{'date':['2019-10-10','2019-11-26'],'labels':['机器学习']}","page":"1"}
-
-<> 2019-10-18T092245.200.json
-
-###
-
-POST http://localhost:8088/conference/searchList
-Accept: */*
-Cache-Control: no-cache
-Content-Type: application/json
-
-{"type":"0","valye":"VALSE","ifPrepara":true,"preparaString":"{'date':['2019-10-10','2019-11-26'],'labels':['机器学习']}","page":"1"}
-
-<> 2019-10-18T092219.200.json
-
-###
-
-POST http://localhost:8088/conference/searchList
-Accept: */*
-Cache-Control: no-cache
-Content-Type: application/json
-
-{"type":"1","valye":"VALSE","ifPrepara":true,"preparaString":"{'date':['2019-10-10','2019-11-26'],'labels':['机器学习']}","page":"1"}
-
-<> 2019-10-18T092206.200.json
-
-###
-
-POST http://localhost:8088/conference/searchList
-Accept: */*
-Cache-Control: no-cache
-Content-Type: application/json
-
-{"type":"1","valye":"AAAI","ifPrepara":true,"preparaString":"{'date':['2019-10-10','2019-11-26'],'labels':['机器学习']}","page":"1"}
-
-<> 2019-10-18T092130.200.json
-
-###
-
-POST http://localhost:8088/conference/searchList
-Accept: */*
-Cache-Control: no-cache
-Content-Type: application/json
-
-{"type":"0","valye":"AAAI","ifPrepara":true,"preparaString":"{'date':['2019-10-10','2019-11-26'],'labels':['机器学习']}","page":"1"}
-
-<> 2019-10-18T092032.200.json
+{"type":"0","value":"The Complete 685-Kilobase DNA Sequence of the Human β T Cell Receptor Locus","ifPrepara":true,"page":1,"preparaString":"{journal:['Science'],pubdate:['1966-06-21T00:00:00','2019-06-21T00:00:00'],affiliations:['L. Rowen and L. Hood are in the Department of Molecular Biotechnology, University of Washington, Seattle, WA 98195-7730, USA.'],labels:['fluorescence', 'detect']}"}
 
 ###
 
@@ -541,6 +90,290 @@ Content-Type: application/json
 {"uuid":"2f03e746ea3611e9a3d800d861171bd5"}
 
 <> 2019-10-16T084305.200.json
+
+###
+
+POST http://localhost:8088/paper/detail
+Accept: */*
+Cache-Control:
+Content-Type: application/json
+
+{"uuid":"2f03e746ea3611e9a3d800d861171bd5"}
+
+<> 2019-10-16T084048.500.json
+
+###
+
+POST http://localhost:8088/paper/detail
+Accept: */*
+Cache-Control:
+Content-Type: application/json
+
+{"uuid":"2f03e746ea3611e9a3d800d861171bd5"}
+
+<> 2019-10-16T083957.500.json
+
+###
+
+POST http://localhost:8088/paper/detail
+Accept: */*
+Cache-Control:
+Content-Type: application/json
+
+{"uuid":"2f03e746ea3611e9a3d800d861171bd5"}
+
+<> 2019-10-16T083910.500.json
+
+###
+
+POST http://localhost:8088/paper/detail
+Accept: */*
+Cache-Control:
+Content-Type: application/json
+
+{"uuid":"2f03e746ea3611e9a3d800d861171bd5"}
+
+<> 2019-10-16T083830.500.json
+
+###
+
+POST http://localhost:8088/paper/prepara
+Accept: */*
+Cache-Control:
+Content-Type: application/json
+
+{"type":"0","value":"The Complete 685-Kilobase DNA Sequence of the Human β T Cell Receptor Locus","ifPrepara":true,"page":1,"preparaString":"{journal:['Science'],pubdate:['1966-06-21T00:00:00','2019-06-21T00:00:00'],affiliations:['L. Rowen and L. Hood are in the Department of Molecular Biotechnology, University of Washington, Seattle, WA 98195-7730, USA.'],labels:['fluorescence', 'detect']}"}
+
+<> 2019-10-16T050155.200.json
+
+###
+
+POST http://localhost:8088/paper/prepara
+Accept: */*
+Cache-Control:
+Content-Type: application/json
+
+{"type":"0","value":"The Complete 685-Kilobase DNA Sequence of the Human β T Cell Receptor Locus","ifPrepara":true,"page":1,"preparaString":"{journal:['Science'],pubdate:['1966-06-21T00:00:00','2019-06-21T00:00:00'],affiliations:['L. Rowen and L. Hood are in the Department of Molecular Biotechnology, University of Washington, Seattle, WA 98195-7730, USA.'],labels:['fluorescence', 'detect']}"}
+
+<> 2019-10-16T045923.200.json
+
+###
+
+POST http://localhost:8088/paper/searchList
+Accept: */*
+Cache-Control:
+Content-Type: application/json
+
+{"type":"0","value":"The Complete 685-Kilobase DNA Sequence of the Human β T Cell Receptor Locus","ifPrepara":true,"page":1,"preparaString":"{journal:['Science'],pubdate:['1966-06-21T00:00:00','2019-06-21T00:00:00'],affiliations:['L. Rowen and L. Hood are in the Department of Molecular Biotechnology, University of Washington, Seattle, WA 98195-7730, USA.'],labels:['fluorescence', 'detect']}"}
+
+<> 2019-10-16T045904.200.json
+
+###
+
+POST http://localhost:8088/paper/searchList
+Accept: */*
+Cache-Control:
+Content-Type: application/json
+
+{"type":"0","value":"The Complete 685-Kilobase DNA Sequence of the Human β T Cell Receptor Locus","ifPrepara":true,"page":1,"preparaString":"{journal:['Science'],pubdate:['1966-06-21T00:00:00','2019-06-21T00:00:00'],affiliations:['L. Rowen and L. Hood are in the Department of Molecular Biotechnology, University of Washington, Seattle, WA 98195-7730, USA.'],labels:['fluorescence', 'detect']}"}
+
+<> 2019-10-16T045204.200.json
+
+###
+
+POST http://localhost:8088/paper/searchList
+Accept: */*
+Cache-Control:
+Content-Type: application/json
+
+{"type":"0","value":"The Complete 685-Kilobase DNA Sequence of the Human β T Cell Receptor Locus","ifPrepara":true,"page":1,"preparaString":"{journal:['Science'],pubdate:['1966-06-21T00:00:00','2019-06-21T00:00:00'],affiliations:['L. Rowen and L. Hood are in the Department of Molecular Biotechnology, University of Washington, Seattle, WA 98195-7730, USA.'],labels:['fluorescence', 'detect']}"}
+
+###
+
+POST http://localhost:8088/paper/searchList
+Accept: */*
+Cache-Control:
+Content-Type: application/json
+
+{"type":"0","value":"The Complete 685-Kilobase DNA Sequence of the Human β T Cell Receptor Locus","ifPrepara":true,"page":1,"preparaString":"0"}
+
+###
+
+POST http://localhost:8088/paper/searchList
+Accept: */*
+Cache-Control:
+Content-Type: application/json
+
+{"type":"0","value":"The Complete 685-Kilobase DNA Sequence of the Human β T Cell Receptor Locus","ifPrepara":true,"page":1,"preparaString":"0"}
+
+###
+
+POST http://localhost:8088/paper/searchList
+Accept: */*
+Cache-Control:
+Content-Type: application/json
+
+{"type":"0","value":"The Complete 685-Kilobase DNA Sequence of the Human β T Cell Receptor Locus","ifPrepara":true,"page":1,"preparaString":"0"}
+
+###
+
+POST http://localhost:8088/paper/searchList
+Accept: */*
+Cache-Control:
+Content-Type: application/json
+
+{"type":"0","value":"The Complete 685-Kilobase DNA Sequence of the Human β T Cell Receptor Locus","ifPrepara":true,"page":1,"preparaString":"0"}
+
+###
+
+POST http://localhost:8088/paper/searchList
+Accept: */*
+Cache-Control:
+Content-Type: application/json
+
+{"type":"0","value":"The Complete 685-Kilobase DNA Sequence of the Human β T Cell Receptor Locus","ifPrepara":true,"page":1,"preparaString":“0”}
+
+<> 2019-10-16T043300.400.json
+
+###
+
+POST http://localhost:8088/paper/searchList
+Accept: */*
+Cache-Control:
+Content-Type: application/json
+
+{"type":"0","value":"The Complete 685-Kilobase DNA Sequence of the Human β T Cell Receptor Locus","ifPrepara":True,"page":1,"preparaString":“0”}
+
+<> 2019-10-16T043248.400.json
+
+###
+
+POST http://localhost:8088/paper/searchList
+Accept: */*
+Cache-Control:
+Content-Type: application/json
+
+{"type":"0","value":"The Complete 685-Kilobase DNA Sequence of the Human β T Cell Receptor Locus","ifPrepara":"Ture","page":1,"preparaString":“0”}
+
+<> 2019-10-16T043153.400.json
+
+###
+
+POST http://localhost:8088/paper/searchList
+Accept: */*
+Cache-Control:
+Content-Type: application/json
+
+{"type":"0","value":"The Complete 685-Kilobase DNA Sequence of the Human β T Cell Receptor Locus","ifPrepara":"1","page":1,"preparaString":“{journal:['Science'],pubdate:['1966-06-21T00:00:00','2019-06-21T00:00:00'],affiliations:['L. Rowen and L. Hood are in the Department of Molecular Biotechnology, University of Washington, Seattle, WA 98195-7730, USA.'],labels:['fluorescence', 'detect']}”}
+
+<> 2019-10-16T043112.400.json
+
+###
+
+POST http://localhost:8088/paper/searchList
+Accept: */*
+Cache-Control:
+Content-Type: application/json
+
+{"type":"0","value":"The Complete 685-Kilobase DNA Sequence of the Human β T Cell Receptor Locus","ifPrepara":"1","page":1}
+
+<> 2019-10-16T042917.400.json
+
+###
+
+POST http://localhost:8088/paper/searchList
+Accept: */*
+Cache-Control:
+Content-Type: application/json
+
+{"type":"0","value":"The Complete 685-Kilobase DNA Sequence of the Human β T Cell Receptor Locus","ifPrepara":"ture","page":1}
+
+<> 2019-10-16T042838.400.json
+
+###
+
+POST http://localhost:8088/paper/searchList
+Accept: */*
+Cache-Control:
+Content-Type: application/json
+
+{"type":"0",value":"The Complete 685-Kilobase DNA Sequence of the Human β T Cell Receptor Locus","ifPrepara":"ture","page":1}
+
+<> 2019-10-16T042819.400.json
+
+###
+
+POST http://localhost:8088/paper/searchList
+Accept: */*
+Cache-Control:
+Content-Type: application/json
+
+{"type":"0",value":"The Complete 685-Kilobase DNA Sequence of the Human β T Cell Receptor Locus","ifPrepara":"ture","page":1}
+
+<> 2019-10-16T042818.400.json
+
+###
+
+POST http://localhost:8088/paper/searchList
+Accept: */*
+Cache-Control:
+Content-Type: application/json
+
+{"type":"0",value":"The Complete 685-Kilobase DNA Sequence of the Human β T Cell Receptor Locus","ifPrepara":"ture","page":1}
+
+<> 2019-10-16T042816.400.json
+
+###
+
+POST http://localhost:8088/paper/searchList
+Accept: */*
+Cache-Control:
+Content-Type: application/json
+
+{"type":"0",value":"The Complete 685-Kilobase DNA Sequence of the Human β T Cell Receptor Locus","ifPrepara":"ture","page":1}
+
+<> 2019-10-16T042800.400.json
+
+###
+
+POST http://localhost:8088/paper/searchList
+Accept: application/json
+Cache-Control:
+Content-Type: application/json
+
+{"type":"0",value":"The Complete 685-Kilobase DNA Sequence of the Human β T Cell Receptor Locus","ifPrepara":"ture","page":1}
+
+<> 2019-10-16T042718.400.json
+
+###
+
+POST http://localhost:8088/paper/searchList
+Accept: application/json
+Cache-Control:
+
+{"type":"0",value":"The Complete 685-Kilobase DNA Sequence of the Human β T Cell Receptor Locus","ifPrepara":"ture","page":1}
+
+<> 2019-10-16T042634.415.json
+
+###
+
+POST http://localhost:8088/paper/searchList
+Accept: */*
+Cache-Control: application/json
+
+{"type":"0",value":"The Complete 685-Kilobase DNA Sequence of the Human β T Cell Receptor Locus","ifPrepara":"ture","page":1}
+
+<> 2019-10-16T042606.415.json
+
+###
+
+POST http://localhost:8088/paper/searchList
+Accept: */*
+Cache-Control: no-cache
+
+{"type":"0",value":"The Complete 685-Kilobase DNA Sequence of the Human β T Cell Receptor Locus","ifPrepara":"ture","page":1}
+
+<> 2019-10-16T042310.415.json
 
 ###
 
