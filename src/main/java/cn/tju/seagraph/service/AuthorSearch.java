@@ -91,20 +91,24 @@ public class AuthorSearch {
 //        return result;
     }
 
-    public Map<String,Object> authorSearchList(String type, String value) throws IOException, JSONException {
+    public Map<String,Object> authorSearchList(String type, String value, String page) throws IOException, JSONException {
 
         List<AuthorEsBean> resultList = new ArrayList<AuthorEsBean>();
         EsUtils esUtils = new EsUtils();
         RestHighLevelClient client = esUtils.client;
         SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();
         QueryBuilder match = null;
+        int p = Integer.valueOf(page);
         if (type.equals("0")) {
             match = QueryBuilders.matchQuery("name",value);
-        }else{
-            match = QueryBuilders.matchQuery("uuid",value);
+        }else if(type.equals("2")){
+            match = QueryBuilders.matchQuery("labels",value);
+        }else {
+            match = QueryBuilders.matchAllQuery();
         }
-        searchSourceBuilder.query(match);
-        searchSourceBuilder.size(100);
+//        searchSourceBuilder.query(match);
+//        searchSourceBuilder.size(100);
+        searchSourceBuilder.from(p).size(20).query(match);
         SearchRequest searchRequest = new SearchRequest();
         searchRequest.indices(Config.AUTHORINDEX);
         searchRequest.source(searchSourceBuilder);
@@ -155,8 +159,10 @@ public class AuthorSearch {
         QueryBuilder match = null;
         if (type.equals("0")) {
             match = QueryBuilders.matchQuery("name",value);
-        }else{
-            match = QueryBuilders.matchQuery("uuid",value);
+        }else if(type.equals("2")){
+            match = QueryBuilders.matchQuery("labels",value);
+        }else {
+            match = QueryBuilders.matchAllQuery();
         }
         searchSourceBuilder.query(match);
         searchSourceBuilder.size(100);
