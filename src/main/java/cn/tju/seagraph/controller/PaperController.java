@@ -53,7 +53,7 @@ public class PaperController {
         Map m = new HashMap();
         m.put("keyword","");
         for (int i = 1 ; i<=12;i++){
-            m.put(""+i,""+r.nextInt(99)+1);
+            m.put(""+i,r.nextInt(99)+1+"");
         }
         return RetResponse.makeOKRsp(m);
     }

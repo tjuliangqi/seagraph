@@ -113,55 +113,63 @@ public class PaperService {
         RestHighLevelClient client = esUtils.getConnection();
         BoolQueryBuilder boolQueryBuilder = QueryBuilders.boolQuery();
         SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();
-        searchSourceBuilder.from(10*(page-1));
+        searchSourceBuilder.from(20*(page-1));
         SearchRequest searchRequest = new SearchRequest(Config.PAPERINDEX);
         if (type.equals("0")){
             boolQueryBuilder.must(QueryBuilders.matchQuery("title",value));
-            if (ifPrepara){
-                try {
-                    map = strToMap(preparaString);
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                    return RetResponse.makeErrRsp("json解析错误");
+        }
+        else if (type.equals("1")){
+            boolQueryBuilder.must(QueryBuilders.matchAllQuery());
+        }
+        else if (type.equals("2")){
+            boolQueryBuilder.must(QueryBuilders.matchQuery("labels",value));
+        }
+
+        if (ifPrepara){
+            try {
+                map = strToMap(preparaString);
+            } catch (JSONException e) {
+                e.printStackTrace();
+                return RetResponse.makeErrRsp("json解析错误");
+            }
+            for (Object key : map.keySet()){
+                if (key.toString().equals("journal")){
+                    if (map.get(key).toString().equals("")){
+                        continue;
+                    }
+                    String[] strings = toStringList(map.get(key).toString());
+                    for (String each :strings){
+                        boolQueryBuilder.filter(QueryBuilders.matchQuery("journal",each.trim()));
+                    }
                 }
-                for (Object key : map.keySet()){
-                    if (key.toString().equals("journal")){
-                        if (map.get(key).toString().equals("")){
-                            continue;
-                        }
-                        String[] strings = toStringList(map.get(key).toString());
-                        for (String each :strings){
-                            boolQueryBuilder.filter(QueryBuilders.matchQuery("journal",each.trim()));
-                        }
+                if (key.toString().equals("pubdate")){
+                    if (map.get(key).toString().equals("")){
+                        continue;
                     }
-                    if (key.toString().equals("pubdate")){
-                        if (map.get(key).toString().equals("")){
-                            continue;
-                        }
-                        String[] strings = toStringList(map.get(key).toString());
-                        boolQueryBuilder.filter(QueryBuilders.rangeQuery("pubdate").from(strings[0]).to(strings[1]));
+                    String[] strings = toStringList(map.get(key).toString());
+                    boolQueryBuilder.filter(QueryBuilders.rangeQuery("pubdate").from(strings[0]).to(strings[1]));
+                }
+                if (key.toString().equals("affiliations")){
+                    if (map.get(key).toString().equals("")){
+                        continue;
                     }
-                    if (key.toString().equals("affiliations")){
-                        if (map.get(key).toString().equals("")){
-                            continue;
-                        }
-                        String[] strings = toStringList(map.get(key).toString());
-                        for (String each :strings){
-                            boolQueryBuilder.filter(QueryBuilders.matchQuery("affiliations",each.trim()));
-                        }
+                    String[] strings = toStringList(map.get(key).toString());
+                    for (String each :strings){
+                        boolQueryBuilder.filter(QueryBuilders.matchQuery("affiliations",each.trim()));
                     }
-                    if (key.toString().equals("labels")){
-                        if (map.get(key).toString().equals("")){
-                            continue;
-                        }
-                        String[] strings = toStringList(map.get(key).toString());
-                        for (String each :strings){
-                            boolQueryBuilder.filter(QueryBuilders.matchQuery("labels",each.trim()));
-                        }
+                }
+                if (key.toString().equals("labels")){
+                    if (map.get(key).toString().equals("")){
+                        continue;
+                    }
+                    String[] strings = toStringList(map.get(key).toString());
+                    for (String each :strings){
+                        boolQueryBuilder.filter(QueryBuilders.matchQuery("labels",each.trim()));
                     }
                 }
             }
         }
+
         searchSourceBuilder.query(boolQueryBuilder);
         searchRequest.source(searchSourceBuilder);
         SearchResponse searchResponse;
@@ -201,6 +209,10 @@ public class PaperService {
         QueryBuilder queryBuilder = null;
         if (type.equals("0")){
             queryBuilder = QueryBuilders.matchQuery("title", value);
+        }
+
+        else if (type.equals("2")){
+            queryBuilder = QueryBuilders.matchQuery("labels", value);
         }
         SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();
         SearchRequest searchRequest = new SearchRequest(Config.PAPERINDEX);
