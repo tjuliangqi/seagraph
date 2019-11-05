@@ -113,7 +113,8 @@ public class PaperService {
         RestHighLevelClient client = esUtils.getConnection();
         BoolQueryBuilder boolQueryBuilder = QueryBuilders.boolQuery();
         SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();
-        searchSourceBuilder.from(20*(page-1));
+        searchSourceBuilder.from(page - 1);
+        searchSourceBuilder.size(20);
         SearchRequest searchRequest = new SearchRequest(Config.PAPERINDEX);
         if (type.equals("0")){
             boolQueryBuilder.must(QueryBuilders.matchQuery("title",value));
@@ -210,7 +211,6 @@ public class PaperService {
         if (type.equals("0")){
             queryBuilder = QueryBuilders.matchQuery("title", value);
         }
-
         else if (type.equals("2")){
             queryBuilder = QueryBuilders.matchQuery("labels", value);
         }
