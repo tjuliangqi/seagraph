@@ -38,7 +38,7 @@ public class SeagraphApplicationTests {
 //        System.out.println(list1.size());
         data data = list1.get(1);
 //        System.out.println(data.getCount());
-        data.setCount(91);
+//        data.setCount(91);
         int k = dataMapper.updateData(data);
         List<data> list2 = dataMapper.getDataById(2);
 //        System.out.println(list2.get(0).getCount());

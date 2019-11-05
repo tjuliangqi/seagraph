@@ -125,13 +125,34 @@ public class UserController {
         User newUser = list.get(0);
         String str = newUser.getKeywords();
         Set set = new HashSet();
-        if (str!=null || str!=""){
+        if (str!=null && str!=""){
             String[] keywords = str.replace("[","").replace("]","").split(",");
             for (String keyword:keywords){
                 set.add(keyword);
             }
         }
         set.add(user.getKeywords());
+        System.out.println(set.toString());
+        newUser.setKeywords(set.toString());
+        int flag = userMapper.updateUser(newUser);
+        if (flag == 1){
+            return RetResponse.makeOKRsp("ok");
+        }else{
+            return RetResponse.makeErrRsp("ERROR");
+        }
+    }
+
+    @RequestMapping(value = "/deleteKeywords")
+    public RetResult<String> deleteKeywords(@RequestBody User user){
+        List<User> list = userMapper.getUserByToken(user.getToken());
+        User newUser = list.get(0);
+        String str = newUser.getKeywords();
+        Set<String> set = new HashSet();
+        String[] keywords = str.replace("[","").replace("]","").split(",");
+        for (String keyword:keywords){
+            set.add(keyword);
+        }
+        set.remove(user.getKeywords());
         newUser.setKeywords(set.toString());
         int flag = userMapper.updateUser(newUser);
         if (flag == 1){
@@ -142,10 +163,16 @@ public class UserController {
     }
 
     @RequestMapping(value = "/getKeywords")
-    public RetResult<String> getKeywords(@RequestBody User user){
+    public RetResult<List<String>> getKeywords(@RequestBody User user){
         List<User> list = userMapper.getUserByToken(user.getToken());
         if (list.size()!=0){
-            return RetResponse.makeOKRsp(list.get(0).getPasswd());
+            String str = list.get(0).getKeywords();
+            List<String> list1 = new ArrayList<>();
+            String[] keywords = str.replace("[","").replace("]","").split(",");
+            for (String keyword:keywords){
+                list1.add(keyword);
+            }
+            return RetResponse.makeOKRsp(list1);
         }else {
             return RetResponse.makeErrRsp("Error");
         }

@@ -22,7 +22,7 @@
         update data
         <set>
             <if test="data.labels != null">labels=#{data.labels},</if>
-            <if test="data.count != 0">count=${data.count}</if>
+            <if test="data.count != null">count=#{data.count}</if>
         </set>
         where id=${data.id}
     </update>
