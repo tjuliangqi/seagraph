@@ -1,8 +1,5 @@
 package cn.tju.seagraph.filter;
-
 import cn.tju.seagraph.dao.UserMapper;
-import cn.tju.seagraph.daomain.RetResponse;
-import cn.tju.seagraph.daomain.RetResult;
 import cn.tju.seagraph.daomain.User;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,7 +35,7 @@ public class userFilter implements Filter {
                 chain.doFilter(request, response);
             }else {
                 Map<String,Object> map = new HashMap<>();
-                map.put("code",40000);
+                map.put("code",40004);
                 map.put("message","验证失败");
                 JSONObject JSONObj = new JSONObject(map);
                 response.setCharacterEncoding("UTF-8");
