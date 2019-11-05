@@ -38,7 +38,7 @@ public class AuthorController {
 //        System.out.println(json.get("email"));
 //        System.out.println(json.get("ifPrepara"));
 //        System.out.println(json.get("preparaString"));
-        Map<String,Object> search = authorSearch.authorSearchList(json.get("type").toString(), json.get("value").toString());
+        Map<String,Object> search = authorSearch.authorSearchList(json.get("type").toString(), json.get("value").toString(),json.get("page").toString());
         if (search.size()>0){
 //            System.out.println(search.get("pic_url"));
             return RetResponse.makeOKRsp(search);
