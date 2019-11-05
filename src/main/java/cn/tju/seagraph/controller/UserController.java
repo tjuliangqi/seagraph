@@ -108,11 +108,46 @@ public class UserController {
 
     @RequestMapping(value = "/updateUser")
     public RetResult<String> updateUser(@RequestBody User user){
-        int flag = userMapper.updateUser(user);
+        List<User> list = userMapper.getUserByEmail(user.getEmail());
+        User newUser = list.get(0);
+        newUser.setPasswd(user.getPasswd());
+        int flag = userMapper.updateUser(newUser);
         if (flag == 1){
             return RetResponse.makeOKRsp("ok");
         }else{
             return RetResponse.makeErrRsp("ERROR");
+        }
+    }
+
+    @RequestMapping(value = "/updateKeywords")
+    public RetResult<String> updateKeywords(@RequestBody User user){
+        List<User> list = userMapper.getUserByToken(user.getToken());
+        User newUser = list.get(0);
+        String str = newUser.getKeywords();
+        Set set = new HashSet();
+        if (str!=null || str!=""){
+            String[] keywords = str.replace("[","").replace("]","").split(",");
+            for (String keyword:keywords){
+                set.add(keyword);
+            }
+        }
+        set.add(user.getKeywords());
+        newUser.setKeywords(set.toString());
+        int flag = userMapper.updateUser(newUser);
+        if (flag == 1){
+            return RetResponse.makeOKRsp("ok");
+        }else{
+            return RetResponse.makeErrRsp("ERROR");
+        }
+    }
+
+    @RequestMapping(value = "/getKeywords")
+    public RetResult<String> getKeywords(@RequestBody User user){
+        List<User> list = userMapper.getUserByToken(user.getToken());
+        if (list.size()!=0){
+            return RetResponse.makeOKRsp(list.get(0).getPasswd());
+        }else {
+            return RetResponse.makeErrRsp("Error");
         }
     }
 
