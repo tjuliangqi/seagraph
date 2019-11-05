@@ -163,10 +163,16 @@ public class UserController {
     }
 
     @RequestMapping(value = "/getKeywords")
-    public RetResult<String> getKeywords(@RequestBody User user){
+    public RetResult<List<String>> getKeywords(@RequestBody User user){
         List<User> list = userMapper.getUserByToken(user.getToken());
         if (list.size()!=0){
-            return RetResponse.makeOKRsp(list.get(0).getKeywords());
+            String str = list.get(0).getKeywords();
+            List<String> list1 = new ArrayList<>();
+            String[] keywords = str.replace("[","").replace("]","").split(",");
+            for (String keyword:keywords){
+                list1.add(keyword);
+            }
+            return RetResponse.makeOKRsp(list1);
         }else {
             return RetResponse.makeErrRsp("Error");
         }
