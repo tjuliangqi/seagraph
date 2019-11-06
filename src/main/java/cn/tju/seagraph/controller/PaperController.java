@@ -66,11 +66,12 @@ public class PaperController {
     }
 
     @RequestMapping(value = "/detail",method = RequestMethod.POST)
-    public RetResult<PaperMysqlBean> detailResponse(@RequestBody Map<String,String> map){
+    public RetResult<Map<String,Object>> detailResponse(@RequestBody Map<String,String> map){
         System.out.println(map);
         int browse;
         PaperMysqlBean result = paperMapper.getDataById(map.get("uuid"));
         PaperMysqlBean paperMysqlBean = result;
+        Map<String,Object> resultMap = new HashMap<>();
         System.out.println(result);
         System.out.println("**********");
         System.out.println(paperMysqlBean);
@@ -82,7 +83,8 @@ public class PaperController {
         }
         paperMysqlBean.setBrowse(String.valueOf(browse));
         paperMapper.updateData(paperMysqlBean);
-        return RetResponse.makeOKRsp(result);
+        resultMap = formatDetial(paperMysqlBean);
+        return RetResponse.makeOKRsp(resultMap);
     }
 
     @RequestMapping(value = "/keywordsheat",method = RequestMethod.POST)

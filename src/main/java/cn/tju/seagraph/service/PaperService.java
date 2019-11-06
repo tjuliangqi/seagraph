@@ -85,6 +85,71 @@ public class PaperService {
 
     }
 
+    public static Map<String,Object> formatDetial(PaperMysqlBean paperMysqlBean){
+        Map<String,Object> resultMap = new HashMap<>();
+        resultMap.put("uuid",paperMysqlBean.getUuid());
+        List<String> authors = new ArrayList<>();
+        List<String> references = new ArrayList<>();
+        List<String> chemicallist = new ArrayList<>();
+        List<String> labels = new ArrayList<>();
+        String[] strAffs ;
+        List<List<String>> affiliations = new ArrayList<>();
+        if (paperMysqlBean.getAuthors() != null){
+            authors = Arrays.asList(toStringList(paperMysqlBean.getAuthors()));
+        }
+
+        resultMap.put("authors",authors);
+
+        if (paperMysqlBean.getAffiliations() != null){
+            strAffs = splitAffiliations(paperMysqlBean.getAffiliations());
+            for (String strAff : strAffs){
+                affiliations.add(Arrays.asList(strAff.trim().split(";")));
+            }
+        }
+
+        resultMap.put("affiliations",affiliations);
+        resultMap.put("doi",paperMysqlBean.getDoi());
+        resultMap.put("title",paperMysqlBean.getTitle());
+        resultMap.put("journal",paperMysqlBean.getJournal());
+        resultMap.put("abs",paperMysqlBean.getAbs());
+        resultMap.put("fulltext",paperMysqlBean.getFulltext());
+
+        if (paperMysqlBean.getReferences() != null){
+            references = Arrays.asList(toStringList(paperMysqlBean.getReferences()));
+        }
+
+        resultMap.put("references",references);
+        resultMap.put("pubdate",paperMysqlBean.getPubdate());
+        resultMap.put("pdf_url",paperMysqlBean.getPdf_url());
+        resultMap.put("type",paperMysqlBean.getType());
+        resultMap.put("pic_url",paperMysqlBean.getPic_url());
+        resultMap.put("pic_text",paperMysqlBean.getPic_text());
+        //这里放的空list
+        resultMap.put("keywords",new ArrayList<>());
+        resultMap.put("fulltext_url",paperMysqlBean.getFulltext_url());
+        resultMap.put("download",paperMysqlBean.getDownload());
+        resultMap.put("ch_title",paperMysqlBean.getCh_title());
+        //这里放的空list
+        resultMap.put("re_uuid",new ArrayList<>());
+        resultMap.put("or_title",paperMysqlBean.getOr_title());
+        resultMap.put("browse",paperMysqlBean.getBrowse());
+
+        if (paperMysqlBean.getChemicallist() != null){
+            chemicallist = Arrays.asList(toStringList(paperMysqlBean.getChemicallist()));
+        }
+
+        resultMap.put("chemicallist",chemicallist);
+
+        if (paperMysqlBean.getLabels() != null){
+            labels = Arrays.asList(toStringList(paperMysqlBean.getLabels()));
+        }
+
+        resultMap.put("labels",labels);
+
+        return resultMap;
+
+    }
+
     public static PaperEsBean mysqlToES(PaperMysqlBean paperMysqlBean){
         PaperEsBean paperEsBean = new PaperEsBean();
         paperEsBean.setUuid(paperMysqlBean.getUuid());
