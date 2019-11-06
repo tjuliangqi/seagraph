@@ -17,10 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.io.IOException;
-import java.util.List;
-import java.util.Map;
-
-import static cn.tju.seagraph.service.AuthorSearch.relationAuthors;
+import java.util.*;
 
 import static cn.tju.seagraph.service.AuthorSearch.relationAuthors;
 
@@ -68,18 +65,11 @@ public class AuthorController {
 
 
     @RequestMapping(value = "/detail", method = RequestMethod.POST)
-    public RetResult<AuthorEsBean> detail(@RequestBody Map<String,String>json){
+    public RetResult<AuthorEsBean> detail(@RequestBody Map<String,String>json) throws IOException, JSONException {
         AuthorSearch authorSearch = new AuthorSearch();
         List<Author> list = authorMapper.getAuthorById(json.get("id"));
         if (list.size()>0){
-            AuthorEsBean search = null;
-            try {
-                search = authorSearch.authorSearchDetail(list);
-            } catch (IOException e) {
-                return RetResponse.makeErrRsp("es查询错误");
-            } catch (JSONException e) {
-                return RetResponse.makeErrRsp("输入数据");
-            }
+            AuthorEsBean search = authorSearch.authorSearchDetail(list);
 //            System.out.println(search.get("pic_url"));
             return RetResponse.makeOKRsp(search);
         }else {
@@ -87,11 +77,39 @@ public class AuthorController {
         }
     }
 
+    @RequestMapping(value = "/shortestPath",method = RequestMethod.POST)
+    public RetResult<List> ShortestPath(@RequestBody Map<String,String> json){
+//        System.out.println(map);
+        String author1 = json.get("author1");
+        String author2 = json.get("author2");
+        Random r = new Random();
+        List l = new ArrayList();
+        String[] names1 = {"Qiqun Zeng", "Iacovos P. Michael", "Peng Zhang"};
+        String[] names2 = {"Sadegh Saghafinia", "Graham Knott", "Wei Jiao", "Brian D. McCabe"};
+        String[] names3 = {"José A. Galván", "Hugh P. C. Robinson", "Inti Zlobec"};
+        String[] names4 = {"Giovanni Ciriello", "Douglas Hanahan", "Andres Barria"};
+        Set<String> setnames1 = new HashSet<>(Arrays.asList(names1));
+        Set<String> setnames2 = new HashSet<>(Arrays.asList(names2));
+        Set<String> setnames3 = new HashSet<>(Arrays.asList(names3));
+        Set<String> setnames4 = new HashSet<>(Arrays.asList(names4));
+        List<Set> shortpath = new ArrayList<Set>();
+        shortpath.add(setnames1);
+        shortpath.add(setnames2);
+        shortpath.add(setnames3);
+        shortpath.add(setnames4);
+
+
+        return RetResponse.makeOKRsp(shortpath);
+    }
+
     @RequestMapping(value = "/relate", method = RequestMethod.POST)
     public RetResult<List<String>> relate(@RequestBody Map<String,String> json) {
         List<String> result;
+        String uuid = json.get("uuid");
+        List<Author> authorList = authorMapper.getAuthorById(uuid);
+        Author author = authorList.get(0);
         try {
-            result = relationAuthors(json.get("name"));
+            result = relationAuthors(author.getName());
         } catch (IOException e) {
             return RetResponse.makeErrRsp("es查询错误");
         }
