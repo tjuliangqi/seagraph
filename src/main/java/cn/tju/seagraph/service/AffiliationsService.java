@@ -125,22 +125,42 @@ public class AffiliationsService {
         return selectTags;
     }
 
-    public static AffiliationsEsBean mySqlBeanToEsBean(AffiliationsMysqlBean affiliationsMysqlBean){
-        AffiliationsEsBean affiliationsEsBean = new AffiliationsEsBean();
-        affiliationsEsBean.setUuid(affiliationsMysqlBean.getUuid());
-        affiliationsEsBean.setName(affiliationsMysqlBean.getName());
-        affiliationsEsBean.setPaperList(affiliationsMysqlBean.getPaperList());
-        affiliationsEsBean.setInfluence(affiliationsMysqlBean.getInfluence());
-        affiliationsEsBean.setPaperUUID(affiliationsMysqlBean.getPaperUUID());
+    public static Map<String, Object> mySqlBeanToEsBean(AffiliationsMysqlBean affiliationsMysqlBean){
+        Map<String, Object> Affiliations = new HashMap();
+
+        Affiliations.put("uuid",affiliationsMysqlBean.getUuid());
+        Affiliations.put("name",affiliationsMysqlBean.getName());
+        String paperListStr = affiliationsMysqlBean.getPaperList();
+        Map<String, Object> paperListMap = new HashMap();
+        String[] alist = paperListStr.replace("{","").replace("}","").split("],");
+        for (String each:alist){
+            String eachName = each.split(":")[0].replace("'","");
+            String eachValue = each.split(":")[1].replace("['","").replace("'","");
+            String[] eachList = eachValue.split(",");
+            paperListMap.put(eachName,eachList);
+        }
+        Affiliations.put("paperList",paperListMap);
+        Affiliations.put("influence",affiliationsMysqlBean.getInfluence());
+        String paperUUIDStr = affiliationsMysqlBean.getPaperUUID();
+        Map<String, Object> paperUUIDMap = new HashMap();
+        String[] blist = paperUUIDStr.replace("{","").replace("}","").split("],");
+        for (String each:blist){
+            String eachName = each.split(":")[0].replace("'","");
+            String eachValue = each.split(":")[1].replace("['","").replace("'","");
+            String[] eachList = eachValue.split(",");
+            paperUUIDMap.put(eachName,eachList);
+        }
+        Affiliations.put("paperUUID",paperUUIDMap);
 
         String labelsText = affiliationsMysqlBean.getLabels();
         String[] labelsArray = labelsText.replace("['","").replace("']","").split("', '");
         Set<String> labelsSet = new HashSet<>(Arrays.asList(labelsArray));
-        affiliationsEsBean.setLabels(labelsSet);
+        Affiliations.put("labels",labelsSet);
 
         int pageNum = Integer.parseInt(affiliationsMysqlBean.getPaperNum());
-        affiliationsEsBean.setPaperNum(pageNum);
-        return affiliationsEsBean;
+        Affiliations.put("paperNum",pageNum);
+
+        return Affiliations;
     }
 
 }

@@ -50,11 +50,12 @@ public class AffiliationsController {
     }
 
     @RequestMapping(value = "/detail", method = RequestMethod.POST)
-    public RetResult<AffiliationsEsBean> detail(@RequestBody Map<String,String> map) throws IOException {
+    public RetResult<Map> detail(@RequestBody Map<String,String> map) throws IOException {
         //RetResult retResult = new RetResult();
         String id = String.valueOf(map.get("id"));
         AffiliationsMysqlBean affiliationsMysqlBean = affiliationsMapper.getDataById(id);
-        AffiliationsEsBean affiliationsEsBean = mySqlBeanToEsBean(affiliationsMysqlBean);
+
+        Map<String, Object> affiliationsEsBean = mySqlBeanToEsBean(affiliationsMysqlBean);
         //retResult.setCode(20000).setMsg("SUCCESS").setData(affiliationsMysqlBean);
         return RetResponse.makeOKRsp(affiliationsEsBean);
     }
