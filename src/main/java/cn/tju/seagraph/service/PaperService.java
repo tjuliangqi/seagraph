@@ -31,6 +31,11 @@ public class PaperService {
         return strings;
     }
 
+    public static String[] toStringListMysql(String listString){
+        String[] strings = listString.replace("['","").replace("']","").replace("\"","").split("', '");
+        return strings;
+    }
+
     public static String[] splitAffiliations(String affiliations){
         String[] strings = affiliations.replace("['","").replace("']","").split("', '");
         return strings;
@@ -95,7 +100,7 @@ public class PaperService {
         String[] strAffs ;
         List<List<String>> affiliations = new ArrayList<>();
         if (paperMysqlBean.getAuthors() != null){
-            authors = Arrays.asList(toStringList(paperMysqlBean.getAuthors()));
+            authors = Arrays.asList(toStringListMysql(paperMysqlBean.getAuthors()));
         }
 
         resultMap.put("authors",authors);
@@ -115,7 +120,7 @@ public class PaperService {
         resultMap.put("fulltext",paperMysqlBean.getFulltext());
 
         if (paperMysqlBean.getReferences() != null){
-            references = Arrays.asList(toStringList(paperMysqlBean.getReferences()));
+            references = Arrays.asList(toStringListMysql(paperMysqlBean.getReferences()));
         }
 
         resultMap.put("references",references);
@@ -135,13 +140,13 @@ public class PaperService {
         resultMap.put("browse",paperMysqlBean.getBrowse());
 
         if (paperMysqlBean.getChemicallist() != null){
-            chemicallist = Arrays.asList(toStringList(paperMysqlBean.getChemicallist()));
+            chemicallist = Arrays.asList(toStringListMysql(paperMysqlBean.getChemicallist()));
         }
 
         resultMap.put("chemicallist",chemicallist);
 
         if (paperMysqlBean.getLabels() != null){
-            labels = Arrays.asList(toStringList(paperMysqlBean.getLabels()));
+            labels = Arrays.asList(toStringListMysql(paperMysqlBean.getLabels()));
         }
 
         resultMap.put("labels",labels);
