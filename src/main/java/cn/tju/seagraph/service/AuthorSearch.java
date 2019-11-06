@@ -49,14 +49,14 @@ public class AuthorSearch {
         Map paperList = new HashMap();
         paperList = JsonToMapUtils.strToMap(list.get(0).getPaperList());
         for (Object each:paperList.keySet()) {
-            paperList.put(each.toString(),Arrays.asList(paperList.get(each).toString().replace("['","").replace("']","").split("', '")));
+            paperList.put(each.toString(),Arrays.asList(paperList.get(each).toString().replace("[","").replace("]","").replace("\"","").split(",")));
         }
         aSD.put("paperList",paperList);
 
         Map paperUUID = new HashMap();
         paperUUID = JsonToMapUtils.strToMap(list.get(0).getPaperUUID());
         for (Object each:paperUUID.keySet()) {
-            paperUUID.put(each.toString(),Arrays.asList(paperUUID.get(each).toString().replace("['","").replace("']","").split("', '")));
+            paperUUID.put(each.toString(),Arrays.asList(paperUUID.get(each).toString().replace("[","").replace("]","").replace("\"","").split(",")));
         }
         aSD.put("paperUUID",paperUUID);
 
