@@ -19,6 +19,7 @@ import org.json.JSONException;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.io.IOException;
+import java.lang.reflect.Type;
 import java.util.*;
 
 import static cn.tju.seagraph.utils.JsonToMapUtils.strToMap;
@@ -81,6 +82,27 @@ public class PaperService {
         pubdate.add(searchHitsASC[0].getSourceAsMap().get("pubdate"));
         pubdate.add(searchHitsDESC[0].getSourceAsMap().get("pubdate"));
         return pubdate;
+
+    }
+
+    public static PaperEsBean mysqlToES(PaperMysqlBean paperMysqlBean){
+        PaperEsBean paperEsBean = new PaperEsBean();
+        paperEsBean.setUuid(paperMysqlBean.getUuid());
+        paperEsBean.setAuthors(paperMysqlBean.getAuthors());
+        paperEsBean.setAffiliations(paperMysqlBean.getAffiliations());
+        paperEsBean.setTitle(paperMysqlBean.getTitle());
+        paperEsBean.setJournal(paperMysqlBean.getJournal());
+        paperEsBean.setAbs(paperMysqlBean.getAbs());
+        paperEsBean.setPubdate(paperMysqlBean.getPubdate());
+        paperEsBean.setType(paperMysqlBean.getType());
+        paperEsBean.setBrowse(paperMysqlBean.getBrowse());
+        paperEsBean.setKeywords(paperMysqlBean.getKeywords());
+        paperEsBean.setChemicallist(paperMysqlBean.getChemicallist());
+        paperEsBean.setLabels(paperMysqlBean.getLabels());
+        paperEsBean.setOr_title(paperMysqlBean.getOr_title());
+        paperEsBean.setCh_title(paperMysqlBean.getCh_title());
+
+        return paperEsBean;
 
     }
 
@@ -182,12 +204,11 @@ public class PaperService {
         }
         client.close();
         SearchHit[] searchHits = searchResponse.getHits().getHits();
-
         long count = searchResponse.getHits().getTotalHits();
         for (SearchHit searchHit : searchHits){
             result.add(hitToBean(searchHit));
         }
-
+        System.out.println(value);
         Map<String,Object> resultMap = new HashMap<>();
         resultMap.put("result",result);
         resultMap.put("count",count);
@@ -196,7 +217,6 @@ public class PaperService {
     }
 
     public static RetResult<FilterBean> prepara(String type, String value) throws IOException {
-
 
         Map map = new HashMap();
         FilterBean filterBean = new FilterBean();
@@ -267,5 +287,12 @@ public class PaperService {
 
         return RetResponse.makeOKRsp(filterBean);
 
+    }
+
+    public static void main(String[] args) throws JSONException {
+        String a = "{'nephrogenic': ['77a3d264ea3611e9815800d861171bd5'], 'peptide': ['77a3d264ea3611e9815800d861171bd5'], 'photosynthetic': ['77a3d264ea3611e9815800d861171bd5']}";
+        Map map = strToMap(a);
+        System.out.println(map);
+        System.out.println(map.get("peptide"));
     }
 }

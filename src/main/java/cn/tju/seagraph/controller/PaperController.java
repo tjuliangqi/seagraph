@@ -2,10 +2,7 @@ package cn.tju.seagraph.controller;
 
 
 import cn.tju.seagraph.dao.PaperMapper;
-import cn.tju.seagraph.daomain.FilterBean;
-import cn.tju.seagraph.daomain.PaperMysqlBean;
-import cn.tju.seagraph.daomain.RetResponse;
-import cn.tju.seagraph.daomain.RetResult;
+import cn.tju.seagraph.daomain.*;
 import org.apache.lucene.analysis.miscellaneous.StemmerOverrideFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -13,8 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.io.IOException;
 import java.util.*;
 
-import static cn.tju.seagraph.service.PaperService.prepara;
-import static cn.tju.seagraph.service.PaperService.searchList;
+import static cn.tju.seagraph.service.PaperService.*;
 
 @RestController
 @RequestMapping("/paper")
@@ -30,7 +26,33 @@ public class PaperController {
         Boolean ifPrepara = Boolean.valueOf(map.get("ifPrepara"));
         String preparaString = String.valueOf(map.get("preparaString"));
         int page = Integer.valueOf(map.get("page"));
-        RetResult<Map<String,Object>> result = searchList(type,value,ifPrepara,preparaString,page);
+        RetResult<Map<String,Object>> result = null;
+        if (type.equals("3")){
+            Map resultMap = new HashMap();
+            List<PaperEsBean> resultList = new ArrayList<>();
+            String[] strs = value.replace("\"","").replace("[","").replace("]","").split(",");
+            int count = strs.length;
+            for (String str : strs){
+                PaperMysqlBean paperMysqlBean = paperMapper.getDataById(str);
+                int browse;
+                if (paperMysqlBean.getBrowse() != null){
+                    browse = Integer.valueOf(paperMysqlBean.getBrowse())+1;
+                }
+                else {
+                    browse = 1;
+                }
+                paperMysqlBean.setBrowse(String.valueOf(browse));
+                PaperEsBean paperEsBean = mysqlToES(paperMysqlBean);
+                resultList.add(paperEsBean);
+                paperMapper.updateData(paperMysqlBean);
+            }
+            resultMap.put("result",resultMap);
+            resultMap.put("count",count);
+            result = RetResponse.makeOKRsp(resultMap);
+        }else {
+            result = searchList(type,value,ifPrepara,preparaString,page);
+        }
+
         return result;
     }
 
@@ -41,6 +63,26 @@ public class PaperController {
         String value = map.get("value");
         RetResult<FilterBean> result = prepara(type,value);
         return result;
+    }
+
+    @RequestMapping(value = "/detail",method = RequestMethod.POST)
+    public RetResult<PaperMysqlBean> detailResponse(@RequestBody Map<String,String> map){
+        System.out.println(map);
+        int browse;
+        PaperMysqlBean result = paperMapper.getDataById(map.get("uuid"));
+        PaperMysqlBean paperMysqlBean = result;
+        System.out.println(result);
+        System.out.println("**********");
+        System.out.println(paperMysqlBean);
+        if (paperMysqlBean.getBrowse() != null){
+            browse = Integer.valueOf(paperMysqlBean.getBrowse())+1;
+        }
+        else {
+            browse = 1;
+        }
+        paperMysqlBean.setBrowse(String.valueOf(browse));
+        paperMapper.updateData(paperMysqlBean);
+        return RetResponse.makeOKRsp(result);
     }
 
     @RequestMapping(value = "/keywordsheat",method = RequestMethod.POST)

@@ -8,6 +8,7 @@ import cn.tju.seagraph.utils.JsonToMapUtils;
 import org.elasticsearch.action.search.SearchRequest;
 import org.elasticsearch.action.search.SearchResponse;
 import org.elasticsearch.client.RestHighLevelClient;
+import org.elasticsearch.index.query.BoolQueryBuilder;
 import org.elasticsearch.index.query.QueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
 import org.elasticsearch.search.SearchHit;
@@ -16,6 +17,8 @@ import org.json.JSONException;
 
 import java.io.IOException;
 import java.util.*;
+
+import static cn.tju.seagraph.utils.JsonToMapUtils.strToMap;
 
 public class AuthorSearch {
 
@@ -91,28 +94,58 @@ public class AuthorSearch {
 //        return result;
     }
 
-    public Map<String,Object> authorSearchList(String type, String value, String page) throws IOException, JSONException {
+    public Map<String,Object> authorSearchList(String type, String value, String page, Boolean ifPrepara, String preparaString)  {
 
         List<AuthorEsBean> resultList = new ArrayList<AuthorEsBean>();
         EsUtils esUtils = new EsUtils();
         RestHighLevelClient client = esUtils.client;
         SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();
-        QueryBuilder match = null;
+        BoolQueryBuilder match = QueryBuilders.boolQuery();
+        Map map = new HashMap();
+
         int p = Integer.valueOf(page);
         if (type.equals("0")) {
-            match = QueryBuilders.matchQuery("name",value);
+            match.must(QueryBuilders.matchQuery("name",value));
         }else if(type.equals("2")){
-            match = QueryBuilders.matchQuery("labels",value);
+            match.must(QueryBuilders.matchQuery("labels",value));
         }else {
-            match = QueryBuilders.matchAllQuery();
+            match.must(QueryBuilders.matchAllQuery());
         }
 //        searchSourceBuilder.query(match);
 //        searchSourceBuilder.size(100);
+
+        if (ifPrepara){
+            try {
+                map = strToMap(preparaString);
+            } catch (JSONException e) {
+                e.printStackTrace();
+//                return RetResponse.makeErrRsp("json解析错误");
+            }
+            for (Object key : map.keySet()){
+                if (key.toString().equals("labels")){
+                    if (map.get(key).toString().equals("")){
+                        continue;
+                    }
+                    String[] strings = map.get(key).toString().replace("[","").replace("]","").replace("\"","").split(",");
+                    for (String each :strings){
+                        match.filter(QueryBuilders.matchQuery("labels",each.trim()));
+                    }
+                }
+            }
+        }
+
+
+
         searchSourceBuilder.from(p).size(20).query(match);
         SearchRequest searchRequest = new SearchRequest();
         searchRequest.indices(Config.AUTHORINDEX);
         searchRequest.source(searchSourceBuilder);
-        SearchResponse searchResponse = client.search(searchRequest);
+        SearchResponse searchResponse = null;
+        try {
+            searchResponse = client.search(searchRequest);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         SearchHit[] searchHits = searchResponse.getHits().getHits();
 
 
@@ -120,7 +153,11 @@ public class AuthorSearch {
         for (SearchHit searchHit:searchHits){
             Map authorListResult = new HashMap();
             AuthorEsBean result = new AuthorEsBean();
-            authorListResult = j.strToMap(searchHit.toString());
+            try {
+                authorListResult = strToMap(searchHit.toString());
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
             String[] aff = authorListResult.get("affiliations").toString().replace("['","").replace("']","").split("', '");
             Set affS = new HashSet();
             for (int i = 0; i <aff.length ; i++) {
@@ -178,7 +215,7 @@ public class AuthorSearch {
         Set authorresult = new HashSet();
         for (SearchHit searchHit:searchHits){
             Map authorPreResult = new HashMap();
-            authorPreResult = j.strToMap(searchHit.toString());
+            authorPreResult = strToMap(searchHit.toString());
 //            System.out.println("=====================================");
 //            System.out.println(authorPreResult.get("labels").toString());
 //            System.out.println("=====================================");
@@ -206,7 +243,7 @@ public class AuthorSearch {
         EsUtils esUtils = new EsUtils();
         RestHighLevelClient client = esUtils.client;
         SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();
-        QueryBuilder match = QueryBuilders.matchQuery("name",name);
+        QueryBuilder match = QueryBuilders.matchQuery("authors",name);
         searchSourceBuilder.query(match);
         searchSourceBuilder.size(100);
         SearchRequest searchRequest = new SearchRequest();
@@ -217,6 +254,7 @@ public class AuthorSearch {
         Set<String> result = new HashSet<>();
         for (SearchHit searchHit:searchHits){
             Map<String,Object> map = searchHit.getSourceAsMap();
+            System.out.println(map.get("authors"));
             String[] strs = String.valueOf(map.get("authors")).replace("\"","").replace("[","").replace("}","").split(",");
             for (String str : strs){
                 result.add(str);

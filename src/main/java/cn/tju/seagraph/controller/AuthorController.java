@@ -22,6 +22,8 @@ import java.util.Map;
 
 import static cn.tju.seagraph.service.AuthorSearch.relationAuthors;
 
+import static cn.tju.seagraph.service.AuthorSearch.relationAuthors;
+
 @RestController
 
 @RequestMapping("/author")
@@ -40,7 +42,7 @@ public class AuthorController {
 //        System.out.println(json.get("email"));
 //        System.out.println(json.get("ifPrepara"));
 //        System.out.println(json.get("preparaString"));
-        Map<String,Object> search = authorSearch.authorSearchList(json.get("type").toString(), json.get("value").toString(),json.get("page").toString());
+        Map<String,Object> search = authorSearch.authorSearchList(json.get("type").toString(), json.get("value").toString(),json.get("page").toString(),Boolean.valueOf(json.get("ifPrepara").toString()),json.get("preparaString").toString());
         if (search.size()>0){
 //            System.out.println(search.get("pic_url"));
             return RetResponse.makeOKRsp(search);
@@ -86,16 +88,14 @@ public class AuthorController {
     }
 
     @RequestMapping(value = "/relate", method = RequestMethod.POST)
-    public RetResult<List<String>> relate(@RequestBody Map<String,String> json){
+    public RetResult<List<String>> relate(@RequestBody Map<String,String> json) {
         List<String> result;
         try {
             result = relationAuthors(json.get("name"));
-        }catch (IOException e) {
+        } catch (IOException e) {
             return RetResponse.makeErrRsp("es查询错误");
         }
         return RetResponse.makeOKRsp(result);
-
-
     }
 }
 
