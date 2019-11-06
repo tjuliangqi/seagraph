@@ -65,11 +65,11 @@ public class AuthorController {
 
 
     @RequestMapping(value = "/detail", method = RequestMethod.POST)
-    public RetResult<AuthorEsBean> detail(@RequestBody Map<String,String>json) throws IOException, JSONException {
+    public RetResult<Map> detail(@RequestBody Map<String,String>json) throws IOException, JSONException {
         AuthorSearch authorSearch = new AuthorSearch();
         List<Author> list = authorMapper.getAuthorById(json.get("id"));
         if (list.size()>0){
-            AuthorEsBean search = authorSearch.authorSearchDetail(list);
+            Map search = authorSearch.authorSearchDetail(list);
 //            System.out.println(search.get("pic_url"));
             return RetResponse.makeOKRsp(search);
         }else {
