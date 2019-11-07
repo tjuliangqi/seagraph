@@ -29,7 +29,7 @@ public class PaperController {
         RetResult<Map<String,Object>> result = null;
         if (type.equals("3")){
             Map resultMap = new HashMap();
-            List<PaperEsBean> resultList = new ArrayList<>();
+            List<Map<String,Object>> resultList = new ArrayList<>();
             String[] strs = value.replace("\"","").replace("[","").replace("]","").split(",");
             int count = strs.length;
             for (String str : strs){
@@ -42,8 +42,8 @@ public class PaperController {
                     browse = 1;
                 }
                 paperMysqlBean.setBrowse(String.valueOf(browse));
-                PaperEsBean paperEsBean = mysqlToES(paperMysqlBean);
-                resultList.add(paperEsBean);
+                Map<String,Object> mysqlMap = formatDetial(paperMysqlBean);
+                resultList.add(mysqlMapToESMap(mysqlMap));
                 paperMapper.updateData(paperMysqlBean);
             }
             resultMap.put("result",resultList);

@@ -90,6 +90,26 @@ public class PaperService {
 
     }
 
+    public static Map<String,Object> mysqlMapToESMap(Map<String,Object> map){
+        Map<String,Object> result = new HashMap<>();
+        result.put("uuid",map.get("uuid"));
+        result.put("authors",map.get("authors"));
+        result.put("affiliations",map.get("affiliations"));
+        result.put("title",map.get("title"));
+        result.put("journal",map.get("journal"));
+        result.put("abs",map.get("abs"));
+        result.put("pubdate",map.get("pubdate"));
+        result.put("type",map.get("type"));
+        result.put("browse",map.get("browse"));
+        result.put("keywords",map.get("keywords"));
+        result.put("chemicallist",map.get("chemicallist"));
+        result.put("labels",map.get("labels"));
+        result.put("ch_title",map.get("ch_title"));
+        result.put("or_title",map.get("or_title"));
+
+        return result;
+    }
+
     public static Map<String,Object> formatDetial(PaperMysqlBean paperMysqlBean){
         Map<String,Object> resultMap = new HashMap<>();
         resultMap.put("uuid",paperMysqlBean.getUuid());
