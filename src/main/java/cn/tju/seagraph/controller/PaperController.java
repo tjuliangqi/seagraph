@@ -46,7 +46,7 @@ public class PaperController {
                 resultList.add(paperEsBean);
                 paperMapper.updateData(paperMysqlBean);
             }
-            resultMap.put("result",resultMap);
+            resultMap.put("result",resultList);
             resultMap.put("count",count);
             result = RetResponse.makeOKRsp(resultMap);
         }else {

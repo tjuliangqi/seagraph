@@ -198,6 +198,55 @@ public class PaperService {
         return paperEsBean;
     }
 
+    public static Map<String,Object> hitToMap(SearchHit searchHit){
+        Map<String,Object> resultMap = new HashMap<>();
+        Map hitMap = searchHit.getSourceAsMap();
+        resultMap.put("uuid",searchHit.getId().split("-")[1]);
+        List<String> authors = new ArrayList<>();
+        List<String> chemicallist = new ArrayList<>();
+        List<List<String>> affiliations = new ArrayList<>();
+        List<String> labels = new ArrayList<>();
+        String[] strAffs;
+        if (hitMap.get("author") != null){
+            authors = Arrays.asList(toStringListMysql(hitMap.get("author").toString()));
+        }
+
+        resultMap.put("authors",authors);
+
+        if (hitMap.get("affiliations") != null){
+            strAffs = splitAffiliations(hitMap.get("affiliations").toString());
+            for (String strAff : strAffs){
+                affiliations.add(Arrays.asList(strAff.trim().split(";")));
+            }
+        }
+
+        resultMap.put("affiliations",affiliations);
+        resultMap.put("title",hitMap.get("title"));
+        resultMap.put("journal",hitMap.get("journal"));
+        resultMap.put("abs",hitMap.get("abs"));
+        resultMap.put("pubdate",hitMap.get("pubdate"));
+        resultMap.put("type",hitMap.get("type"));
+        resultMap.put("browse",hitMap.get("browse"));
+        //这里输入空的list
+        resultMap.put("keywords",new ArrayList<>());
+
+        if (hitMap.get("chemicallist") != null){
+            chemicallist = Arrays.asList(toStringListMysql(hitMap.get("chemicallist").toString()));
+        }
+
+        resultMap.put("chemicallist",chemicallist);
+
+        if ((hitMap.get("labels") != null)){
+            labels = Arrays.asList(toStringListMysql(hitMap.get("labels").toString()));
+        }
+
+        resultMap.put("labels",labels);
+        resultMap.put("or_title",hitMap.get("or_title"));
+        resultMap.put("ch_title",hitMap.get("ch_title"));
+
+        return resultMap;
+    }
+
     public static RetResult<Map<String,Object>> searchList(String type, String value, Boolean ifPrepara, String preparaString, int page) throws IOException {
         List result = new ArrayList();
         Map map = new HashMap();
@@ -276,7 +325,7 @@ public class PaperService {
         SearchHit[] searchHits = searchResponse.getHits().getHits();
         long count = searchResponse.getHits().getTotalHits();
         for (SearchHit searchHit : searchHits){
-            result.add(hitToBean(searchHit));
+            result.add(hitToMap(searchHit));
         }
         System.out.println(value);
         Map<String,Object> resultMap = new HashMap<>();
