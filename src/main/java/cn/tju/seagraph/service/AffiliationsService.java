@@ -52,6 +52,7 @@ public class AffiliationsService {
             name = name.replace("\\n","");
             String labels = (String)searchHit.getSourceAsMap().get("labels");
             String influence = (String)searchHit.getSourceAsMap().get("influence");
+            Integer paperNum = (Integer) searchHit.getSourceAsMap().get("paperNum");
             String[] labelsArray = labels.replace("['","").replace("']","").split("', '");
             Set<String> labelsSet = new HashSet<>(Arrays.asList(labelsArray));
 
@@ -59,6 +60,7 @@ public class AffiliationsService {
             affiliationsEsBean.setName(name);
             affiliationsEsBean.setLabels(labelsSet);
             affiliationsEsBean.setInfluence(influence);
+            affiliationsEsBean.setPaperNum(paperNum);
             affiliationsEsBeans.add(affiliationsEsBean);
         }
         long count = searchResponse.getHits().getTotalHits();
