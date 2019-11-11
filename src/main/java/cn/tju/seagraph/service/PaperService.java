@@ -110,7 +110,7 @@ public class PaperService {
         return result;
     }
 
-    public static Map<String,Object> formatDetial(PaperMysqlBean paperMysqlBean){
+    public static Map<String,Object> formatDetail(PaperMysqlBean paperMysqlBean){
         Map<String,Object> resultMap = new HashMap<>();
         resultMap.put("uuid",paperMysqlBean.getUuid());
         List<String> authors = new ArrayList<>();
@@ -137,7 +137,7 @@ public class PaperService {
         resultMap.put("title",paperMysqlBean.getTitle());
         resultMap.put("journal",paperMysqlBean.getJournal());
         resultMap.put("abs",paperMysqlBean.getAbs());
-        resultMap.put("fulltext",paperMysqlBean.getFulltext());
+        resultMap.put("fulltext",paperMysqlBean.getFulltext().replace("\n","<br />"));
 
         if (paperMysqlBean.getReferences() != null){
             references = Arrays.asList(toStringListMysql(paperMysqlBean.getReferences()));

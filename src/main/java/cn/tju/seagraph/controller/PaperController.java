@@ -42,7 +42,7 @@ public class PaperController {
                     browse = 1;
                 }
                 paperMysqlBean.setBrowse(String.valueOf(browse));
-                Map<String,Object> mysqlMap = formatDetial(paperMysqlBean);
+                Map<String,Object> mysqlMap = formatDetail(paperMysqlBean);
                 resultList.add(mysqlMapToESMap(mysqlMap));
                 paperMapper.updateData(paperMysqlBean);
             }
@@ -83,7 +83,7 @@ public class PaperController {
         }
         paperMysqlBean.setBrowse(String.valueOf(browse));
         paperMapper.updateData(paperMysqlBean);
-        resultMap = formatDetial(paperMysqlBean);
+        resultMap = formatDetail(paperMysqlBean);
         return RetResponse.makeOKRsp(resultMap);
     }
 
