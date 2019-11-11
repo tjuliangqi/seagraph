@@ -71,7 +71,7 @@ public class AuthorSearch {
 
     public Map<String,Object> authorSearchList(String type, String value, String page, Boolean ifPrepara, String preparaString)  {
 
-        List<AuthorEsBean> resultList = new ArrayList<AuthorEsBean>();
+        List<Map> resultList = new ArrayList<Map>();
         EsUtils esUtils = new EsUtils();
         RestHighLevelClient client = esUtils.client;
         SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();
@@ -127,29 +127,49 @@ public class AuthorSearch {
         JsonToMapUtils j = new JsonToMapUtils();
         for (SearchHit searchHit:searchHits){
             Map authorListResult = new HashMap();
-            AuthorEsBean result = new AuthorEsBean();
+//            AuthorEsBean result = new AuthorEsBean();
+            Map<String,Object> result = new HashMap();
             try {
                 authorListResult = strToMap(searchHit.toString());
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-            String[] aff = authorListResult.get("affiliations").toString().replace("['","").replace("']","").split("', '");
+            String[] aff = authorListResult.get("affiliations").toString().replace("[","").replace("]","").replace("\"","").split(",");
             Set affS = new HashSet();
             for (int i = 0; i <aff.length ; i++) {
                 affS.add(aff[i]);
             }
-            String[] lab = authorListResult.get("labels").toString().replace("['","").replace("']","").split("', '");
+            String[] lab = authorListResult.get("labels").toString().replace("[","").replace("]","").replace("\"","").split(",");
             Set labS = new HashSet();
             for (int i = 0; i <lab.length ; i++) {
                 labS.add(lab[i]);
             }
-            result.setName(authorListResult.get("name").toString());
-            result.setAffiliations(affS);
-            result.setLabels(labS);
-            result.setPic_url(authorListResult.get("pic_url").toString());
-            result.setPaperList(authorListResult.get("paperList").toString());
-            result.setPaperNum((int)authorListResult.get("paperNum"));
-            result.setId(authorListResult.get("uuid").toString());
+
+            Map paperList = new HashMap();
+            try {
+                paperList = JsonToMapUtils.strToMap(authorListResult.get("paperList").toString());
+                for (Object each:paperList.keySet()) {
+                    paperList.put(each.toString(),Arrays.asList(paperList.get(each).toString().replace("[","").replace("]","").replace("\"","").split(",")));
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+
+            result.put("name",authorListResult.get("name").toString());
+            result.put("pic_url",authorListResult.get("pic_url").toString());
+            result.put("paperNum",authorListResult.get("paperNum"));
+            result.put("affiliations",new ArrayList<>(affS));
+            result.put("labels",new ArrayList<>(labS));
+            result.put("paperList",paperList);
+            result.put("id",authorListResult.get("uuid").toString());
+//            result.setName(authorListResult.get("name").toString());
+//            result.setAffiliations(affS);
+//            result.setLabels(labS);
+//            result.setPic_url(authorListResult.get("pic_url").toString());
+//            result.setPaperList(authorListResult.get("paperList").toString());
+//            result.setPaperNum((int)authorListResult.get("paperNum"));
+//            result.setId(authorListResult.get("uuid").toString());
             resultList.add(result);
         }
 

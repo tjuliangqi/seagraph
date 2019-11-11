@@ -60,4 +60,3 @@ public class AffiliationsController {
         return RetResponse.makeOKRsp(affiliationsEsBean);
     }
 }
-

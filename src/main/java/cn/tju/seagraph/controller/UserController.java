@@ -73,6 +73,7 @@ public class UserController {
                 map.put("token",token);
                 dateUtils.update(statisticsMapper,0,dateUtils.gainDate());
                 dateUtils.update(statisticsMapper,0,"2000-01-01");
+                System.out.println(map);
                 return RetResponse.makeOKRsp(map);
             }else {
                 return RetResponse.makeErrRsp("密码不正确");
@@ -168,9 +169,11 @@ public class UserController {
         if (list.size()!=0){
             String str = list.get(0).getKeywords();
             List<String> list1 = new ArrayList<>();
-            String[] keywords = str.replace("[","").replace("]","").split(",");
-            for (String keyword:keywords){
-                list1.add(keyword);
+            if (str!=null || str!=""){
+                String[] keywords = str.replace("[","").replace("]","").split(",");
+                for (String keyword:keywords){
+                    list1.add(keyword);
+                }
             }
             return RetResponse.makeOKRsp(list1);
         }else {
