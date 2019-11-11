@@ -50,14 +50,20 @@ public class AuthorController {
     }
 
     @RequestMapping(value = "/prepara", method = RequestMethod.POST)
-    public RetResult<AuthorEsBean> prePara(@RequestBody Map<String,String>json) throws IOException, JSONException {
+    public RetResult<Map> prePara(@RequestBody Map<String,String>json) throws IOException, JSONException {
         AuthorSearch authorSearch = new AuthorSearch();
 //        System.out.println(json.get("type"));
 //        System.out.println(json.get("value"));
         AuthorEsBean search = authorSearch.authorSearchPrepara(json.get("type"), json.get("value"));
+        Map m = new HashMap();
+        List li = new ArrayList();
+        li.add(1);
+        li.add(12);
+        m.put("labels",search.getLabels());
+        m.put("influence",li);
         if (search.getPaperNum()>0){
 //            System.out.println(search.get("pic_url"));
-            return RetResponse.makeOKRsp(search);
+            return RetResponse.makeOKRsp(m);
         }else {
             return RetResponse.makeErrRsp("查无数据");
         }
