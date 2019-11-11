@@ -37,7 +37,7 @@ public class PaperService {
     }
 
     public static String[] splitAffiliations(String affiliations){
-        String[] strings = affiliations.replace("['","").replace("']","").split("', '");
+        String[] strings = affiliations.replace("['","").replace("']","").replace("\\n","").replace("\\","").split("', '");
         return strings;
     }
 
