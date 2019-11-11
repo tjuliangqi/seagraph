@@ -49,6 +49,7 @@ public class AffiliationsService {
             AffiliationsEsBean affiliationsEsBean = new AffiliationsEsBean();
             String uuid = (String)searchHit.getSourceAsMap().get("uuid");
             String name = (String)searchHit.getSourceAsMap().get("name");
+            name = name.replace("\n","");
             String labels = (String)searchHit.getSourceAsMap().get("labels");
             String influence = (String)searchHit.getSourceAsMap().get("influence");
             String[] labelsArray = labels.replace("['","").replace("']","").split("', '");
@@ -127,9 +128,9 @@ public class AffiliationsService {
 
     public static Map<String, Object> mySqlBeanToEsBean(AffiliationsMysqlBean affiliationsMysqlBean){
         Map<String, Object> Affiliations = new HashMap();
-
+        String name = affiliationsMysqlBean.getName().replace("\n","");
         Affiliations.put("uuid",affiliationsMysqlBean.getUuid());
-        Affiliations.put("name",affiliationsMysqlBean.getName());
+        Affiliations.put("name",name);
         String paperListStr = affiliationsMysqlBean.getPaperList();
         Map<String, Object> paperListMap = new HashMap();
         String[] alist = paperListStr.replace("{","").replace("]}","").split("],");
