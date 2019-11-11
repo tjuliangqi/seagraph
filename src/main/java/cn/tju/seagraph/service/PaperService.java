@@ -94,16 +94,16 @@ public class PaperService {
         Map<String,Object> result = new HashMap<>();
         result.put("uuid",map.get("uuid"));
         result.put("authors",map.get("authors"));
-        result.put("affiliations",map.get("affiliations"));
+        result.put("Affiliations",map.get("affiliations"));
         result.put("title",map.get("title"));
-        result.put("journal",map.get("journal"));
+        result.put("Journal",map.get("journal"));
         result.put("abs",map.get("abs"));
-        result.put("pubdate",map.get("pubdate"));
+        result.put("Pubdate",map.get("pubdate"));
         result.put("type",map.get("type"));
         result.put("browse",map.get("browse"));
         result.put("keywords",map.get("keywords"));
         result.put("chemicallist",map.get("chemicallist"));
-        result.put("labels",map.get("labels"));
+        result.put("Labels",map.get("labels"));
         result.put("ch_title",map.get("ch_title"));
         result.put("or_title",map.get("or_title"));
 
@@ -132,10 +132,10 @@ public class PaperService {
             }
         }
 
-        resultMap.put("affiliations",affiliations);
+        resultMap.put("Affiliations",affiliations);
         resultMap.put("doi",paperMysqlBean.getDoi());
         resultMap.put("title",paperMysqlBean.getTitle());
-        resultMap.put("journal",paperMysqlBean.getJournal());
+        resultMap.put("Journal",paperMysqlBean.getJournal());
         resultMap.put("abs",paperMysqlBean.getAbs());
         resultMap.put("fulltext",paperMysqlBean.getFulltext().replace("\n","<br />"));
 
@@ -144,7 +144,7 @@ public class PaperService {
         }
 
         resultMap.put("references",references);
-        resultMap.put("pubdate",paperMysqlBean.getPubdate());
+        resultMap.put("Pubdate",paperMysqlBean.getPubdate());
         resultMap.put("pdf_url",paperMysqlBean.getPdf_url());
         resultMap.put("type",paperMysqlBean.getType());
         resultMap.put("pic_url",paperMysqlBean.getPic_url());
@@ -169,7 +169,7 @@ public class PaperService {
             labels = Arrays.asList(toStringListMysql(paperMysqlBean.getLabels()));
         }
 
-        resultMap.put("labels",labels);
+        resultMap.put("Labels",labels);
 
         return resultMap;
 
@@ -240,11 +240,11 @@ public class PaperService {
             }
         }
 
-        resultMap.put("affiliations",affiliations);
+        resultMap.put("Affiliations",affiliations);
         resultMap.put("title",hitMap.get("title"));
-        resultMap.put("journal",hitMap.get("journal"));
+        resultMap.put("Journal",hitMap.get("journal"));
         resultMap.put("abs",hitMap.get("abs"));
-        resultMap.put("pubdate",hitMap.get("pubdate"));
+        resultMap.put("Pubdate",hitMap.get("pubdate"));
         resultMap.put("type",hitMap.get("type"));
         resultMap.put("browse",hitMap.get("browse"));
         //这里输入空的list
@@ -260,7 +260,7 @@ public class PaperService {
             labels = Arrays.asList(toStringListMysql(hitMap.get("labels").toString()));
         }
 
-        resultMap.put("labels",labels);
+        resultMap.put("Labels",labels);
         resultMap.put("or_title",hitMap.get("or_title"));
         resultMap.put("ch_title",hitMap.get("ch_title"));
 
