@@ -13,6 +13,7 @@ import org.elasticsearch.index.query.QueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
 import org.elasticsearch.search.SearchHit;
 import org.elasticsearch.search.builder.SearchSourceBuilder;
+import org.elasticsearch.search.sort.SortOrder;
 import org.json.JSONException;
 
 import java.io.IOException;
@@ -31,7 +32,7 @@ public class AuthorSearch {
         String[] aff = list.get(0).getAffiliations().replace("['","").replace("']","").replace("\\n","").replace("\\\\","").replace("\\","").split("', '");
         Set affS = new HashSet();
         for (int i = 0; i <aff.length ; i++) {
-            affS.add(aff[i]);
+            affS.add(aff[i].trim());
         }
 //        aEB.setAffiliations(affS);
         aSD.put("affiliations",new ArrayList<>(affS));
@@ -111,7 +112,7 @@ public class AuthorSearch {
 
 
 
-        searchSourceBuilder.from(p).size(20).query(match);
+        searchSourceBuilder.from(p-1).size(20).query(match).sort("paperNum", SortOrder.DESC);
         SearchRequest searchRequest = new SearchRequest();
         searchRequest.indices(Config.AUTHORINDEX);
         searchRequest.source(searchSourceBuilder);
@@ -137,7 +138,7 @@ public class AuthorSearch {
             String[] aff = authorListResult.get("affiliations").toString().replace("[","").replace("]","").replace("\"","").replace("\\n","").replace("\\\\","").replace("\\","").split(",");
             Set affS = new HashSet();
             for (int i = 0; i <aff.length ; i++) {
-                affS.add(aff[i]);
+                affS.add(aff[i].trim());
             }
             String[] lab = authorListResult.get("labels").toString().replace("[","").replace("]","").replace("\"","").split(",");
             Set labS = new HashSet();
