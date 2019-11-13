@@ -33,10 +33,8 @@ public class AffiliationsController {
         int page = Integer.valueOf(map.get("page"));
 
         Map<String,Object> affiliationsEsBeans = affiliationSearchList(type, value, ifPrepara, preparaString, page);
-        //retResult.setCode(20000).setMsg("SUCCESS").setData(affiliationsMysqlBeans);
         return RetResponse.makeOKRsp(affiliationsEsBeans);
     }
-
 
 
     @RequestMapping(value = "/prepara", method = RequestMethod.POST)
@@ -44,8 +42,7 @@ public class AffiliationsController {
         //RetResult retResult = new RetResult();
         String type = String.valueOf(map.get("type"));
         String value = String.valueOf(map.get("value"));
-        Map<String, Set> selectTags = affiliationPrepara(type, value);
-        //retResult.setCode(20000).setMsg("SUCCESS").setData(affiliationsMysqlBean);
+        Map<String, Object> selectTags = affiliationPrepara(type, value);
         return RetResponse.makeOKRsp(selectTags);
     }
 

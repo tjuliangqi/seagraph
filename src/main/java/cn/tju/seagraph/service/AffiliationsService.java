@@ -11,6 +11,7 @@ import org.elasticsearch.index.query.QueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
 import org.elasticsearch.search.SearchHit;
 import org.elasticsearch.search.builder.SearchSourceBuilder;
+
 import org.json.JSONException;
 
 import java.io.IOException;
@@ -34,11 +35,9 @@ public class AffiliationsService {
         EsUtils esUtils = new EsUtils();
         RestHighLevelClient client = esUtils.client;
         ArrayList<AffiliationsEsBean> affiliationsEsBeans = new ArrayList<>();
-        QueryBuilder builder = queryTextToBuilder(type, value, ifPrepara, preparaString);
-        SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();
-        searchSourceBuilder.from(page)
-                .size(10)
-                .query(builder);
+        SearchSourceBuilder searchSourceBuilder;
+        searchSourceBuilder = queryTextToBuilder(type, value, ifPrepara, preparaString, page);
+
         SearchRequest searchRequest = new SearchRequest(Config.INDEX_AFFILIATIONS);
         searchRequest.source(searchSourceBuilder);
         SearchResponse searchResponse = client.search(searchRequest);
@@ -51,7 +50,8 @@ public class AffiliationsService {
             String name = (String)searchHit.getSourceAsMap().get("name");
             name = name.replace("\\n","");
             String labels = (String)searchHit.getSourceAsMap().get("labels");
-            String influence = (String)searchHit.getSourceAsMap().get("influence");
+            Double influenceNum = (Double) searchHit.getSourceAsMap().get("influence");
+            String influence = influenceNum.toString();
             Integer paperNum = (Integer) searchHit.getSourceAsMap().get("paperNum");
             String[] labelsArray = labels.replace("['","").replace("']","").split("', '");
             Set<String> labelsSet = new HashSet<>(Arrays.asList(labelsArray));
@@ -72,56 +72,52 @@ public class AffiliationsService {
 
     /**
      *
-     * @param type
+     * @param type type只有 0 和 1 两种
      * @param value
      * @return
      * @throws IOException
      */
-    public static Map<String, Set> affiliationPrepara(String type, String value) throws IOException {
-        String queryField = "name";
-        QueryBuilder builder = QueryBuilders.matchAllQuery();
+    public static Map<String, Object> affiliationPrepara(String type, String value) throws IOException {
+        QueryBuilder builder;
         if (type.equals("0")){
-            queryField = "name";
-            builder = QueryBuilders.matchQuery(queryField,value);
-        }else if(type.equals("1")){
-            builder = QueryBuilders.matchAllQuery();
-        }else if(type.equals("2")){
-            queryField = "labels";
-            builder = QueryBuilders.matchQuery(queryField,value);
+            builder = QueryBuilders.matchQuery("name",value);
+        }else {
+            builder = QueryBuilders.matchAllQuery();// type = 1
         }
         EsUtils esUtils = new EsUtils();
         RestHighLevelClient client = esUtils.client;
 
         SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();
         searchSourceBuilder.from(0)
-                .size(10)
+                .size(100)
                 .query(builder);
+
         SearchRequest searchRequest = new SearchRequest(Config.INDEX_AFFILIATIONS);
         searchRequest.source(searchSourceBuilder);
         SearchResponse searchResponse = client.search(searchRequest);
         SearchHit[] searchHits = searchResponse.getHits().getHits();
 
         ArrayList<String> labelsList = new ArrayList<>();
-        ArrayList<String> influenceList = new ArrayList<>();
-        Map<String,Set> selectTags = new HashMap<>();
-        AffiliationsEsBean affiliationsEsBean = new AffiliationsEsBean();
-        for (SearchHit searchHit:searchHits){
-//            System.out.println(searchHit.getSourceAsString());
+        ArrayList<Double> influenceList = new ArrayList<>();
+        Map<String,Object> selectTags = new HashMap<>();
 
+        for (SearchHit searchHit:searchHits){
+            //System.out.println(searchHit.getSourceAsString());
+            // find all labels
             String labels = (String)searchHit.getSourceAsMap().get("labels");
-            String influence = (String)searchHit.getSourceAsMap().get("influence");
             labels = labels.replace("['", "").replace("']", "");
-            influence = influence.replace("['", "").replace("']", "");
             String[] eachLabels = labels.split("', '");
             List<String> eachLabelsList= new ArrayList<>(Arrays.asList(eachLabels));
             labelsList.addAll(eachLabelsList);
-
-            String[] eachInfluence = influence.split("', '");
-            List<String> eachInfluenceList= new ArrayList<>(Arrays.asList(eachInfluence));
-            influenceList.addAll(eachInfluenceList);
+            // find all influence
+            Double influenceNum = (Double) searchHit.getSourceAsMap().get("influence");
+            influenceList.add(influenceNum);
         }
+
         Set result1 = new HashSet(labelsList);
-        Set result2 = new HashSet(influenceList);
+        ArrayList<Double> result2 = new ArrayList<>();
+        result2.add(Collections.min(influenceList));
+        result2.add(Collections.max(influenceList));
         selectTags.put("labels",result1);
         selectTags.put("influence",result2);
 
