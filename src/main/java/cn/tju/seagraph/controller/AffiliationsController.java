@@ -43,6 +43,7 @@ public class AffiliationsController {
         String type = String.valueOf(map.get("type"));
         String value = String.valueOf(map.get("value"));
         Map<String, Object> selectTags = affiliationPrepara(type, value);
+
         return RetResponse.makeOKRsp(selectTags);
     }
 
