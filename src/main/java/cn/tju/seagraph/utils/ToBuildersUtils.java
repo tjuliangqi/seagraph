@@ -22,7 +22,7 @@ public class ToBuildersUtils {
         String queryField0 = "name";
         QueryBuilder builder0 = QueryBuilders.matchAllQuery();
 
-        if (ifPrepara==false) {
+        if (ifPrepara==false || preparaString.equals("{}")) {
             if (type.equals("0")){
                 queryField0 = "name";
                 builder0 = QueryBuilders.matchQuery(queryField0, value);

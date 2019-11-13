@@ -101,8 +101,15 @@ public class AuthorController {
         shortpath.add(setnames3);
         shortpath.add(setnames4);
 
+        if (author1.equals("a")){
+            return RetResponse.makeOKRsp(shortpath);
+        }else {
+            if (author1.equals("b")){
+                return RetResponse.makeOKRsp(null);
+            }
+            return RetResponse.makeOKRsp(new ArrayList<Set>());
+        }
 
-        return RetResponse.makeOKRsp(shortpath);
     }
 
     @RequestMapping(value = "/relate", method = RequestMethod.POST)

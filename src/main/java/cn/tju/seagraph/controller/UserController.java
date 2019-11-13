@@ -172,7 +172,7 @@ public class UserController {
             if (str!=null || str!=""){
                 String[] keywords = str.replace("[","").replace("]","").split(",");
                 for (String keyword:keywords){
-                    list1.add(keyword);
+                    list1.add(keyword.trim());
                 }
             }
             return RetResponse.makeOKRsp(list1);
