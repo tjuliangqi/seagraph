@@ -209,6 +209,9 @@ public class AuthorSearch {
 
         JsonToMapUtils j = new JsonToMapUtils();
         Set authorresult = new HashSet();
+        Set influenceallresult = new HashSet();
+        Set influenceresult = new HashSet();
+
         for (SearchHit searchHit:searchHits){
             Map authorPreResult = new HashMap();
             authorPreResult = strToMap(searchHit.toString());
@@ -221,7 +224,12 @@ public class AuthorSearch {
                 authorresult.add(lables[i]);
             }
 
+            influenceallresult.add((float)(Math.round(Float.parseFloat(authorPreResult.get("influence").toString())*100))/100);
+
         }
+        influenceresult.add(Collections.min(new ArrayList<>(influenceallresult)));
+        influenceresult.add(Collections.max(new ArrayList<>(influenceallresult)));
+
 
         if(searchHits.length==0){
             result.setPaperNum(0);
@@ -229,6 +237,7 @@ public class AuthorSearch {
         else {
             result.setLabels(authorresult);
             result.setPaperNum(searchHits.length);
+            result.setInfluence(influenceresult);
         }
 
 

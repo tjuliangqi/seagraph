@@ -99,7 +99,7 @@ public class PaperController {
 //
             m.put("keyword",keys[j]);
             for (int i = 1 ; i<=12;i++){
-                m.put(""+i,""+r.nextInt(99)+1);
+                m.put(""+i,r.nextInt(99)+1+"");
             }
             l.add(m);
         }

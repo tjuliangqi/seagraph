@@ -11,6 +11,7 @@ public class AuthorEsBean {
     private int paperNum;
     private String pic_url;
     private String paperUUID;
+    private Set influence;
 
     public String getId() {
         return id;
@@ -74,6 +75,14 @@ public class AuthorEsBean {
 
     public void setPaperUUID(String paperUUID) {
         this.paperUUID = paperUUID;
+    }
+
+    public Set getInfluence() {
+        return influence;
+    }
+
+    public void setInfluence(Set influence) {
+        this.influence = influence;
     }
 
     @Override

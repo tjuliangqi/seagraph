@@ -56,11 +56,8 @@ public class AuthorController {
 //        System.out.println(json.get("value"));
         AuthorEsBean search = authorSearch.authorSearchPrepara(json.get("type"), json.get("value"));
         Map m = new HashMap();
-        List li = new ArrayList();
-        li.add(1);
-        li.add(12);
         m.put("labels",search.getLabels());
-        m.put("influence",li);
+        m.put("influence",search.getInfluence());
         if (search.getPaperNum()>0){
 //            System.out.println(search.get("pic_url"));
             return RetResponse.makeOKRsp(m);
