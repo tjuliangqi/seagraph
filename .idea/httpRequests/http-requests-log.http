@@ -1,3 +1,15 @@
+POST http://211.81.50.158/ocean/paper/keywordsheat
+Accept: */*
+Cache-Control: no-cache
+Content-Type: application/json
+token: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI2In0.JR0Jf5-fkF0nKLhmmmklBqhJqkQj79nX5DDr4VCnzNw
+
+{"type":"2","value":"reinforcement","email":"111@111","ifPrepara":false,"page":1,"preparaString":"{journal: ['Science'],pubdate:['1966-06-21T00:00:00','2019-06-21T00:00:00'],affiliations: ['L. Rowen and L. Hood are in the Department of Molecular Biotechnology, University of Washington, Seattle, WA 98195-7730, USA.'],labels:['fluorescence', 'detect']}"}
+
+<> 2019-11-12T093214.200.json
+
+###
+
 POST http://211.81.50.158/ocean/data/label
 Accept: */*
 Cache-Control: no-cache
@@ -563,17 +575,6 @@ Content-Type: application/json
 {"uuid":"2f03e746ea3611e9a3d800d861171bd5"}
 
 <> 2019-10-16T084048.500.json
-
-###
-
-POST http://localhost:8088/paper/detail
-Accept: */*
-Cache-Control:
-Content-Type: application/json
-
-{"uuid":"2f03e746ea3611e9a3d800d861171bd5"}
-
-<> 2019-10-16T083957.500.json
 
 ###
 

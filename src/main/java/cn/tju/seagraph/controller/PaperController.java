@@ -30,9 +30,11 @@ public class PaperController {
         if (type.equals("3")){
             Map resultMap = new HashMap();
             List<Map<String,Object>> resultList = new ArrayList<>();
+            System.out.println(preparaString);
             String[] strs = value.replace("\"","").replace("[","").replace("]","").split(",");
             int count = strs.length;
             for (String str : strs){
+                System.out.println(str);
                 PaperMysqlBean paperMysqlBean = paperMapper.getDataById(str);
                 int browse;
                 if (paperMysqlBean.getBrowse() != null){

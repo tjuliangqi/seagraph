@@ -139,7 +139,7 @@ public class AffiliationsService {
         for (String each:alist){
             String eachName = each.split(":")[0].replace("'","").trim();
             String eachValue = each.split(":")[1].replace("['","").replace("'","").trim();
-            String[] eachList = eachValue.split(",");
+            String[] eachList = eachValue.split(", ");
             paperListMap.put(eachName,eachList);
         }
         Affiliations.put("paperList",paperListMap);
@@ -150,7 +150,7 @@ public class AffiliationsService {
         for (String each:blist){
             String eachName = each.split(":")[0].replace("'","").trim();
             String eachValue = each.split(":")[1].replace("['","").replace("'","").trim();
-            String[] eachList = eachValue.split(",");
+            String[] eachList = eachValue.split(", ");
             paperUUIDMap.put(eachName,eachList);
         }
         Affiliations.put("paperUUID",paperUUIDMap);
