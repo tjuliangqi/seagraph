@@ -50,7 +50,7 @@ public class AffiliationsService {
             String name = (String)searchHit.getSourceAsMap().get("name");
             name = name.replace("\\n","");
             String labels = (String)searchHit.getSourceAsMap().get("labels");
-            Double influenceNum = (Double) searchHit.getSourceAsMap().get("influence");
+            Double influenceNum = (Double)searchHit.getSourceAsMap().get("influence");
             String influence = influenceNum.toString();
             Integer paperNum = (Integer) searchHit.getSourceAsMap().get("paperNum");
             String[] labelsArray = labels.replace("['","").replace("']","").split("', '");
@@ -110,7 +110,7 @@ public class AffiliationsService {
             List<String> eachLabelsList= new ArrayList<>(Arrays.asList(eachLabels));
             labelsList.addAll(eachLabelsList);
             // find all influence
-            Double influenceNum = (Double) searchHit.getSourceAsMap().get("influence");
+            Double influenceNum = (Double)searchHit.getSourceAsMap().get("influence");
             influenceList.add(influenceNum);
         }
 
