@@ -100,26 +100,29 @@ public class AffiliationsService {
         ArrayList<String> labelsList = new ArrayList<>();
         ArrayList<Double> influenceList = new ArrayList<>();
         Map<String,Object> selectTags = new HashMap<>();
+        if (searchHits.length < 2){
+            selectTags = selectTags;
+        }else {
+            for (SearchHit searchHit:searchHits){
+                //System.out.println(searchHit.getSourceAsString());
+                // find all labels
+                String labels = (String)searchHit.getSourceAsMap().get("labels");
+                labels = labels.replace("['", "").replace("']", "");
+                String[] eachLabels = labels.split("', '");
+                List<String> eachLabelsList= new ArrayList<>(Arrays.asList(eachLabels));
+                labelsList.addAll(eachLabelsList);
+                // find all influence
+                Double influenceNum = (Double)searchHit.getSourceAsMap().get("influence");
+                influenceList.add(influenceNum);
+            }
 
-        for (SearchHit searchHit:searchHits){
-            //System.out.println(searchHit.getSourceAsString());
-            // find all labels
-            String labels = (String)searchHit.getSourceAsMap().get("labels");
-            labels = labels.replace("['", "").replace("']", "");
-            String[] eachLabels = labels.split("', '");
-            List<String> eachLabelsList= new ArrayList<>(Arrays.asList(eachLabels));
-            labelsList.addAll(eachLabelsList);
-            // find all influence
-            Double influenceNum = (Double)searchHit.getSourceAsMap().get("influence");
-            influenceList.add(influenceNum);
+            Set result1 = new HashSet(labelsList);
+            ArrayList<Double> result2 = new ArrayList<>();
+            result2.add(Collections.min(influenceList));
+            result2.add(Collections.max(influenceList));
+            selectTags.put("labels",result1);
+            selectTags.put("influence",result2);
         }
-
-        Set result1 = new HashSet(labelsList);
-        ArrayList<Double> result2 = new ArrayList<>();
-        result2.add(Collections.min(influenceList));
-        result2.add(Collections.max(influenceList));
-        selectTags.put("labels",result1);
-        selectTags.put("influence",result2);
 
         return selectTags;
     }

@@ -31,7 +31,8 @@ public class ToBuildersUtils {
                 builder0 = QueryBuilders.matchQuery("labels", value);
                 searchSourceBuilder.from(page - 1)
                         .size(20)
-                        .query(builder0);
+                        .query(builder0)
+                        .sort("influence", SortOrder.DESC);
             }
         } else {
             if (type.equals("0")) {
@@ -52,7 +53,8 @@ public class ToBuildersUtils {
                 builderAdd = addFilterBuilder(builder0, preparaString);
                 searchSourceBuilder.from(page - 1)
                         .size(20)
-                        .query(builderAdd);
+                        .query(builderAdd)
+                        .sort("influence", SortOrder.DESC);
             }
         }
 
