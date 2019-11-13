@@ -260,7 +260,7 @@ public class AuthorSearch {
         for (SearchHit searchHit:searchHits){
             Map<String,Object> map = searchHit.getSourceAsMap();
             System.out.println(map.get("authors"));
-            String[] strs = String.valueOf(map.get("authors")).replace("\"","").replace("[","").replace("}","").split(",");
+            String[] strs = String.valueOf(map.get("authors")).replace("\"","").replace("[","").replace("]","").replace("'","").replace("}","").split(",");
             for (String str : strs){
                 result.add(str);
             }
