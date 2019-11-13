@@ -84,8 +84,12 @@ public class PaperService {
         SearchHit[] searchHitsASC = searchResponseASC.getHits().getHits();
 //        System.out.println("正序：" + searchHitsASC.length);
 //        System.out.println("反序：" + searchHitsDESC.length);
-        pubdate.add(searchHitsASC[0].getSourceAsMap().get("pubdate"));
-        pubdate.add(searchHitsDESC[0].getSourceAsMap().get("pubdate"));
+        try {
+            pubdate.add(searchHitsASC[0].getSourceAsMap().get("pubdate"));
+            pubdate.add(searchHitsDESC[0].getSourceAsMap().get("pubdate"));
+        }catch (Exception e){
+            System.out.println("查询为空");
+        }
         return pubdate;
 
     }

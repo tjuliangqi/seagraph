@@ -139,6 +139,7 @@ public class ConferenceService {
             conference.setLocation(String.valueOf(hitMap.get("location")));
             conference.setHomepage(String.valueOf(hitMap.get("homepage")));
             conference.setDate(String.valueOf(hitMap.get("date")));
+            conference.setLabels(String.valueOf(hitMap.get("labels")));
             result.add(conference);
         }
         return result;

@@ -227,14 +227,17 @@ public class AuthorSearch {
             influenceallresult.add((float)(Math.round(Float.parseFloat(authorPreResult.get("influence").toString())*100))/100);
 
         }
-        influenceresult.add(Collections.min(new ArrayList<>(influenceallresult)));
-        influenceresult.add(Collections.max(new ArrayList<>(influenceallresult)));
+
 
 
         if(searchHits.length==0){
-            result.setPaperNum(0);
+            result.setLabels(authorresult);
+            result.setInfluence(influenceresult);
+            result.setPaperNum(40000);
         }
         else {
+            influenceresult.add(Collections.min(new ArrayList<>(influenceallresult)));
+            influenceresult.add(Collections.max(new ArrayList<>(influenceallresult)));
             result.setLabels(authorresult);
             result.setPaperNum(searchHits.length);
             result.setInfluence(influenceresult);
