@@ -32,7 +32,7 @@ public class AuthorSearch {
         String[] aff = list.get(0).getAffiliations().replace("['","").replace("']","").replace("\\n","").replace("\\\\","").replace("\\","").split("', '");
         Set affS = new HashSet();
         for (int i = 0; i <aff.length ; i++) {
-            affS.add(aff[i].trim());
+            affS.add(aff[i].trim().replace("''",""));
         }
 //        aEB.setAffiliations(affS);
         aSD.put("affiliations",new ArrayList<>(affS));
@@ -138,7 +138,7 @@ public class AuthorSearch {
             String[] aff = authorListResult.get("affiliations").toString().replace("[","").replace("]","").replace("\"","").replace("\\n","").replace("\\\\","").replace("\\","").split(",");
             Set affS = new HashSet();
             for (int i = 0; i <aff.length ; i++) {
-                affS.add(aff[i].trim());
+                affS.add(aff[i].trim().replace("''",""));
             }
             String[] lab = authorListResult.get("labels").toString().replace("[","").replace("]","").replace("\"","").split(",");
             Set labS = new HashSet();
