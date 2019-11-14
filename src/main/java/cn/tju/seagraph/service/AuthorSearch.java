@@ -111,8 +111,14 @@ public class AuthorSearch {
                     if (map.get(key).toString().equals("")){
                         continue;
                     }
-                    String[] strings = map.get(key).toString().replace("[","").replace("]","").replace("\"","").split(",");
-                    match.filter(QueryBuilders.rangeQuery("influence").from(Integer.parseInt(strings[0])).to(Integer.parseInt(strings[1])));
+                    String strings = map.get(key).toString().replace("[","").replace("]","").replace("\"","");
+                    if(strings.equals("10+")){
+                        match.filter(QueryBuilders.rangeQuery("influence").gte(10));
+                    }else {
+                        String[] strings1 = strings.split("-");
+                        match.filter(QueryBuilders.rangeQuery("influence").from(Integer.parseInt(strings1[0])).to(Integer.parseInt(strings1[1])));
+                    }
+
                 }
 
             }
