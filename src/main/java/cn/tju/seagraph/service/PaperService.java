@@ -292,7 +292,7 @@ public class PaperService {
             boolQueryBuilder.must(QueryBuilders.matchAllQuery());
         }
         else if (type.equals("2")){
-            boolQueryBuilder.must(QueryBuilders.matchQuery("labels",value));
+            boolQueryBuilder.must(QueryBuilders.multiMatchQuery(value,"labels","title"));
         }
 
         if (ifPrepara){
