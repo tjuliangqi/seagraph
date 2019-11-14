@@ -88,9 +88,21 @@ public class ToBuildersUtils {
 
         try {
             String influence = map.get("influence").toString().replace("[", "").replace("]", "").replace("\"", "");
-            String[] influenceToList = influence.split(",");
-            Float influenceMIN = Float.parseFloat(influenceToList[0].trim());
-            Float influenceMAX = Float.parseFloat(influenceToList[1].trim());
+//            String[] influenceToList = influence.split(",");
+//            Float influenceMIN = Float.parseFloat(influenceToList[0].trim());
+//            Float influenceMAX = Float.parseFloat(influenceToList[1].trim());
+            Double influenceMIN;
+            Double influenceMAX;
+            if (influence.equals("0-5")){
+                influenceMIN = 0.00;
+                influenceMAX = 5.00;
+            }else if(influence.equals("5-10")){
+                influenceMIN = 5.00;
+                influenceMAX = 10.00;
+            }else {
+                influenceMIN = 10.00;
+                influenceMAX = Double.POSITIVE_INFINITY;
+            }
             QueryBuilder builder2;
             builder2 = QueryBuilders.rangeQuery("influence").from(influenceMIN).to(influenceMAX);
 
