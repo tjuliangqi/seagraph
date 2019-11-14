@@ -42,31 +42,35 @@ public class AffiliationsService {
         searchRequest.source(searchSourceBuilder);
         SearchResponse searchResponse = client.search(searchRequest);
         SearchHit[] searchHits = searchResponse.getHits().getHits();
-
-        for (SearchHit searchHit:searchHits){
-//            System.out.println(searchHit.getSourceAsString());
-            AffiliationsEsBean affiliationsEsBean = new AffiliationsEsBean();
-            String uuid = (String)searchHit.getSourceAsMap().get("uuid");
-            String name = (String)searchHit.getSourceAsMap().get("name");
-            name = name.replace("\\n","");
-            String labels = (String)searchHit.getSourceAsMap().get("labels");
-            Double influenceNum = (Double)searchHit.getSourceAsMap().get("influence");
-            String influence = influenceNum.toString();
-            Integer paperNum = (Integer) searchHit.getSourceAsMap().get("paperNum");
-            String[] labelsArray = labels.replace("['","").replace("']","").split("', '");
-            Set<String> labelsSet = new HashSet<>(Arrays.asList(labelsArray));
-
-            affiliationsEsBean.setUuid(uuid);
-            affiliationsEsBean.setName(name);
-            affiliationsEsBean.setLabels(labelsSet);
-            affiliationsEsBean.setInfluence(influence);
-            affiliationsEsBean.setPaperNum(paperNum);
-            affiliationsEsBeans.add(affiliationsEsBean);
-        }
-        long count = searchResponse.getHits().getTotalHits();
         Map<String,Object> resultMap = new HashMap<>();
-        resultMap.put("result",affiliationsEsBeans);
-        resultMap.put("count",count);
+        if (searchHits.length < 1){
+            resultMap = resultMap;
+        }else {
+            for (SearchHit searchHit:searchHits){
+//            System.out.println(searchHit.getSourceAsString());
+                AffiliationsEsBean affiliationsEsBean = new AffiliationsEsBean();
+                String uuid = (String)searchHit.getSourceAsMap().get("uuid");
+                String name = (String)searchHit.getSourceAsMap().get("name");
+                name = name.replace("\\n","");
+                String labels = (String)searchHit.getSourceAsMap().get("labels");
+                Double influenceNum = (Double)searchHit.getSourceAsMap().get("influence");
+                String influence = influenceNum.toString();
+                Integer paperNum = (Integer) searchHit.getSourceAsMap().get("paperNum");
+                String[] labelsArray = labels.replace("['","").replace("']","").split("', '");
+                Set<String> labelsSet = new HashSet<>(Arrays.asList(labelsArray));
+
+                affiliationsEsBean.setUuid(uuid);
+                affiliationsEsBean.setName(name);
+                affiliationsEsBean.setLabels(labelsSet);
+                affiliationsEsBean.setInfluence(influence);
+                affiliationsEsBean.setPaperNum(paperNum);
+                affiliationsEsBeans.add(affiliationsEsBean);
+            }
+            long count = searchResponse.getHits().getTotalHits();
+
+            resultMap.put("result",affiliationsEsBeans);
+            resultMap.put("count",count);
+        }
         return resultMap;
     }
 
