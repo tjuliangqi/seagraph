@@ -1,8 +1,11 @@
 package cn.tju.seagraph.controller;
 
 
+import cn.tju.seagraph.dao.KeywordsMapper;
 import cn.tju.seagraph.dao.PaperMapper;
 import cn.tju.seagraph.daomain.*;
+import cn.tju.seagraph.utils.JsonToMapUtils;
+import org.json.JSONException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,6 +19,8 @@ import static cn.tju.seagraph.service.PaperService.*;
 public class PaperController {
     @Autowired
     PaperMapper paperMapper;
+    @Autowired
+    KeywordsMapper keywordsMapper;
 
     @RequestMapping(value = "/searchList",method = RequestMethod.POST)
     public RetResult<Map<String,Object>> searchListResponse(@RequestBody Map<String,String> map) throws IOException {
@@ -87,21 +92,17 @@ public class PaperController {
 
     @RequestMapping(value = "/keywordsheat",method = RequestMethod.POST)
     public RetResult<List> KeywordsHeat(){
-//        System.out.println(map);
-        Random r = new Random();
         List l = new ArrayList();
-        String[] keys = {"Immunotherapy", "Innate immunity", "Signal transduction"};
-        for (int j = 0;j<keys.length;j++){
-
-            Map m = new HashMap();
-//
-            m.put("keyword",keys[j]);
-            for (int i = 1 ; i<=12;i++){
-                m.put(""+i,r.nextInt(99)+1+"");
+        List<keywords> list = keywordsMapper.getKeywordsList();
+        for (keywords k:list){
+            String str = k.getWords();
+            try {
+                Map map = JsonToMapUtils.strToMap(str);
+                l.add(map);
+            } catch (JSONException e) {
+                return RetResponse.makeErrRsp("查询错误");
             }
-            l.add(m);
         }
-
         return RetResponse.makeOKRsp(l);
     }
 

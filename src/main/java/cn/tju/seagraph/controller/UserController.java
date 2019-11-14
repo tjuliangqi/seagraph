@@ -183,6 +183,7 @@ public class UserController {
 
     @RequestMapping(value = "/regis", method = RequestMethod.POST)
     public RetResult<String> login(@RequestBody User user){
+        user.setKeywords("[]");
         int flag = userMapper.insertUser(user);
         if (flag==1){
             dateUtils.update(statisticsMapper,1,dateUtils.gainDate());

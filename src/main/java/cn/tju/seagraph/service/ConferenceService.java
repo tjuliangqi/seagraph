@@ -36,11 +36,11 @@ public class ConferenceService {
         SearchRequest searchRequestDESC = new SearchRequest(Config.CONFERENCEINDEX);
         SearchRequest searchRequestASC = new SearchRequest(Config.CONFERENCEINDEX);
 
-        if (type.equals("0")) {
+        if (type.equals("1")) {
             queryBuilder = QueryBuilders.matchAllQuery();
         }
-        if (type.equals("1")){
-            queryBuilder = QueryBuilders.matchQuery("name", value);
+        if (type.equals("0")){
+            queryBuilder = QueryBuilders.wildcardQuery("labels","*"+value+"*");
         }
 
         searchSourceBuilderDESC.query(queryBuilder);
@@ -81,11 +81,11 @@ public class ConferenceService {
         SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();
         searchSourceBuilder.from(10*(page-1));
         SearchRequest searchRequest = new SearchRequest(Config.CONFERENCEINDEX);
-        if (type.equals("0")){
+        if (type.equals("1")){
             boolQueryBuilder.must(QueryBuilders.matchAllQuery());
         }else {
-            if (type.equals("1")){
-                boolQueryBuilder.must(QueryBuilders.matchQuery("name",value));
+            if (type.equals("0")){
+                boolQueryBuilder.must(QueryBuilders.wildcardQuery("labels","*"+value+"*"));
             }else {
                 return null;
             }
@@ -99,7 +99,7 @@ public class ConferenceService {
                 return null;
             }
             for (Object key : map.keySet()){
-                if (key.toString().equals("date")){
+                if (key.toString().equals("pubdate")){
                     if (map.get(key).toString().equals("")){
                         continue;
                     }

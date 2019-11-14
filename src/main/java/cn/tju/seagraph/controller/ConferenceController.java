@@ -24,11 +24,13 @@ public class ConferenceController {
     @Autowired
     ConferenceMapper conferenceMapper;
     @RequestMapping(value = "/prepara", method = RequestMethod.POST)
-    public RetResult<Map> getPrepra() {
+    public RetResult<Map> getPrepra(Map<String,String> map) {
+        String type = String.valueOf(map.get("type"));
+        String value = String.valueOf(map.get("value"));
         List<Conference> list = conferenceMapper.getAllConference();
         Set<String> dataset;
         try {
-            dataset = ConferenceService.dateRange("0","");
+            dataset = ConferenceService.dateRange(type,value);
         } catch (IOException e) {
             return RetResponse.makeErrRsp("查询失败");
         }
@@ -40,10 +42,10 @@ public class ConferenceController {
                 labelSet.add(str.trim());
             }
         }
-        Map<String,Set> map = new HashMap<>();
-        map.put("date",dataset);
-        map.put("labels",labelSet);
-        return RetResponse.makeOKRsp(map);
+        Map<String,Set> result = new HashMap<>();
+        result.put("date",dataset);
+        result.put("labels",labelSet);
+        return RetResponse.makeOKRsp(result);
     }
 
     @RequestMapping(value = "/add", method = RequestMethod.POST)

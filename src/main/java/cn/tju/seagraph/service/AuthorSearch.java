@@ -126,7 +126,7 @@ public class AuthorSearch {
 
 
 
-        searchSourceBuilder.from(p-1).size(20).query(match).sort("paperNum", SortOrder.DESC);
+        searchSourceBuilder.from(p-1).size(20).query(match).sort("influence", SortOrder.DESC);
         SearchRequest searchRequest = new SearchRequest();
         searchRequest.indices(Config.AUTHORINDEX);
         searchRequest.source(searchSourceBuilder);
