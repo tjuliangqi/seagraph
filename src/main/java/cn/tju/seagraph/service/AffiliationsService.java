@@ -158,9 +158,10 @@ public class AffiliationsService {
         }
         Affiliations.put("paperUUID",paperUUIDMap);
 
-        String labelsText = affiliationsMysqlBean.getLabels();
-        String[] labelsArray = labelsText.replace("['","").replace("']","").split("', '");
-        Set<String> labelsSet = new HashSet<>(Arrays.asList(labelsArray));
+//        String labelsText = affiliationsMysqlBean.getLabels();
+//        String[] labelsArray = labelsText.replace("['","").replace("']","").split("', '");
+//        Set<String> labelsSet = new HashSet<>(Arrays.asList(labelsArray));
+        Set<String> labelsSet = paperUUIDMap.keySet();
         Affiliations.put("labels",labelsSet);
 
         int pageNum = Integer.parseInt(affiliationsMysqlBean.getPaperNum());
