@@ -107,7 +107,7 @@ public class AuthorController {
                     list.add(node.get("title").asString());
                 }
                 if (list.size() == 0){
-                    resultList.add(null);
+                    return RetResponse.makeOKRsp(null);
                 }else {
                     list.remove(name1);
                     list.remove(name2);
