@@ -142,12 +142,12 @@ public class PaperService {
         resultMap.put("Journal",paperMysqlBean.getJournal());
         int n = paperMysqlBean.getAbs().indexOf("Abstract");
         if (n>0){
-            resultMap.put("abs",paperMysqlBean.getAbs().substring(n).replace("\n","<br /><br />&nbsp;&nbsp;"));
+            resultMap.put("abs",paperMysqlBean.getAbs().substring(n).replace("\n","<br /><br />&emsp;"));
         }else {
-            resultMap.put("abs",paperMysqlBean.getAbs().replace("\n","<br /><br />&nbsp;&nbsp;"));
+            resultMap.put("abs",paperMysqlBean.getAbs().replace("\n","<br /><br />&emsp;"));
         }
 
-        resultMap.put("fulltext",paperMysqlBean.getFulltext().replace("\n","<br /><br />&nbsp;&nbsp;").replaceFirst("&nbsp;&nbsp;",""));
+        resultMap.put("fulltext",paperMysqlBean.getFulltext().replace("\n","<br /><br />&emsp;").replaceFirst("&emsp;",""));
         if (paperMysqlBean.getReferences() != null){
             references = Arrays.asList(toStringListMysql(paperMysqlBean.getReferences()));
         }

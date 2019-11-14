@@ -101,7 +101,7 @@ public class ToBuildersUtils {
                 influenceMAX = 10.00;
             }else {
                 influenceMIN = 10.00;
-                influenceMAX = Double.POSITIVE_INFINITY;
+                influenceMAX = 100000.00;
             }
             QueryBuilder builder2;
             builder2 = QueryBuilders.rangeQuery("influence").from(influenceMIN).to(influenceMAX);
