@@ -107,6 +107,14 @@ public class AuthorSearch {
                         match.filter(QueryBuilders.matchQuery("labels",each.trim()));
                     }
                 }
+                if (key.toString().equals("influence")){
+                    if (map.get(key).toString().equals("")){
+                        continue;
+                    }
+                    String[] strings = map.get(key).toString().replace("[","").replace("]","").replace("\"","").split(",");
+                    match.filter(QueryBuilders.rangeQuery("influence").from(Integer.parseInt(strings[0])).to(Integer.parseInt(strings[1])));
+                }
+
             }
         }
 
@@ -224,10 +232,11 @@ public class AuthorSearch {
                 authorresult.add(lables[i]);
             }
 
-            influenceallresult.add((float)(Math.round(Float.parseFloat(authorPreResult.get("influence").toString())*100))/100);
+//            influenceallresult.add((float)(Math.round(Float.parseFloat(authorPreResult.get("influence").toString())*100))/100);
+            influenceallresult.add(Float.parseFloat(authorPreResult.get("influence").toString()));
+
 
         }
-
 
 
         if(searchHits.length==0){
