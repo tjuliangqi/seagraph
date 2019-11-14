@@ -10,6 +10,8 @@ import cn.tju.seagraph.daomain.RetResult;
 import cn.tju.seagraph.service.AuthorSearch;
 import cn.tju.seagraph.service.EmailService;
 import org.json.JSONException;
+import org.neo4j.driver.v1.*;
+import org.neo4j.driver.v1.types.Node;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,6 +22,7 @@ import java.io.IOException;
 import java.util.*;
 
 import static cn.tju.seagraph.service.AuthorSearch.relationAuthors;
+import static org.neo4j.driver.v1.Values.parameters;
 
 @RestController
 
@@ -83,34 +86,49 @@ public class AuthorController {
     @RequestMapping(value = "/shortestPath",method = RequestMethod.POST)
     public RetResult<List> ShortestPath(@RequestBody Map<String,String> json){
 //        System.out.println(map);
-        String author1 = json.get("author1");
-        String author2 = json.get("author2");
-        Random r = new Random();
-        List l = new ArrayList();
-        String[] names1 = {"Qiqun Zeng", "Iacovos P. Michael", "Peng Zhang"};
-        String[] names2 = {"Sadegh Saghafinia", "Graham Knott", "Wei Jiao", "Brian D. McCabe"};
-        String[] names3 = {"José A. Galván", "Hugh P. C. Robinson", "Inti Zlobec"};
-        String[] names4 = {"Giovanni Ciriello", "Douglas Hanahan", "Andres Barria"};
-        Set<String> setnames1 = new HashSet<>(Arrays.asList(names1));
-        Set<String> setnames2 = new HashSet<>(Arrays.asList(names2));
-        Set<String> setnames3 = new HashSet<>(Arrays.asList(names3));
-        Set<String> setnames4 = new HashSet<>(Arrays.asList(names4));
-        List<Set> shortpath = new ArrayList<Set>();
-        shortpath.add(setnames1);
-        shortpath.add(setnames2);
-        shortpath.add(setnames3);
-        shortpath.add(setnames4);
+        String name1 = json.get("author1");
+        String name2 = json.get("author2");
+        List<List> resultList = new ArrayList<>();
+        try{
+            Driver driver = GraphDatabase.driver( "bolt://192.168.199.205:7687", AuthTokens.basic( "neo4j", "tju123" ) );
+            Session session = driver.session();
+//            String name1 = "KR Foltz";
+//            String name2 = "WJ Lennarz";
+            StatementResult result = session.run( "MATCH n=allshortestPaths((a:author{title:{name1}})-[*]-(b:author{title:{name2}})) return n",
+                    parameters( "name1", name1, "name2", name2));
 
-        if (author1.equals("a")){
-            return RetResponse.makeOKRsp(shortpath);
-        }else {
-            if (author1.equals("b")){
-                return RetResponse.makeOKRsp(null);
+            while ( result.hasNext() )
+            {
+                List<String> list = new ArrayList<>();
+                Record record = result.next();
+                Iterable<Node> nodes = record.get("n").asPath().nodes();
+
+                for (Node node : nodes){
+                    list.add(node.get("title").asString());
+                }
+                if (list.size() == 0){
+                    resultList.add(null);
+                }else {
+                    list.remove(name1);
+                    list.remove(name2);
+                    resultList.add(list);
+                }
+
             }
-            return RetResponse.makeOKRsp(new ArrayList<Set>());
+
+            session.close();
+            driver.close();
+            System.out.println("*******");
+            System.out.println(resultList);
+
+        }catch (Exception e){
+            System.out.println(e);
         }
 
+        return RetResponse.makeOKRsp(resultList);
+
     }
+
 
     @RequestMapping(value = "/relate", method = RequestMethod.POST)
     public RetResult<List<String>> relate(@RequestBody Map<String,String> json) {

@@ -5,12 +5,20 @@ import cn.tju.seagraph.daomain.*;
 import cn.tju.seagraph.utils.dateUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.neo4j.cypher.internal.frontend.v2_3.ast.functions.Str;
+import org.neo4j.cypher.internal.frontend.v3_2.ast.functions.Nodes;
+import org.neo4j.driver.v1.*;
+import org.neo4j.driver.v1.types.Node;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.sql.DriverManager;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+
+import static org.neo4j.driver.v1.Values.parameters;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -26,6 +34,7 @@ public class SeagraphApplicationTests {
     ConferenceMapper conferenceMapper;
     @Autowired
     PaperMapper paperMapper;
+
     @Test
     public void contextLoads() {
     }
@@ -114,4 +123,50 @@ public class SeagraphApplicationTests {
 
 
     }
+
+    @Test
+    public void Neo4jTest(){
+        try{
+            Driver driver = GraphDatabase.driver( "bolt://192.168.199.205:7687", AuthTokens.basic( "neo4j", "tju123" ) );
+            Session session = driver.session();
+            String name1 = "KR Foltz";
+            String name2 = "WJ Lennarz";
+            StatementResult result = session.run( "MATCH n=allshortestPaths((a:author{title:{name1}})-[*]-(b:author{title:{name2}})) return n",
+                    parameters( "name1", name1, "name2", name2));
+            List<List> resultList = new ArrayList<>();
+            while ( result.hasNext() )
+            {
+                List<String> list = new ArrayList<>();
+                Record record = result.next();
+                Iterable<Node> nodes = record.get("n").asPath().nodes();
+                System.out.println(nodes);
+                int count = 0;
+                for (Node node : nodes){
+                    list.add(node.get("title").asString());
+                    count ++;
+                }
+                if (list.size() == 0){
+                    resultList.add(null);
+                }else {
+                    list.remove(name1);
+                    list.remove(name2);
+                    resultList.add(list);
+                }
+
+            }
+
+
+            session.close();
+            driver.close();
+            System.out.println("*******");
+            System.out.println(resultList);
+
+        }catch (Exception e){
+            System.out.println(e);
+        }
+
+
+
+    }
+
 }

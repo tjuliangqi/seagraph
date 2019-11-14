@@ -3,7 +3,6 @@ package cn.tju.seagraph.controller;
 
 import cn.tju.seagraph.dao.PaperMapper;
 import cn.tju.seagraph.daomain.*;
-import org.apache.lucene.analysis.miscellaneous.StemmerOverrideFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -74,9 +73,6 @@ public class PaperController {
         PaperMysqlBean result = paperMapper.getDataById(map.get("uuid"));
         PaperMysqlBean paperMysqlBean = result;
         Map<String,Object> resultMap = new HashMap<>();
-        System.out.println(result);
-        System.out.println("**********");
-        System.out.println(paperMysqlBean);
         if (paperMysqlBean.getBrowse() != null){
             browse = Integer.valueOf(paperMysqlBean.getBrowse())+1;
         }
