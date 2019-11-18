@@ -97,6 +97,7 @@ public class AuthorController {
             StatementResult result = session.run( "MATCH n=allshortestPaths((a:author{title:{name1}})-[*]-(b:author{title:{name2}})) return n",
                     parameters( "name1", name1, "name2", name2));
 
+            int count = 0;
             while ( result.hasNext() )
             {
                 List<String> list = new ArrayList<>();
@@ -105,19 +106,25 @@ public class AuthorController {
 
                 for (Node node : nodes){
                     list.add(node.get("title").asString());
+                    System.out.println(list);
                 }
-                if (list.size() == 0){
-                    resultList.add(null);
-                }else {
-                    list.remove(name1);
-                    list.remove(name2);
-                    resultList.add(list);
-                }
+
+                list.remove(name1);
+                list.remove(name2);
+                resultList.add(list);
+                count++;
 
             }
-
             session.close();
             driver.close();
+
+            if (count == 0){
+                return RetResponse.makeOKRsp(null);
+            }
+            if (resultList.get(0).size() == 0){
+                return RetResponse.makeOKRsp(new ArrayList());
+            }
+
             System.out.println("*******");
             System.out.println(resultList);
 
