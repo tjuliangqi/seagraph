@@ -10,7 +10,7 @@ public class affiliationsUtils {
                     affiliation = affil;
                 }else {
                     if (Affiliations.length!=0 && Affiliations.length>=2){
-                        affiliation = Affiliations[2];
+                        affiliation = Affiliations[1];
                     }else if (Affiliations.length == 1){
                         affiliation = Affiliations[0];
                     }else {
