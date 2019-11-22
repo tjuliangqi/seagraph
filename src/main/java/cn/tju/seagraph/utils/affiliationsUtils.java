@@ -1,7 +1,7 @@
 package cn.tju.seagraph.utils;
 
 public class affiliationsUtils {
-    public String strToaffiliations(String name){
+    public static String strToaffiliations(String name){
         String affiliation = null;
         if (name.contains(",")){
             String[] Affiliations = name.split(",");

@@ -4,6 +4,7 @@ import cn.tju.seagraph.Config;
 import cn.tju.seagraph.daomain.AffiliationsEsBean;
 import cn.tju.seagraph.daomain.AffiliationsMysqlBean;
 import cn.tju.seagraph.utils.EsUtils;
+import cn.tju.seagraph.utils.affiliationsUtils;
 import org.elasticsearch.action.search.SearchRequest;
 import org.elasticsearch.action.search.SearchResponse;
 import org.elasticsearch.client.RestHighLevelClient;
@@ -59,8 +60,10 @@ public class AffiliationsService {
                 String[] labelsArray = labels.replace("['","").replace("']","").split("', '");
                 Set<String> labelsSet = new HashSet<>(Arrays.asList(labelsArray));
 
+                String name_university = affiliationsUtils.strToaffiliations(name);
+
                 affiliationsEsBean.setUuid(uuid);
-                affiliationsEsBean.setName(name);
+                affiliationsEsBean.setName(name_university);
                 affiliationsEsBean.setLabels(labelsSet);
                 affiliationsEsBean.setInfluence(influence);
                 affiliationsEsBean.setPaperNum(paperNum);
@@ -133,7 +136,7 @@ public class AffiliationsService {
 
     public static Map<String, Object> mySqlBeanToEsBean(AffiliationsMysqlBean affiliationsMysqlBean){
         Map<String, Object> Affiliations = new HashMap();
-        String name = affiliationsMysqlBean.getName().replace("\\n","");
+        String name = affiliationsUtils.strToaffiliations(affiliationsMysqlBean.getName().replace("\\n",""));
         Affiliations.put("uuid",affiliationsMysqlBean.getUuid());
         Affiliations.put("name",name);
         String paperListStr = affiliationsMysqlBean.getPaperList();
