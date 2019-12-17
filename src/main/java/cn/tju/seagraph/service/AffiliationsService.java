@@ -142,13 +142,13 @@ public class AffiliationsService {
         String paperListStr = affiliationsMysqlBean.getPaperList();
         Map<String, Object> paperListMap = new HashMap();
         String[] alist = paperListStr.replace("{","").replace("]}","").split("],");
-        for (String each:alist){
-            String eachName = each.split(":")[0].replace("'","").trim();
-            String eachValue = each.split(":")[1].replace("['","").replace("'","").trim();
-            String[] eachList = eachValue.split(", ");
-            paperListMap.put(eachName,eachList);
-        }
-        Affiliations.put("paperList",paperListMap);
+//        for (String each:alist){
+//            String eachName = each.split(":")[0].replace("'","").trim();
+//            String eachValue = each.split(":")[1].replace("['","").replace("'","").trim();
+//            String[] eachList = eachValue.split(", ");
+//            paperListMap.put(eachName,eachList);
+//        }
+        Affiliations.put("paperList","");
         Affiliations.put("influence",affiliationsMysqlBean.getInfluence());
         String paperUUIDStr = affiliationsMysqlBean.getPaperUUID();
         Map<String, Object> paperUUIDMap = new HashMap();
@@ -156,7 +156,14 @@ public class AffiliationsService {
         for (String each:blist){
             String eachName = each.split(":")[0].replace("'","").trim();
             String eachValue = each.split(":")[1].replace("['","").replace("'","").trim();
-            String[] eachList = eachValue.split(", ");
+//            List<String> eachList = new ArrayList<>();
+//            if (eachValue.split(", ").length > 50){
+//                eachList = Arrays.asList(eachValue.split(", ")).subList(0,50);
+//            }
+//            else {
+//                eachList = Arrays.asList(eachValue.split(", "));
+//            }
+            List eachList = Arrays.asList(eachValue.split(", "));
             paperUUIDMap.put(eachName,eachList);
         }
         Affiliations.put("paperUUID",paperUUIDMap);

@@ -17,7 +17,8 @@ public class ToBuildersUtils {
 
         if (ifPrepara == false || preparaString.equals("{}")) {
             if (type.equals("0")) {
-                builder0 = QueryBuilders.matchQuery("name", value);
+//                builder0 = QueryBuilders.matchQuery("name", value);
+                builder0 = QueryBuilders.boolQuery().must(QueryBuilders.matchQuery("name",value)).should(QueryBuilders.matchPhraseQuery("name",value));
                 searchSourceBuilder.from(page - 1)
                         .size(20)
                         .query(builder0);
@@ -36,7 +37,8 @@ public class ToBuildersUtils {
             }
         } else {
             if (type.equals("0")) {
-                builder0 = QueryBuilders.matchQuery("name", value);
+//                builder0 = QueryBuilders.matchQuery("name", value);
+                builder0 = QueryBuilders.boolQuery().must(QueryBuilders.matchQuery("name",value)).should(QueryBuilders.matchPhraseQuery("name",value));
                 builderAdd = addFilterBuilder(builder0, preparaString);
                 searchSourceBuilder.from(page - 1)
                         .size(20)

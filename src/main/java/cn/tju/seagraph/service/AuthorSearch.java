@@ -35,7 +35,7 @@ public class AuthorSearch {
             affS.add(aff[i].trim().replace("''",""));
         }
 //        aEB.setAffiliations(affS);
-        aSD.put("affiliations",new ArrayList<>(affS));
+        aSD.put("affiliations",new ArrayList<>(affS).get(0));
 
         String[] lab = list.get(0).getLabels().replace("['","").replace("']","").split("', '");
         Set labS = new HashSet();
@@ -47,12 +47,12 @@ public class AuthorSearch {
         aSD.put("name",list.get(0).getName());
         aSD.put("pic_url",list.get(0).getPic_url());
         aSD.put("paperNum",list.get(0).getPaperNum());
-        Map paperList = new HashMap();
-        paperList = JsonToMapUtils.strToMap(list.get(0).getPaperList());
-        for (Object each:paperList.keySet()) {
-            paperList.put(each.toString(),Arrays.asList(paperList.get(each).toString().replace("[","").replace("]","").replace("\"","").split(",")));
-        }
-        aSD.put("paperList",paperList);
+//        Map paperList = new HashMap();
+//        paperList = JsonToMapUtils.strToMap(list.get(0).getPaperList());
+//        for (Object each:paperList.keySet()) {
+//            paperList.put(each.toString(),Arrays.asList(paperList.get(each).toString().replace("[","").replace("]","").replace("\"","").split(",")));
+//        }
+        aSD.put("paperList","");
 
         Map paperUUID = new HashMap();
         paperUUID = JsonToMapUtils.strToMap(list.get(0).getPaperUUID());
@@ -160,15 +160,15 @@ public class AuthorSearch {
                 labS.add(lab[i]);
             }
 
-            Map paperList = new HashMap();
-            try {
-                paperList = JsonToMapUtils.strToMap(authorListResult.get("paperList").toString());
-                for (Object each:paperList.keySet()) {
-                    paperList.put(each.toString(),Arrays.asList(paperList.get(each).toString().replace("[","").replace("]","").replace("\"","").split(",")));
-                }
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
+//            Map paperList = new HashMap();
+//            try {
+//                paperList = JsonToMapUtils.strToMap(authorListResult.get("paperList").toString());
+//                for (Object each:paperList.keySet()) {
+//                    paperList.put(each.toString(),Arrays.asList(paperList.get(each).toString().replace("[","").replace("]","").replace("\"","").split(",")));
+//                }
+//            } catch (JSONException e) {
+//                e.printStackTrace();
+//            }
 
 
             result.put("name",authorListResult.get("name").toString());
@@ -176,7 +176,7 @@ public class AuthorSearch {
             result.put("paperNum",authorListResult.get("paperNum"));
             result.put("affiliations",new ArrayList<>(affS));
             result.put("labels",new ArrayList<>(labS));
-            result.put("paperList",paperList);
+            result.put("paperList","");
             result.put("id",authorListResult.get("uuid").toString());
 //            result.setName(authorListResult.get("name").toString());
 //            result.setAffiliations(affS);
@@ -285,6 +285,42 @@ public class AuthorSearch {
         }
         List final_result = new ArrayList(result);
         return final_result;
+
+    }
+
+    public static List<String> tuPuGetauthor(String value) throws IOException {
+        List<String> authorList = new ArrayList<String>();
+        EsUtils esUtils = new EsUtils();
+        RestHighLevelClient client = esUtils.client;
+        SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();
+        BoolQueryBuilder match = QueryBuilders.boolQuery();
+        match.must(QueryBuilders.matchQuery("labels",value));
+        searchSourceBuilder.size(10).query(match).sort("influence", SortOrder.DESC);
+        SearchRequest searchRequest = new SearchRequest();
+        searchRequest.indices(Config.AUTHORINDEX);
+        searchRequest.source(searchSourceBuilder);
+        SearchResponse searchResponse = null;
+        try {
+            searchResponse = client.search(searchRequest);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        SearchHit[] searchHits = searchResponse.getHits().getHits();
+        JsonToMapUtils j = new JsonToMapUtils();
+        for (SearchHit searchHit:searchHits) {
+            Map authorListResult = new HashMap();
+//            AuthorEsBean result = new AuthorEsBean();
+            Map<String, Object> result = new HashMap();
+            try {
+                authorListResult = strToMap(searchHit.toString());
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+            authorList.add(authorListResult.get("uuid").toString());
+        }
+
+        return authorList;
 
     }
 

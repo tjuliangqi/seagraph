@@ -151,7 +151,7 @@ public class UserController {
         Set<String> set = new HashSet();
         String[] keywords = str.replace("[","").replace("]","").split(",");
         for (String keyword:keywords){
-            set.add(keyword);
+            set.add(keyword.trim());
         }
         set.remove(user.getKeywords());
         newUser.setKeywords(set.toString());

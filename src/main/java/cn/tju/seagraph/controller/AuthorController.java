@@ -2,13 +2,12 @@ package cn.tju.seagraph.controller;
 
 
 import cn.tju.seagraph.dao.AuthorMapper;
+import cn.tju.seagraph.dao.PaperMapper;
 import cn.tju.seagraph.dao.StatisticsMapper;
-import cn.tju.seagraph.daomain.Author;
-import cn.tju.seagraph.daomain.AuthorEsBean;
-import cn.tju.seagraph.daomain.RetResponse;
-import cn.tju.seagraph.daomain.RetResult;
+import cn.tju.seagraph.daomain.*;
 import cn.tju.seagraph.service.AuthorSearch;
 import cn.tju.seagraph.service.EmailService;
+import cn.tju.seagraph.utils.JsonToMapUtils;
 import org.json.JSONException;
 import org.neo4j.driver.v1.*;
 import org.neo4j.driver.v1.types.Node;
@@ -30,6 +29,8 @@ import static org.neo4j.driver.v1.Values.parameters;
 public class AuthorController {
     @Autowired
     AuthorMapper authorMapper;
+    @Autowired
+    PaperMapper paperMapper;
     @Autowired
     EmailService emailService;
     @Autowired
@@ -147,6 +148,47 @@ public class AuthorController {
             result = relationAuthors(author.getName());
         } catch (IOException e) {
             return RetResponse.makeErrRsp("es查询错误");
+        }
+        return RetResponse.makeOKRsp(result);
+    }
+
+    @RequestMapping(value = "/tupu", method = RequestMethod.POST)
+    public RetResult<List<Map>> tupu(@RequestBody Map<String,String> json) throws IOException, JSONException {
+        List<Map> result = new ArrayList<>();
+
+        String label = json.get("message");
+        System.out.println(label);
+        AuthorSearch authorSearch = new AuthorSearch();
+        List<String> authorListUUID = authorSearch.tuPuGetauthor(label);
+        for (String uuid :authorListUUID){
+            List<Author> authorList = authorMapper.getAuthorById(uuid);
+            Author author = authorList.get(0);
+            Map paperUUID = new HashMap();
+            paperUUID = JsonToMapUtils.strToMap(author.getPaperUUID());
+            for (Object each:paperUUID.keySet()) {
+                if(each.toString().equals(label)){
+                    List<String> labelPaperList = new ArrayList<String>();
+                    labelPaperList = Arrays.asList(paperUUID.get(each).toString().replace("[","").replace("]","").replace("\"","").split(","));
+                    for (String paper:labelPaperList){
+                        PaperMysqlBean eachpaper = paperMapper.getDataById(paper);
+                        Map<String,String> oneLine = new HashMap<>();
+                        oneLine.put("entity1",author.getName());
+                        oneLine.put("entity1ID",author.getId());
+                        String pertitle = new String();
+                        String[] titleHead = eachpaper.getTitle().split(" ");
+                        if(titleHead.length>=3){
+                            pertitle = titleHead[0]+" "+titleHead[1]+" "+titleHead[2];
+                        }else {
+                            pertitle = eachpaper.getTitle();
+                        }
+                        oneLine.put("entity2",pertitle);
+                        oneLine.put("entity2ID",eachpaper.getUuid());
+                        oneLine.put("rel","发文");
+                        System.out.println(oneLine);
+                        result.add(oneLine);
+                    }
+                }
+            }
         }
         return RetResponse.makeOKRsp(result);
     }

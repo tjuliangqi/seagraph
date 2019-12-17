@@ -135,9 +135,15 @@ public class PaperService {
                 affiliations.add(Arrays.asList(strAff.trim().split(";")));
             }
         }
+        String doiAddHead = null;
+        if(paperMysqlBean.getDoi().startsWith("https://doi.org/") || paperMysqlBean.getDoi().length()<5){
+            doiAddHead = paperMysqlBean.getDoi();
+        }else {
+            doiAddHead = "https://doi.org/"+paperMysqlBean.getDoi();
+        }
 
         resultMap.put("Affiliations",affiliations);
-        resultMap.put("doi",paperMysqlBean.getDoi());
+        resultMap.put("doi",doiAddHead);
         resultMap.put("title",paperMysqlBean.getTitle());
         resultMap.put("Journal",paperMysqlBean.getJournal());
         int n = paperMysqlBean.getAbs().indexOf("Abstract");
@@ -146,8 +152,12 @@ public class PaperService {
         }else {
             resultMap.put("abs",paperMysqlBean.getAbs().replace("\n","<br /><br />&emsp;"));
         }
+        try{
+            resultMap.put("fulltext",paperMysqlBean.getFulltext().replace("\n","<br /><br />&emsp;").replaceFirst("&emsp;",""));
+        }catch (Exception e){
+            resultMap.put("fulltext",null);
+        }
 
-        resultMap.put("fulltext",paperMysqlBean.getFulltext().replace("\n","<br /><br />&emsp;").replaceFirst("&emsp;",""));
         if (paperMysqlBean.getReferences() != null){
             references = Arrays.asList(toStringListMysql(paperMysqlBean.getReferences()));
         }
@@ -289,6 +299,7 @@ public class PaperService {
             boolQueryBuilder.must(QueryBuilders.matchQuery("title",value));
         }
         else if (type.equals("1")){
+            searchSourceBuilder.sort("pubdate", SortOrder.DESC);
             boolQueryBuilder.must(QueryBuilders.matchAllQuery());
         }
         else if (type.equals("2")){

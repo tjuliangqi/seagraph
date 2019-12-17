@@ -1,24 +1,48 @@
 package cn.tju.seagraph.utils;
 
+import java.util.Arrays;
+
 public class affiliationsUtils {
     public static String strToaffiliations(String name){
         String affiliation = null;
+//        System.out.println(name);
         if (name.contains(",")){
             String[] Affiliations = name.split(",");
-            for(String affil:Affiliations){
-                if (affil.contains("university")){
-                    affiliation = affil;
-                }else {
-                    if (Affiliations.length!=0 && Affiliations.length>=2){
-                        affiliation = Affiliations[1];
-                    }else if (Affiliations.length == 1){
-                        affiliation = Affiliations[0];
-                    }else {
-                        affiliation = null;
+            if (name.toLowerCase().contains("university")){
+                for(String affil:Affiliations) {
+                    if (affil.toLowerCase().contains("university")) {
+                        affiliation = affil;
+                        return affiliation;
+                    }
+                }
+            }else if(name.toLowerCase().contains("institute")){
+                for(String affil:Affiliations) {
+                    if (affil.toLowerCase().contains("institute")){
+                        affiliation = affil;
+                        return affiliation;
                     }
                 }
             }
+            else if(name.toLowerCase().contains("school")){
+                for(String affil:Affiliations) {
+                    if (affil.toLowerCase().contains("school")){
+                        affiliation = affil;
+                        return affiliation;
+                    }
+                }
+            }
+            else {
+                if(Affiliations[0].length()<=2){
+                    affiliation = null;
+                }else {
 
+                    affiliation = Affiliations[0];
+                }
+            }
+
+
+        }else{
+            affiliation=name;
         }
         return affiliation;
     }
